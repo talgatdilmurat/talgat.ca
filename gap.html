@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growth — Talgat Dilmurat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #ffffff;
+      --bg-soft:    #f9fafb;
+      --bg-warm:    #faf8f5;
+      --bg-tag:     #f4f4f5;
+      --text:       #18181b;
+      --text-mid:   #3f3f46;
+      --text-muted: #71717a;
+      --text-faint: #a1a1aa;
+      --border:     #e4e4e7;
+      --border-dk:  #d4d4d8;
+      --silver:     #64748b;
+      --radius:     8px;
+      --font:       'Inter', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── SCROLL BAR ─────────────────────────────────────────── */
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--silver); z-index: 200; transition: width 0.08s linear; pointer-events: none; }
+
+    /* ─── NAV ──────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 880px; margin: 0 auto; padding: 0 28px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
+    .nav-right { display: flex; gap: 18px; align-items: center; }
+    .nav-right a { font-size: 0.8rem; color: var(--text-faint); transition: color 0.15s; }
+    .nav-right a:hover { color: var(--text); }
+    .nav-right .nav-resume {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      border: 1px solid var(--border-dk); padding: 5px 13px; border-radius: 5px;
+      transition: all 0.2s;
+    }
+    .nav-right .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 72px 0; border-top: 1px solid var(--border); }
+    .s-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--silver); margin-bottom: 10px; }
+    .s-title { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+    .s-sub { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; max-width: 580px; margin-bottom: 36px; }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    @keyframes hero-breathe {
+      0%   { background-color: #f9f8f6; }
+      30%  { background-color: #f5f2ec; }
+      65%  { background-color: #f7f4ef; }
+      100% { background-color: #f9f8f6; }
+    }
+    #header {
+      padding: 80px 0 64px; border-top: none; position: relative;
+      animation: hero-breathe 14s ease-in-out infinite;
+    }
+    #header::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='600' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.06;
+    }
+    #header .wrap { position: relative; z-index: 1; }
+    .page-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .page-label::before { content: ''; width: 20px; height: 1px; background: var(--border-dk); }
+    .page-title { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px; }
+    .page-intro { font-size: 0.97rem; color: var(--text-muted); max-width: 560px; line-height: 1.78; }
+
+    /* ─── STAT BAR ──────────────────────────────────────────── */
+    .stat-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin-top: 40px;
+    }
+    .stat-item {
+      background: var(--bg-warm); padding: 20px 22px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .stat-num { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* ─── POSITION ──────────────────────────────────────────── */
+    .position-text { max-width: 660px; }
+    .position-text p { font-size: 0.93rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+    .position-text p:last-child { margin-bottom: 0; }
+    .advantage-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px; margin-top: 28px;
+    }
+    .advantage-card {
+      padding: 16px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg-soft);
+      border-left: 3px solid var(--silver);
+      transition: background 0.15s;
+    }
+    .advantage-card:hover { background: #f1f5f9; }
+    .advantage-card h4 { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .advantage-card p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ─── COMPETENCY MATRIX ─────────────────────────────────── */
+    .matrix-wrap {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .matrix-col {
+      padding: 28px 22px;
+      border-right: 1px solid var(--border);
+    }
+    .matrix-col:last-child { border-right: none; }
+    .matrix-col.col-entry   { background: var(--bg-soft); }
+    .matrix-col.col-mid     { background: var(--bg-warm); }
+    .matrix-col.col-senior  { background: var(--bg); }
+    .col-header { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .col-level { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--silver); margin-bottom: 4px; }
+    .col-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .col-years { font-size: 0.74rem; color: var(--text-muted); }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .ci {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.8rem; color: var(--text-mid); line-height: 1.4;
+    }
+    .ci-dot {
+      flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%;
+      margin-top: 4px;
+    }
+    .ci-done .ci-dot   { background: var(--silver); }
+    .ci-above .ci-dot  { background: var(--silver); box-shadow: 0 0 0 2px rgba(100,116,139,0.2); }
+    .ci-prog .ci-dot   { background: none; border: 2px solid var(--silver); animation: pulse-dot 2s ease-in-out infinite; }
+    .ci-plan           { color: var(--text-faint); }
+    .ci-plan .ci-dot   { background: none; border: 1.5px solid var(--border-dk); }
+    @keyframes pulse-dot { 0%,100% { border-color: var(--border-dk); } 50% { border-color: var(--silver); } }
+    .above-badge {
+      font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--silver); background: #f1f5f9; border: 1px solid #cbd5e1;
+      padding: 1px 5px; border-radius: 3px; margin-left: 5px;
+      vertical-align: middle; display: inline-block;
+    }
+    .matrix-note {
+      margin-top: 20px; padding: 14px 18px;
+      background: var(--bg-warm); border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .matrix-note span { color: var(--silver); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── GIS PRACTICE ──────────────────────────────────────── */
+    .gis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .gis-card {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 18px; background: var(--bg-soft);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .gis-card:hover { border-color: var(--silver); transform: translateY(-1px); }
+    .gis-card-icon { font-size: 1.2rem; margin-bottom: 10px; opacity: 0.7; }
+    .gis-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .gis-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+    .gis-pill-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .gis-pill {
+      font-family: var(--mono); font-size: 0.66rem; padding: 2px 7px;
+      border-radius: 4px; background: var(--bg-tag); border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* ─── TIMELINE ──────────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 1px; background: var(--border);
+    }
+    .t-item {
+      position: relative; padding-bottom: 32px;
+    }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-dot {
+      position: absolute; left: -24px; top: 5px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--silver);
+    }
+    .t-dot.t-now {
+      background: var(--silver);
+      box-shadow: 0 0 0 3px rgba(100,116,139,0.18);
+    }
+    .t-month { font-family: var(--mono); font-size: 0.68rem; color: var(--text-faint); margin-bottom: 4px; letter-spacing: 0.06em; }
+    .t-item h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .t-item p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ─── NEXT STEPS ────────────────────────────────────────── */
+    .next-list { display: flex; flex-direction: column; gap: 0; }
+    .next-item {
+      padding: 18px 0 18px 20px;
+      border-bottom: 1px solid var(--border);
+      border-left: 2px solid transparent;
+      margin-left: -20px;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: border-left-color 0.2s, background 0.15s;
+    }
+    .next-item:hover { border-left-color: var(--silver); background: var(--bg-soft); }
+    .next-item:last-child { border-bottom: none; }
+    .next-status {
+      flex-shrink: 0; font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; padding: 3px 8px; border-radius: 999px; margin-top: 2px;
+    }
+    .ns-soon { background: var(--bg-tag); color: var(--text-muted); border: 1px solid var(--border-dk); }
+    .ns-now  { background: #f8faff; color: var(--silver); border: 1px solid #cbd5e1; }
+    .next-item h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .next-item p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ─── FADE ──────────────────────────────────────────────── */
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      .stat-bar  { grid-template-columns: 1fr 1fr; }
+      .matrix-wrap { grid-template-columns: 1fr; }
+      .matrix-col { border-right: none; border-bottom: 1px solid var(--border); }
+      .matrix-col:last-child { border-bottom: none; }
+      .gis-grid { grid-template-columns: 1fr; }
+      .advantage-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .stat-bar { grid-template-columns: 1fr 1fr; }
+      .advantage-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <span class="nav-title">Growth</span>
+    <div class="nav-right">
+      <a href="index.html#projects">Projects</a>
+      <a href="personal.html">Personal</a>
+      <a href="resume.html" class="nav-resume">Full Resume →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section id="header">
+  <div class="wrap">
+    <p class="page-label fade">Talgat Dilmurat</p>
+    <h1 class="page-title fade">Bridging the Gap</h1>
+    <p class="page-intro fade">
+      Most BSA roles ask for three years of direct experience. This page addresses
+      that directly — what the gap is, what's already covered, and how I'm
+      closing the rest.
+    </p>
+    <div class="stat-bar fade">
+      <div class="stat-item">
+        <span class="stat-num">11</span>
+        <span class="stat-label">Esri Academy<br>courses completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3yr</span>
+        <span class="stat-label">Software Engineering<br>Technology diploma</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Sectors with direct<br>systems experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Languages spoken<br>(IRB certified ×3)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST POSITION -->
+<section id="position" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">The position, honestly</p>
+    <h2 class="s-title fade">What I have instead of three years</h2>
+    <div class="position-text fade">
+      <p>
+        The role asks for 3 years of BSA experience. I don't have a job title
+        that says that. What I do have is five years of directly relevant
+        work — running operational systems, administering CRMs, documenting
+        workflows, writing SQL, designing APIs, and translating between
+        technical and non-technical teams across multiple sectors.
+      </p>
+      <p>
+        That experience doesn't sit neatly under one job title, but it covers
+        a wide range of what BSA work actually involves. And I've been
+        deliberately building the missing pieces — specifically GIS and spatial
+        analysis — through intensive, structured training.
+      </p>
+    </div>
+    <div class="advantage-grid fade">
+      <div class="advantage-card">
+        <h4>CRM Administration</h4>
+        <p>Live platforms — NationBuilder and Salesforce — not just theory. Data hygiene, campaign analytics, segmentation.</p>
+      </div>
+      <div class="advantage-card">
+        <h4>REST API Design</h4>
+        <p>Full CRUD API built from scratch in Spring Boot. Endpoint logic, data validation, Postman testing.</p>
+      </div>
+      <div class="advantage-card">
+        <h4>Relational Data Modeling</h4>
+        <p>Normalized schemas designed and built from first principles — not inherited or maintained, designed.</p>
+      </div>
+      <div class="advantage-card">
+        <h4>Cross-sector Translation</h4>
+        <p>E-commerce, nonprofit, marketing, interpretation — I understand how organizations actually work from the inside.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCY MATRIX -->
+<section id="matrix" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Year-by-year</p>
+    <h2 class="s-title fade">BSA competency progression</h2>
+    <p class="s-sub fade">
+      What a BSA analyst typically builds at each stage of their career —
+      and where I stand on each area. Filled = done. Pulsing = actively building. Empty = on the roadmap.
+    </p>
+
+    <div class="matrix-wrap fade">
+
+      <!-- Entry Level -->
+      <div class="matrix-col col-entry">
+        <div class="col-header">
+          <div class="col-level">Entry Level</div>
+          <div class="col-title">Foundation</div>
+          <div class="col-years">Year 0–1</div>
+        </div>
+        <ul class="check-list">
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Requirements gathering &amp; documentation</span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Process mapping &amp; workflow analysis</span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Basic SQL queries &amp; data reporting</span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Stakeholder communication</span>
+          </li>
+          <li class="ci ci-above">
+            <span class="ci-dot"></span>
+            <span>CRM data management <span class="above-badge">above level</span></span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>System testing &amp; UAT support</span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Technical documentation</span>
+          </li>
+          <li class="ci ci-above">
+            <span class="ci-dot"></span>
+            <span>API understanding <span class="above-badge">above level</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Developing -->
+      <div class="matrix-col col-mid">
+        <div class="col-header">
+          <div class="col-level">Developing</div>
+          <div class="col-title">Applied</div>
+          <div class="col-years">Years 1–3</div>
+        </div>
+        <ul class="check-list">
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>End-to-end process improvement</span>
+          </li>
+          <li class="ci ci-above">
+            <span class="ci-dot"></span>
+            <span>Full CRM administration <span class="above-badge">above level</span></span>
+          </li>
+          <li class="ci ci-above">
+            <span class="ci-dot"></span>
+            <span>REST API design &amp; documentation <span class="above-badge">above level</span></span>
+          </li>
+          <li class="ci ci-above">
+            <span class="ci-dot"></span>
+            <span>Relational data modeling <span class="above-badge">above level</span></span>
+          </li>
+          <li class="ci ci-prog">
+            <span class="ci-dot"></span>
+            <span>GIS &amp; spatial data analysis</span>
+          </li>
+          <li class="ci ci-done">
+            <span class="ci-dot"></span>
+            <span>Multi-stakeholder communication</span>
+          </li>
+          <li class="ci ci-prog">
+            <span class="ci-dot"></span>
+            <span>Change management documentation</span>
+          </li>
+          <li class="ci ci-prog">
+            <span class="ci-dot"></span>
+            <span>Business case development</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Advanced -->
+      <div class="matrix-col col-senior">
+        <div class="col-header">
+          <div class="col-level">Advanced</div>
+          <div class="col-title">Strategic</div>
+          <div class="col-years">Years 3+</div>
+        </div>
+        <ul class="check-list">
+          <li class="ci ci-prog">
+            <span class="ci-dot"></span>
+            <span>Enterprise GIS architecture</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Strategic system recommendations</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Cross-department program management</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Spatial data governance</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Vendor &amp; contract management</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Enterprise-wide data strategy</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Mentoring junior analysts</span>
+          </li>
+          <li class="ci ci-plan">
+            <span class="ci-dot"></span>
+            <span>Policy &amp; compliance ownership</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="matrix-note fade">
+      <span>→</span>
+      <span>Current position: Foundation complete, most of Applied covered through transferable experience and technical training. Enterprise GIS is the active frontier — targeted directly by current Esri study.</span>
+    </div>
+  </div>
+</section>
+
+<!-- GIS IN PRACTICE -->
+<section id="gis" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">GIS specifically</p>
+    <h2 class="s-title fade">GIS in practice</h2>
+    <p class="s-sub fade">
+      GIS is the primary technical focus of this application. Here's what's been built so far.
+    </p>
+
+    <div class="gis-grid fade">
+      <div class="gis-card">
+        <div class="gis-card-icon">📐</div>
+        <h4>ArcGIS Pro — Desktop Work</h4>
+        <p>Hands-on map and layer navigation, attribute table operations, custom symbology configuration, coordinate system management, and data analysis using real geographic datasets.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">ArcGIS Pro</span>
+          <span class="gis-pill">Symbology</span>
+          <span class="gis-pill">Coordinate Systems</span>
+          <span class="gis-pill">Attribute Tables</span>
+        </div>
+      </div>
+      <div class="gis-card">
+        <div class="gis-card-icon">🌐</div>
+        <h4>ArcGIS Online — Web Maps</h4>
+        <p>Web map creation and sharing, layer configuration, content administration, and publishing spatial data for web-based access and collaboration.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">ArcGIS Online</span>
+          <span class="gis-pill">Web Maps</span>
+          <span class="gis-pill">Content Admin</span>
+          <span class="gis-pill">Data Publishing</span>
+        </div>
+      </div>
+      <div class="gis-card">
+        <div class="gis-card-icon">📊</div>
+        <h4>Business Analyst Pro</h4>
+        <p>Spatial business intelligence — site analysis, trade area definition, demographic data integration, and mapping for business decision support.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">Business Analyst</span>
+          <span class="gis-pill">Trade Areas</span>
+          <span class="gis-pill">Demographics</span>
+          <span class="gis-pill">Site Analysis</span>
+        </div>
+      </div>
+      <div class="gis-card">
+        <div class="gis-card-icon">🗺️</div>
+        <h4>ArcGIS Story Maps</h4>
+        <p>Narrative mapping combining spatial layers with structured storytelling — designed to make geographic information accessible to non-GIS audiences.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">Story Maps</span>
+          <span class="gis-pill">Spatial Narrative</span>
+          <span class="gis-pill">Data Visualization</span>
+        </div>
+      </div>
+      <div class="gis-card">
+        <div class="gis-card-icon">🏗️</div>
+        <h4>Enterprise Fundamentals</h4>
+        <p>Currently studying ArcGIS Enterprise architecture — Portal for ArcGIS, ArcGIS Server, geodatabases, licensing, and administration concepts for large-scale GIS deployment.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">ArcGIS Enterprise</span>
+          <span class="gis-pill">Portal</span>
+          <span class="gis-pill">Server</span>
+          <span class="gis-pill">Geodatabases</span>
+        </div>
+      </div>
+      <div class="gis-card">
+        <div class="gis-card-icon">🤖</div>
+        <h4>AI in ArcGIS</h4>
+        <p>Introduction to AI-assisted workflows within the ArcGIS platform — machine learning integration, intelligent mapping, and automated feature extraction.</p>
+        <div class="gis-pill-row">
+          <span class="gis-pill">AI in ArcGIS</span>
+          <span class="gis-pill">ML Integration</span>
+          <span class="gis-pill">Automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING TIMELINE -->
+<section id="timeline" class="section">
+  <div class="wrap">
+    <p class="s-label fade">How fast</p>
+    <h2 class="s-title fade">The learning sprint</h2>
+    <p class="s-sub fade">From zero GIS training to 11 Esri courses and hands-on ArcGIS work — in under five months.</p>
+
+    <div class="timeline fade">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-month">Jan 2026</div>
+        <h4>Esri Academy — GIS Basics &amp; ArcGIS Pro Basics</h4>
+        <p>Started from the ground up. GIS fundamentals, then ArcGIS Pro Basics. Immediate hands-on desktop work alongside coursework.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-month">Feb 2026</div>
+        <h4>ArcGIS Online, Coordinate Systems, Data Management</h4>
+        <p>Three more Esri courses completed. First web map workflows. Coordinate system fundamentals and spatial data management concepts.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-month">Mar 2026</div>
+        <h4>Business Analyst Pro, Systems Approach (×2), AI in ArcGIS</h4>
+        <p>Moved into more applied territory — spatial business intelligence, enterprise systems thinking, and AI-assisted mapping workflows.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-month">Apr 2026</div>
+        <h4>Story Maps, ArcGIS Monitor, Content Administration</h4>
+        <p>Completed the final three Esri courses. Began building Story Maps. ArcGIS Online content administration and monitoring tools.</p>
+      </div>
+      <div class="t-item">
+        <div class="t-dot t-now"></div>
+        <div class="t-month">May 2026 — Now</div>
+        <h4>Enterprise Study + Portfolio</h4>
+        <p>Deep-diving ArcGIS Enterprise architecture. Building spatial projects and this portfolio. Preparing to apply for City of London BSA role.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section id="next" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">Roadmap</p>
+    <h2 class="s-title fade">What's being built next</h2>
+    <p class="s-sub fade">The active areas of growth — being worked on now or planned for the near term.</p>
+
+    <div class="next-list fade">
+      <div class="next-item">
+        <span class="next-status ns-now">Active</span>
+        <div>
+          <h4>ArcGIS Enterprise — Deep Dive</h4>
+          <p>Working through Enterprise architecture concepts: Portal for ArcGIS, federated ArcGIS Server, geodatabases, patching, and administration. Targeting the system-level GIS knowledge a senior BSA role requires.</p>
+        </div>
+      </div>
+      <div class="next-item">
+        <span class="next-status ns-now">Active</span>
+        <div>
+          <h4>ArcGIS Story Maps — Publishing Spatial Projects</h4>
+          <p>Building and publishing GIS Story Maps from real data — moving from coursework into demonstrated output. Links will appear in the portfolio as they're completed.</p>
+        </div>
+      </div>
+      <div class="next-item">
+        <span class="next-status ns-soon">Soon</span>
+        <div>
+          <h4>Python for ArcGIS (arcpy)</h4>
+          <p>Python scripting for ArcGIS — automating geoprocessing workflows, batch operations, and spatial analysis scripts. Bridges programming background directly into GIS practice.</p>
+        </div>
+      </div>
+      <div class="next-item">
+        <span class="next-status ns-soon">Soon</span>
+        <div>
+          <h4>ArcGIS Dashboards &amp; Operations Views</h4>
+          <p>Real-time operational dashboards using ArcGIS Dashboards — directly relevant to the kind of live data visualization a municipal BSA role would involve.</p>
+        </div>
+      </div>
+      <div class="next-item">
+        <span class="next-status ns-soon">Soon</span>
+        <div>
+          <h4>Formal Business Analysis Certification (CBAP prep)</h4>
+          <p>Working toward structured business analysis certification to formalize and validate the experience already accumulated across multiple sectors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--border); padding: 28px; text-align: center;">
+  <p style="font-size: 0.75rem; color: var(--text-faint);">
+    Talgat Dilmurat · <a href="index.html" style="color: var(--silver);">← Portfolio</a> · <a href="resume.html" style="color: var(--silver);">Resume</a>
+  </p>
+</footer>
+
+<script>
+  const bar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

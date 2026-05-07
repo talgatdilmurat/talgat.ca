@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talgat Dilmurat</title>
+  <meta name="description" content="Portfolio of Talgat Dilmurat — Business Systems Analyst, GIS, and Software Engineering Technology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #ffffff;
+      --bg-soft:     #f9fafb;
+      --bg-warm:     #faf8f5;   /* subtle warm off-white for section rhythm */
+      --bg-tag:      #f4f4f5;
+      --text:        #18181b;
+      --text-mid:    #3f3f46;
+      --text-muted:  #71717a;
+      --text-faint:  #a1a1aa;
+      --border:      #e4e4e7;
+      --border-dk:   #d4d4d8;
+      --silver:      #64748b;   /* the one accent — cool slate-silver, used sparingly */
+      --radius:      8px;
+      --font:        'Inter', system-ui, sans-serif;
+      --mono:        'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    /* ─── HERO COLOR SHIFT ──────────────────────────────────────── */
+    @keyframes hero-breathe {
+      0%   { background-color: #f9f8f6; }
+      20%  { background-color: #f5f2ec; }
+      45%  { background-color: #f7f4ef; }
+      70%  { background-color: #f4f2ee; }
+      85%  { background-color: #f6f4f0; }
+      100% { background-color: #f9f8f6; }
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    p { line-height: 1.75; }
+
+    /* ─── SCROLL PROGRESS ───────────────────────────────────────── */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--silver); z-index: 200; transition: width 0.08s linear;
+      pointer-events: none;
+    }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────── */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 80px 0; border-top: 1px solid var(--border); }
+    .section:first-of-type { border-top: none; }
+
+    .s-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--silver); margin-bottom: 10px;
+    }
+    .s-title {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
+      letter-spacing: -0.025em; color: var(--text); margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .s-body { color: var(--text-mid); line-height: 1.8; }
+    .s-body p { margin-bottom: 14px; }
+    .s-body p:last-child { margin-bottom: 0; }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 860px; margin: 0 auto; padding: 0 28px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 0.88rem; font-weight: 600; color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a {
+      font-size: 0.82rem; color: var(--text-faint); font-weight: 400;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--text); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--text); font-weight: 500; }
+    .nav-links .nav-resume {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      border: 1px solid var(--border-dk); padding: 5px 13px; border-radius: 5px;
+      transition: all 0.2s;
+    }
+    .nav-links .nav-resume::after { display: none; }
+    .nav-links .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+    .nav-ham { display: none; cursor: pointer; flex-direction: column; gap: 4px; }
+    .nav-ham span { width: 20px; height: 1.5px; background: var(--text-mid); border-radius: 1px; display: block; }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      padding: 108px 0 88px; border-top: none; position: relative;
+      animation: hero-breathe 14s ease-in-out infinite;
+    }
+    /* Plaster/concrete noise texture via SVG turbulence */
+    #hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='600' height='400' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.07;
+    }
+    #hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: linear-gradient(to bottom, transparent 0%, rgba(249,248,246,0.8) 100%);
+    }
+    #hero .wrap { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+      color: var(--text-faint); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--border-dk); }
+    .hero-name {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 800;
+      letter-spacing: -0.05em; line-height: 1.0;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .hero-title {
+      font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted);
+      font-weight: 400; margin-bottom: 0; letter-spacing: 0.01em;
+    }
+    .hero-divider {
+      width: 36px; height: 2px; background: var(--silver);
+      margin: 28px 0; border-radius: 1px; opacity: 0.5;
+    }
+    .hero-intro {
+      font-size: 1.02rem; color: var(--text-mid); line-height: 1.82;
+      max-width: 540px; margin-bottom: 36px;
+    }
+    .hero-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .hero-links a {
+      font-size: 0.82rem; color: var(--text-muted);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 0.15s; border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+    .hero-links a:hover { color: var(--text); border-bottom-color: var(--border-dk); }
+    .hero-links a span { font-size: 0.9rem; }
+    .hero-sep { color: var(--border-dk); }
+
+    /* ─── ABOUT ─────────────────────────────────────────────────── */
+    .about-text { color: var(--text-mid); max-width: 660px; }
+    .about-text p { margin-bottom: 14px; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* Language pills */
+    .lang-strip { margin-top: 36px; }
+    .lang-pills {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+    }
+    .lang-pill {
+      padding: 8px 18px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 500; color: var(--text-mid);
+      background: var(--bg-soft); border: 1px solid var(--border-dk);
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .lang-pill:hover { background: #f1f5f9; border-color: var(--silver); color: var(--text); }
+    /* IRB callout */
+    .irb-callout {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 9px 14px; border-radius: var(--radius);
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-left: 3px solid var(--silver);
+    }
+    .irb-callout .irb-icon { font-size: 0.75rem; color: var(--silver); }
+    .irb-callout p {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid); line-height: 1.4;
+    }
+    .irb-callout p span { font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 1px; }
+
+    /* ─── SKILLS ────────────────────────────────────────────────── */
+    .skills-table { width: 100%; border-collapse: collapse; }
+    .skills-table tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .skills-table tr:hover { background: var(--bg-soft); }
+    .skills-table tr:last-child { border-bottom: none; }
+    .skills-table td { padding: 14px 0; vertical-align: top; }
+    .skills-table tr:hover td { padding-left: 4px; }
+    .skills-table td:first-child {
+      width: 180px; min-width: 140px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-faint);
+      padding-right: 24px; padding-top: 16px;
+      transition: color 0.15s;
+    }
+    .skills-table tr:hover td:first-child { color: var(--silver); }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; }
+    .pill {
+      font-family: var(--mono); font-size: 0.71rem;
+      padding: 4px 9px; border-radius: 4px;
+      background: var(--bg-tag); color: var(--text-mid);
+      border: 1px solid var(--border); white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .pill:hover { border-color: var(--silver); color: var(--text); }
+
+    /* ─── PROJECTS ──────────────────────────────────────────────── */
+    .project-list { display: flex; flex-direction: column; gap: 0; }
+    .project-item {
+      padding: 28px 0 28px 20px;
+      border-bottom: 1px solid var(--border);
+      border-left: 2px solid transparent;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 16px; align-items: start;
+      transition: border-left-color 0.25s, background 0.2s;
+      margin-left: -20px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .project-item:hover {
+      border-left-color: var(--silver);
+      background: var(--bg-soft);
+    }
+    .project-item:last-child { border-bottom: none; }
+    .project-item h3 {
+      font-size: 0.97rem; font-weight: 600; color: var(--text);
+      margin-bottom: 6px; transition: transform 0.2s;
+    }
+    .project-item:hover h3 { transform: translateX(3px); }
+    .project-item p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag {
+      font-family: var(--mono); font-size: 0.68rem;
+      padding: 2px 7px; border-radius: 3px;
+      background: var(--bg-tag); color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .project-link-icon {
+      font-size: 0.82rem; color: var(--text-faint); white-space: nowrap;
+      padding-top: 2px; transition: color 0.2s, transform 0.2s;
+    }
+    .project-item:hover .project-link-icon { color: var(--silver); transform: translate(1px, -1px); }
+
+    /* ─── STORY MAPS ────────────────────────────────────────────── */
+    .storymap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+    .storymap-card {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .storymap-card:hover {
+      border-color: var(--silver);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    .sm-thumb {
+      height: 120px; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; position: relative;
+    }
+    /* Neutral architectural gradients — no primary colors */
+    .sm-thumb-1 { background: linear-gradient(135deg, #18181b 0%, #3f3f46 100%); }
+    .sm-thumb-2 { background: linear-gradient(135deg, #1e293b 0%, #475569 100%); }
+    .sm-thumb-3 { background: linear-gradient(135deg, #27272a 0%, #52525b 100%); }
+    .sm-body { padding: 16px; }
+    .sm-body h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
+    .sm-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
+    .sm-link { font-size: 0.75rem; color: var(--silver); font-weight: 600; }
+    .sm-placeholder {
+      background: var(--bg-soft); border: 1.5px dashed var(--border-dk);
+      border-radius: var(--radius); padding: 32px; text-align: center;
+      margin-top: 16px;
+    }
+    .sm-placeholder p { font-size: 0.83rem; color: var(--text-muted); }
+
+    /* ─── COURSEWORK ────────────────────────────────────────────── */
+    .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
+    .course-group h4 {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.09em; color: var(--text-faint); margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .course-list { list-style: none; }
+    .course-list li {
+      font-size: 0.82rem; color: var(--text-mid);
+      padding: 6px 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; line-height: 1.4;
+      transition: color 0.15s, padding-left 0.15s;
+    }
+    .course-list li:hover { color: var(--text); padding-left: 4px; }
+    .course-list li:last-child { border-bottom: none; }
+    .course-list li::before { content: '–'; color: var(--text-faint); font-size: 0.7rem; flex-shrink: 0; }
+
+    /* Esri table */
+    .esri-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .esri-table th {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-faint); font-weight: 700; text-align: left;
+      padding: 0 0 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .esri-table tr { transition: background 0.15s; }
+    .esri-table tbody tr:hover { background: var(--bg-soft); }
+    .esri-table td {
+      font-size: 0.82rem; color: var(--text-mid); padding: 9px 0;
+      border-bottom: 1px solid var(--border); vertical-align: top;
+    }
+    .esri-table tr:last-child td { border-bottom: none; }
+    .esri-table td:nth-child(2) { color: var(--text-faint); font-size: 0.75rem; padding-left: 20px; white-space: nowrap; }
+
+    /* ─── LEARNING LOG ──────────────────────────────────────────── */
+    .log-list { display: flex; flex-direction: column; gap: 0; }
+    .log-item {
+      padding: 20px 0; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: baseline;
+      transition: background 0.15s;
+    }
+    .log-item:hover { background: var(--bg-soft); padding-left: 8px; padding-right: 8px; margin: 0 -8px; border-radius: var(--radius); }
+    .log-item:last-child { border-bottom: none; }
+    .log-date { font-size: 0.72rem; color: var(--text-faint); font-family: var(--mono); padding-top: 2px; }
+    .log-content h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .log-content p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+    .log-tag {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      background: var(--bg-tag); color: var(--silver);
+      border: 1px solid var(--border);
+      padding: 2px 7px; border-radius: 3px; margin-bottom: 5px;
+    }
+
+    /* ─── CONTACT / FOOTER ──────────────────────────────────────── */
+    #contact { padding: 60px 0; border-top: 1px solid var(--border); background: var(--bg-warm); }
+    .contact-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+    .contact-link {
+      font-size: 0.84rem; color: var(--text-muted);
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: color 0.15s; border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+    }
+    .contact-link:hover { color: var(--text); border-bottom-color: var(--border-dk); }
+    footer { padding: 28px; text-align: center; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.75rem; color: var(--text-faint); }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .lang-chip { min-width: 90px; padding: 9px 12px; }
+      .course-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-ham { display: flex; }
+      .project-item { grid-template-columns: 1fr; }
+      .log-item { grid-template-columns: 1fr; gap: 4px; }
+      .skills-table td:first-child { display: none; }
+    }
+
+    /* ─── FADE IN (staggered) ───────────────────────────────────── */
+    .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    .fade:nth-child(2) { transition-delay: 0.05s; }
+    .fade:nth-child(3) { transition-delay: 0.1s; }
+    .fade:nth-child(4) { transition-delay: 0.15s; }
+
+    /* ─── MOBILE NAV MENU ───────────────────────────────────────── */
+    #mob-nav {
+      display: none; position: fixed; top: 52px; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 16px 28px; flex-direction: column; gap: 2px; z-index: 99;
+    }
+    #mob-nav a {
+      padding: 11px 0; font-size: 0.95rem; color: var(--text-mid);
+      border-bottom: 1px solid var(--border); display: block;
+    }
+    #mob-nav a:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- ─── NAV ──────────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Talgat Dilmurat</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#storymaps">Story Maps</a>
+      <a href="#skills">Skills</a>
+      <a href="#coursework">Coursework</a>
+      <a href="personal.html">Personal</a>
+      <a href="gap.html">Growth</a>
+      <a href="resume.html" class="nav-resume">Full Resume →</a>
+    </div>
+    <div class="nav-ham" onclick="toggleMob()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div id="mob-nav">
+  <a href="#about" onclick="toggleMob()">About</a>
+  <a href="#projects" onclick="toggleMob()">Projects</a>
+  <a href="#storymaps" onclick="toggleMob()">Story Maps</a>
+  <a href="#skills" onclick="toggleMob()">Skills</a>
+  <a href="#coursework" onclick="toggleMob()">Coursework</a>
+  <a href="personal.html" onclick="toggleMob()">Personal</a>
+  <a href="gap.html" onclick="toggleMob()">Growth</a>
+  <a href="resume.html" onclick="toggleMob()">Full Resume →</a>
+</div>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow fade">London, Ontario</p>
+    <h1 class="hero-name fade">Talgat<br>Dilmurat</h1>
+    <p class="hero-title fade">Business Systems Analyst &nbsp;·&nbsp; Software Engineering Technology</p>
+    <div class="hero-divider fade"></div>
+    <p class="hero-intro fade">
+      GIS, SQL, REST APIs, CRM administration, and workflow documentation —
+      focused on the seam between systems and the people who depend on them.
+    </p>
+    <div class="hero-links fade">
+      <a href="mailto:talgat.dilmurat.tech@gmail.com"><span>✉</span> talgat.dilmurat.tech@gmail.com</a>
+      <span class="hero-sep">·</span>
+      <a href="tel:4169099610"><span>📞</span> (416) 909-9610</a>
+      <span class="hero-sep">·</span>
+      <a href="https://github.com/talgatdilmurat" target="_blank"><span>⌥</span> GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────────────── -->
+<section id="about" class="section">
+  <div class="wrap">
+    <p class="s-label fade">About</p>
+    <div class="about-text fade">
+      <p>
+        Software engineering technology graduate, now specializing in GIS and business systems
+        analysis in London, Ontario. I'm drawn to the space where data becomes decision-making —
+        where a well-mapped workflow or a clean database schema changes how an organization works.
+      </p>
+      <p>
+        Before focusing on tech, I ran e-commerce operations, administered donor databases
+        for nonprofits, supported marketing analytics in CRM platforms, and spent years as
+        a certified language interpreter in medical and government settings. That range is now
+        my main edge — I can move between technical and non-technical contexts without losing
+        either side.
+      </p>
+    </div>
+
+    <!-- Language pills + IRB callout -->
+    <div class="lang-strip fade">
+      <p class="s-label" style="margin-bottom: 12px;">Languages</p>
+      <div class="lang-pills">
+        <span class="lang-pill">English</span>
+        <span class="lang-pill">Mandarin</span>
+        <span class="lang-pill">Uyghur</span>
+        <span class="lang-pill">Kazakh</span>
+        <span class="lang-pill">Arabic</span>
+        <span class="lang-pill">Russian</span>
+      </div>
+      <div class="irb-callout">
+        <span class="irb-icon">◆</span>
+        <p>IRB Certified Interpreter
+          <span>Mandarin · Uyghur · Kazakh</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ──────────────────────────────────────────────────── -->
+<section id="projects" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Projects</p>
+    <h2 class="s-title fade">Selected work</h2>
+    <div class="project-list">
+
+      <!-- Municipal Portfolio — featured group label -->
+      <p class="s-label fade" style="margin-bottom:4px; margin-top:4px;">Municipal Services Portfolio — City of London, ON</p>
+
+      <div class="project-item fade">
+        <div>
+          <h3>Work Order REST API</h3>
+          <p>8-endpoint Spring Boot REST API for managing municipal service requests — potholes, streetlights, graffiti, drainage. Full CRUD with status filtering, keyword search, and an analytics summary endpoint. Runs on Java 17, Spring Data JPA, Hibernate 6, and H2 in development with MySQL production config included.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Java 17</span>
+            <span class="tech-tag">Spring Boot 3</span>
+            <span class="tech-tag">Spring Data JPA</span>
+            <span class="tech-tag">Hibernate 6</span>
+            <span class="tech-tag">H2 / MySQL</span>
+            <span class="tech-tag">REST API</span>
+            <span class="tech-tag">Maven</span>
+          </div>
+        </div>
+        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+      </div>
+
+      <div class="project-item fade">
+        <div>
+          <h3>Municipal SQL Database &amp; Reporting</h3>
+          <p>Normalized MySQL schema for a full service request system — 6 tables with foreign keys, indexes, and a status history audit trail. Includes realistic seed data covering London ON wards and departments, plus analytical queries for resolution time, volume by type, and SLA compliance reporting.</p>
+          <div class="project-tech">
+            <span class="tech-tag">MySQL 8</span>
+            <span class="tech-tag">Schema Design</span>
+            <span class="tech-tag">Normalization</span>
+            <span class="tech-tag">Audit Trail</span>
+            <span class="tech-tag">Analytics Queries</span>
+          </div>
+        </div>
+        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+      </div>
+
+      <div class="project-item fade">
+        <div>
+          <h3>GIS Service Request Map — London ON</h3>
+          <p>Interactive Leaflet.js map plotting 50 real municipal service requests across London, Ontario. Filter by issue type and status, click markers for full request details, and view a live count summary. Loads from CSV with no backend required — runs entirely in the browser.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Leaflet.js</span>
+            <span class="tech-tag">HTML / CSS / JS</span>
+            <span class="tech-tag">CSV Data</span>
+            <span class="tech-tag">GIS</span>
+            <span class="tech-tag">CARTO Tiles</span>
+          </div>
+        </div>
+        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+      </div>
+
+      <div class="project-item fade">
+        <div>
+          <h3>Workflow Analysis — Intake, Triage &amp; Escalation</h3>
+          <p>Business systems case study on London's 311 service request process — current-state mapping, root cause analysis of 7 key pain points (18% duplicate rate, 2-day triage delay, no citizen status visibility), and a redesigned workflow with automated triage rules, 4-tier SLA escalation, and functional requirements specification.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Business Analysis</span>
+            <span class="tech-tag">Process Mapping</span>
+            <span class="tech-tag">BPMN</span>
+            <span class="tech-tag">SVG</span>
+            <span class="tech-tag">SLA Design</span>
+            <span class="tech-tag">Requirements</span>
+          </div>
+        </div>
+        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+      </div>
+
+    </div>
+
+    <!-- More projects (hidden by default) -->
+    <div id="more-projects" style="display:none;">
+      <div class="project-list" style="margin-top:0;">
+
+        <div class="project-item fade">
+          <div>
+            <h3>CRM Administration — NationBuilder</h3>
+            <p>Full administration of a NationBuilder CRM for a nonprofit organization — managing 5,000+ donor and volunteer records, configuring email campaign tracking, building segmentation lists, and documenting data hygiene procedures for staff handover.</p>
+            <div class="project-tech">
+              <span class="tech-tag">NationBuilder</span>
+              <span class="tech-tag">CRM</span>
+              <span class="tech-tag">Data Hygiene</span>
+              <span class="tech-tag">Campaign Analytics</span>
+              <span class="tech-tag">Documentation</span>
+            </div>
+          </div>
+          <a href="#" class="project-link-icon">↗</a>
+        </div>
+
+        <div class="project-item fade">
+          <div>
+            <h3>E-Commerce Operations System — Noah's Art</h3>
+            <p>End-to-end setup and operation of a multi-channel e-commerce system on Shopify — product catalogue management, inventory tracking, supplier logistics coordination, and analytics reporting across Amazon, eBay, and direct sales channels.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Shopify</span>
+              <span class="tech-tag">Operations</span>
+              <span class="tech-tag">Inventory Management</span>
+              <span class="tech-tag">Multi-channel Analytics</span>
+              <span class="tech-tag">Supplier Management</span>
+            </div>
+          </div>
+          <a href="#" class="project-link-icon">↗</a>
+        </div>
+
+        <div class="project-item fade">
+          <div>
+            <h3>AWS Cloud Infrastructure Deployment</h3>
+            <p>Designed and deployed cloud infrastructure on AWS — EC2 instance provisioning, S3 bucket configuration for static assets, RDS database setup with access control, and Lambda function implementation for a serverless web application backend.</p>
+            <div class="project-tech">
+              <span class="tech-tag">AWS EC2</span>
+              <span class="tech-tag">S3</span>
+              <span class="tech-tag">RDS</span>
+              <span class="tech-tag">Lambda</span>
+              <span class="tech-tag">Cloud Architecture</span>
+            </div>
+          </div>
+          <a href="#" class="project-link-icon">↗</a>
+        </div>
+
+      </div>
+    </div>
+
+    <button id="more-btn" onclick="toggleMoreProjects()" style="
+      margin-top: 24px; background: none; border: 1px solid var(--border-dk);
+      padding: 10px 20px; border-radius: var(--radius); font-size: 0.82rem;
+      font-family: var(--font); color: var(--text-muted); cursor: pointer;
+      display: flex; align-items: center; gap: 7px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    " onmouseover="this.style.borderColor='var(--silver)';this.style.color='var(--text)';this.style.background='var(--bg-soft)'"
+       onmouseout="this.style.borderColor='var(--border-dk)';this.style.color='var(--text-muted)';this.style.background='none'">
+      <span id="more-btn-icon">+</span>
+      <span id="more-btn-text">3 more projects</span>
+    </button>
+
+  </div>
+</section>
+
+<!-- ─── STORY MAPS ────────────────────────────────────────────────── -->
+<section id="storymaps" class="section">
+  <div class="wrap">
+    <p class="s-label fade">ArcGIS Story Maps</p>
+    <h2 class="s-title fade">Spatial stories</h2>
+    <p class="s-body fade" style="max-width:560px;">
+      Maps built with ArcGIS Story Maps — combining spatial data, layers, and narrative to make geographic information readable and useful.
+    </p>
+    <div class="storymap-grid">
+      <div class="storymap-card fade">
+        <div class="sm-thumb sm-thumb-1">🗺️</div>
+        <div class="sm-body">
+          <h4>Story Map Title</h4>
+          <p>Short description of the spatial story — what question it answers, what data it uses.</p>
+          <a href="https://storymaps.arcgis.com" target="_blank" class="sm-link">Open in ArcGIS →</a>
+        </div>
+      </div>
+      <div class="storymap-card fade">
+        <div class="sm-thumb sm-thumb-2">🌍</div>
+        <div class="sm-body">
+          <h4>Story Map Title</h4>
+          <p>Short description of the spatial story — what question it answers, what data it uses.</p>
+          <a href="https://storymaps.arcgis.com" target="_blank" class="sm-link">Open in ArcGIS →</a>
+        </div>
+      </div>
+      <div class="storymap-card fade">
+        <div class="sm-thumb sm-thumb-3">📍</div>
+        <div class="sm-body">
+          <h4>Story Map Title</h4>
+          <p>Short description of the spatial story — what question it answers, what data it uses.</p>
+          <a href="https://storymaps.arcgis.com" target="_blank" class="sm-link">Open in ArcGIS →</a>
+        </div>
+      </div>
+    </div>
+    <div class="sm-placeholder fade">
+      <p>✏️ Placeholder — send me your Story Map links and titles and I'll fill these in.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ────────────────────────────────────────────────────── -->
+<section id="skills" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">Skills</p>
+    <h2 class="s-title fade">Technical skills</h2>
+    <table class="skills-table fade">
+      <tbody>
+        <tr>
+          <td>GIS &amp; Spatial</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">ArcGIS Pro</span>
+              <span class="pill">ArcGIS Online</span>
+              <span class="pill">Business Analyst Pro</span>
+              <span class="pill">Story Maps</span>
+              <span class="pill">Coordinate Systems</span>
+              <span class="pill">Spatial Analysis</span>
+              <span class="pill">Data Management</span>
+              <span class="pill">ArcGIS Enterprise</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Databases</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">SQL</span>
+              <span class="pill">Relational Modeling</span>
+              <span class="pill">Database Design</span>
+              <span class="pill">MongoDB</span>
+              <span class="pill">Google BigQuery</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Programming</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">Java</span>
+              <span class="pill">Python</span>
+              <span class="pill">JavaScript</span>
+              <span class="pill">C#</span>
+              <span class="pill">Spring Boot</span>
+              <span class="pill">REST APIs</span>
+              <span class="pill">Postman</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Systems &amp; Tools</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">Salesforce CRM</span>
+              <span class="pill">NationBuilder CRM</span>
+              <span class="pill">Git</span>
+              <span class="pill">Jira</span>
+              <span class="pill">Shopify</span>
+              <span class="pill">SaaS Operations</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Cloud</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">AWS EC2</span>
+              <span class="pill">AWS S3</span>
+              <span class="pill">AWS RDS</span>
+              <span class="pill">AWS Lambda</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Business Analysis</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">Process Mapping</span>
+              <span class="pill">Workflow Documentation</span>
+              <span class="pill">Requirements Gathering</span>
+              <span class="pill">Stakeholder Communication</span>
+              <span class="pill">User Training</span>
+              <span class="pill">Reporting</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── COURSEWORK ────────────────────────────────────────────────── -->
+<section id="coursework" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Education &amp; Training</p>
+    <h2 class="s-title fade">Coursework</h2>
+
+    <!-- Esri Training -->
+    <div style="margin-bottom: 48px;">
+      <h3 class="fade" style="font-size:0.88rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:16px;">Esri Academy — ArcGIS Training</h3>
+      <table class="esri-table fade">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>ArcGIS Business Analyst Pro Basics</td><td>Web Course</td></tr>
+          <tr><td>The Systems Approach to ArcGIS: System Life Cycle</td><td>Web Course</td></tr>
+          <tr><td>The Systems Approach to ArcGIS: An Introduction</td><td>Web Course</td></tr>
+          <tr><td>Administering ArcGIS Online Content</td><td>Web Course</td></tr>
+          <tr><td>Introduction to AI in ArcGIS</td><td>Web Course</td></tr>
+          <tr><td>Introduction to Coordinate Systems</td><td>Web Course</td></tr>
+          <tr><td>ArcGIS Online Basics</td><td>Web Course</td></tr>
+          <tr><td>ArcGIS Pro Basics</td><td>Web Course</td></tr>
+          <tr><td>GIS Basics</td><td>Web Course</td></tr>
+          <tr><td>Getting Started with Data Management</td><td>Web Course</td></tr>
+          <tr><td>Introduction to ArcGIS Monitor</td><td>Training Seminar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- College Coursework -->
+    <div>
+      <h3 class="fade" style="font-size:0.88rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:16px;">Centennial College — Software Engineering Technology (Advanced Diploma)</h3>
+      <div class="course-grid fade">
+        <div class="course-group">
+          <h4>Systems &amp; Software</h4>
+          <ul class="course-list">
+            <li>Software Requirements Engineering</li>
+            <li>Enterprise Systems Integration</li>
+            <li>Application Development</li>
+            <li>Systems Design &amp; Architecture</li>
+            <li>Software Security</li>
+            <li>IT Project Management</li>
+          </ul>
+        </div>
+        <div class="course-group">
+          <h4>Data &amp; Cloud</h4>
+          <ul class="course-list">
+            <li>Database Systems &amp; SQL</li>
+            <li>Cloud Computing (AWS)</li>
+            <li>DevOps Fundamentals</li>
+            <li>REST API Engineering</li>
+            <li>Unix / Linux Administration</li>
+            <li>Networking Fundamentals</li>
+          </ul>
+        </div>
+        <div class="course-group">
+          <h4>Business &amp; Analysis</h4>
+          <ul class="course-list">
+            <li>Business Systems Analysis</li>
+            <li>Business Communication</li>
+            <li>Analytics &amp; Reporting</li>
+            <li>Technical Documentation</li>
+          </ul>
+        </div>
+        <div class="course-group">
+          <h4>Programming</h4>
+          <ul class="course-list">
+            <li>Java Programming</li>
+            <li>Python Programming</li>
+            <li>C# &amp; .NET</li>
+            <li>JavaScript &amp; Web</li>
+            <li>Object-Oriented Design</li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:var(--text-faint); margin-top:20px;" class="fade">Full transcript available on request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LEARNING LOG ───────────────────────────────────────────────── -->
+<section id="learning" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">Currently</p>
+    <h2 class="s-title fade">Learning log</h2>
+    <p class="s-body fade" style="max-width:520px; margin-bottom:32px;">
+      An ongoing record of what I'm studying and building — courses, tools, and practical experiments.
+    </p>
+    <div class="log-list">
+
+      <div class="log-item fade">
+        <span class="log-date">May 2026</span>
+        <div class="log-content">
+          <span class="log-tag">ArcGIS</span>
+          <h4>ArcGIS Enterprise Quick Start Guide</h4>
+          <p>Self-directed preparation on Enterprise architecture — Portal for ArcGIS, ArcGIS Server, licensing, patching, and geodatabases. Building familiarity with administration concepts beyond ArcGIS Online.</p>
+        </div>
+      </div>
+
+      <div class="log-item fade">
+        <span class="log-date">May 2026</span>
+        <div class="log-content">
+          <span class="log-tag">ArcGIS</span>
+          <h4>Hands-on ArcGIS Pro Practice</h4>
+          <p>Active desktop work: map and layer navigation, attribute table operations, symbology configuration, coordinate systems, and data management exercises using real geographic datasets.</p>
+        </div>
+      </div>
+
+      <div class="log-item fade">
+        <span class="log-date">2026</span>
+        <div class="log-content">
+          <span class="log-tag">GIS</span>
+          <h4>11 Esri Academy Courses Completed</h4>
+          <p>Completed foundational Esri curriculum: ArcGIS Pro, ArcGIS Online, Business Analyst Pro, GIS Basics, Coordinate Systems, Data Management, AI in ArcGIS, Systems Approach to ArcGIS, and ArcGIS Monitor.</p>
+        </div>
+      </div>
+
+      <div class="log-item fade">
+        <span class="log-date">2025–26</span>
+        <div class="log-content">
+          <span class="log-tag">Software Engineering</span>
+          <h4>Advanced Diploma — Centennial College</h4>
+          <p>Completed 3-year program covering databases, APIs, cloud, DevOps, networking, security, enterprise systems, and business analysis.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="wrap">
+    <p class="s-label fade">Contact</p>
+    <div class="contact-row fade">
+      <a href="mailto:talgat.dilmurat.tech@gmail.com" class="contact-link">
+        <span>✉</span> talgat.dilmurat.tech@gmail.com
+      </a>
+      <a href="tel:4169099610" class="contact-link">
+        <span>📞</span> (416) 909-9610
+      </a>
+      <a href="https://github.com/talgatdilmurat" target="_blank" class="contact-link">
+        <span>⌥</span> GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Talgat Dilmurat · London, ON · 2026</p>
+</footer>
+
+<script>
+  // More projects toggle
+  function toggleMoreProjects() {
+    const more = document.getElementById('more-projects');
+    const icon = document.getElementById('more-btn-icon');
+    const text = document.getElementById('more-btn-text');
+    const open = more.style.display === 'block';
+    more.style.display = open ? 'none' : 'block';
+    icon.textContent = open ? '+' : '−';
+    text.textContent = open ? '3 more projects' : 'Show less';
+    if (!open) {
+      // trigger fade on newly revealed items
+      more.querySelectorAll('.fade:not(.in)').forEach(el => {
+        setTimeout(() => el.classList.add('in'), 50);
+      });
+    }
+  }
+
+  // Mobile nav
+  function toggleMob() {
+    const m = document.getElementById('mob-nav');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  // Scroll progress bar
+  const bar = document.getElementById('scroll-bar');
+  function updateScroll() {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }
+
+  // Active nav section highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  function updateNav() {
+    const y = window.scrollY + 80;
+    let current = '';
+    sections.forEach(s => { if (y >= s.offsetTop) current = s.id; });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', () => { updateScroll(); updateNav(); }, { passive: true });
+
+  // Fade-in on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

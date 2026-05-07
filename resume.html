@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Talgat Dilmurat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #ffffff;
+      --bg-soft:    #f9fafb;
+      --bg-tag:     #f3f4f6;
+      --text:       #111827;
+      --text-mid:   #374151;
+      --text-muted: #6b7280;
+      --text-faint: #9ca3af;
+      --border:     #e5e7eb;
+      --border-dk:  #d1d5db;
+      --accent:     #64748b;
+      --link:       #1d4ed8;
+      --mono:       'JetBrains Mono', 'Courier New', monospace;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.94); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 860px; margin: 0 auto; padding: 0 28px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back {
+      font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
+    .nav-print {
+      font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+      border: 1px solid var(--border-dk); padding: 5px 12px; border-radius: 5px;
+      transition: all 0.15s; background: none;
+      font-family: inherit;
+    }
+    .nav-print:hover { color: var(--text); border-color: var(--text-mid); }
+
+    /* LAYOUT */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 28px 80px; }
+
+    /* RESUME HEADER */
+    .r-header { padding: 56px 0 36px; border-bottom: 2px solid var(--text); margin-bottom: 40px; }
+    .r-name { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 6px; }
+    .r-contact {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;
+    }
+    .r-contact a { color: var(--link); }
+    .r-contact a:hover { text-decoration: underline; }
+    .r-summary {
+      margin-top: 18px; font-size: 0.9rem; color: var(--text-mid);
+      line-height: 1.8; max-width: 700px;
+    }
+
+    /* SECTIONS */
+    .r-section { margin-bottom: 44px; }
+    .r-section-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--accent); margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+
+    /* EXPERIENCE */
+    .r-job { margin-bottom: 28px; }
+    .r-job:last-child { margin-bottom: 0; }
+    .r-job-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; margin-bottom: 3px; flex-wrap: wrap;
+    }
+    .r-job-title { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .r-job-dates { font-size: 0.78rem; color: var(--text-faint); white-space: nowrap; font-family: var(--mono); }
+    .r-job-org { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 10px; }
+    .r-job ul { padding-left: 0; list-style: none; }
+    .r-job li {
+      font-size: 0.85rem; color: var(--text-mid); line-height: 1.65;
+      margin-bottom: 5px; padding-left: 14px; position: relative;
+    }
+    .r-job li::before {
+      content: '–'; position: absolute; left: 0; color: var(--text-faint);
+    }
+
+    /* EDUCATION */
+    .r-edu { margin-bottom: 20px; }
+    .r-edu:last-child { margin-bottom: 0; }
+    .r-edu-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 3px;
+    }
+    .r-edu-degree { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+    .r-edu-year { font-size: 0.77rem; color: var(--text-faint); font-family: var(--mono); }
+    .r-edu-school { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 6px; }
+    .r-edu-note { font-size: 0.82rem; color: var(--text-mid); line-height: 1.65; }
+
+    /* SKILLS GRID */
+    .r-skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .r-skill-group h4 {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-muted); font-weight: 600; margin-bottom: 8px;
+    }
+    .r-skill-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .r-pill {
+      font-family: var(--mono); font-size: 0.68rem;
+      padding: 3px 7px; border-radius: 3px;
+      background: var(--bg-tag); color: var(--text-mid);
+      border: 1px solid var(--border);
+    }
+
+    /* LANGUAGES TABLE */
+    .r-lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+    .r-lang-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.84rem;
+    }
+    .r-lang-name { color: var(--text-mid); font-weight: 500; }
+    .r-lang-level { font-size: 0.72rem; color: var(--text-faint); }
+
+    /* ESRI TABLE */
+    .esri-t { width: 100%; border-collapse: collapse; }
+    .esri-t th {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-muted); font-weight: 600; text-align: left;
+      padding: 0 0 8px; border-bottom: 1px solid var(--border);
+    }
+    .esri-t td {
+      font-size: 0.82rem; color: var(--text-mid); padding: 8px 0;
+      border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.4;
+    }
+    .esri-t tr:last-child td { border-bottom: none; }
+    .esri-t td:nth-child(2) { font-size: 0.75rem; color: var(--text-faint); padding-right: 12px; white-space: nowrap; }
+    .esri-t td:last-child { text-align: right; }
+    /* sbadge removed */
+
+    /* PRINT */
+    @media print {
+      nav { display: none !important; }
+      .page { padding: 0 0 40px; }
+      .r-header { padding: 20px 0 24px; }
+      .r-job li, .r-edu-note { font-size: 0.8rem; }
+    }
+
+    @media (max-width: 600px) {
+      .r-job-header, .r-edu-header { flex-direction: column; gap: 2px; }
+      .r-lang-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="personal.html" style="font-size:0.82rem;color:var(--text-muted);">Personal</a>
+      <a href="gap.html" style="font-size:0.82rem;color:var(--text-muted);">Growth</a>
+    <span class="nav-title">Talgat Dilmurat — Resume</span>
+    </div>
+    <button class="nav-print" onclick="window.print()">Print / PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="r-header">
+    <h1 class="r-name">Talgat Dilmurat</h1>
+    <div class="r-contact">
+      <span>London, Ontario</span>
+      <a href="tel:4169099610">(416) 909-9610</a>
+      <a href="mailto:talgat.dilmurat.tech@gmail.com">talgat.dilmurat.tech@gmail.com</a>
+      <a href="https://linkedin.com/in/talgat-dilmurat" target="_blank">LinkedIn</a>
+      <a href="https://github.com/talgat-dilmurat" target="_blank">GitHub</a>
+    </div>
+    <p class="r-summary">
+      Business systems analyst and software engineering technology graduate with hands-on experience across
+      CRM administration, data integrity, operational reporting, workflow documentation, SaaS tool
+      implementation, GIS mapping, REST API development, and stakeholder communication. Background in
+      translating raw operational data into actionable reports, building repeatable workflows, and training
+      non-technical users across nonprofit, marketing, e-commerce, and operations environments.
+    </p>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="r-section">
+    <h2 class="r-section-title">Experience</h2>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Sales Delivery Specialist</span>
+        <span class="r-job-dates">Aug 2023 – Present</span>
+      </div>
+      <div class="r-job-org">Frito-Lay / PepsiCo · London, ON</div>
+      <ul>
+        <li>Operate company logistics systems and defined workflows to complete daily operational responsibilities with accuracy and consistency.</li>
+        <li>Maintain real-time record handling, safety compliance, and procedure adherence in a fast-paced operational environment.</li>
+        <li>Demonstrate reliability, operations discipline, and practical experience using proprietary systems in a structured operational context.</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Language Interpreter</span>
+        <span class="r-job-dates">Feb 2022 – Present</span>
+      </div>
+      <div class="r-job-org">Freelance / Agencies / Government</div>
+      <ul>
+        <li>IRB Certified Interpreter for Mandarin, Uyghur, and Kazakh — experience in medical, legal, financial, government, and emergency contexts.</li>
+        <li>Process complex information quickly and accurately under pressure while maintaining professional neutrality and confidentiality.</li>
+        <li>Adapt rapidly to unfamiliar terminology and formal procedural requirements across sectors with high accuracy demands.</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Administrative &amp; Development Operations</span>
+        <span class="r-job-dates">Apr 2020 – Sep 2021</span>
+      </div>
+      <div class="r-job-org">Nonprofit / Freelance</div>
+      <ul>
+        <li>Managed NationBuilder CRM data, maintained data integrity, and used CRM exports to build Excel-based reports for fundraising, revenue tracking, and leadership decision-making.</li>
+        <li>Converted raw donation data into structured financial reports covering one-time, recurring, and campaign revenue with trend projections.</li>
+        <li>Selected, configured, and organized SaaS tools for project management, workflow tracking, fundraising operations, and team collaboration.</li>
+        <li>Documented workflows, operating procedures, software instructions, and calling processes so staff and volunteers could follow consistent steps.</li>
+        <li>Led donor calling campaigns: assigned caller lists from the database, trained callers, managed the calling platform, and tracked activity and revenue results per caller.</li>
+        <li>Trained staff and volunteers on CRM usage, data handling, donor lists, calling workflow, reporting, and standard operating procedures.</li>
+        <li>Supported HR and internal administration including job postings, candidate shortlisting, interview scheduling, feedback documentation, and policy drafts.</li>
+        <li>Led external partnership outreach by researching 500+ nonprofit organizations and managing collaboration messages and follow-ups.</li>
+        <li>Prepared confidential summaries, policy drafts, operational reports, and communication materials for leadership use.</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Marketing Operations Assistant</span>
+        <span class="r-job-dates">Dec 2021 – Mar 2023</span>
+      </div>
+      <div class="r-job-org">ONESTUDIO · Remote</div>
+      <ul>
+        <li>Managed analytics reporting for marketing campaigns, newsletters, surveys, and customer engagement data to support business decisions.</li>
+        <li>Operated across CRM, CMS, email marketing, newsletter, survey, and internal communication platforms in a fully remote environment.</li>
+        <li>Served as practical troubleshooting support for tool, workflow, reporting, and administrative bottlenecks across marketing and operations.</li>
+        <li>Supported HR operations: drafted job postings, shortlisted candidates, scheduled interviews, conducted interviews, and prepared candidate comparison notes.</li>
+        <li>Created internal cryptocurrency educational content — newsletter-style materials and a glossary — to help non-technical staff understand emerging technology topics.</li>
+        <li>Applied multilingual and cross-cultural knowledge to support campaign planning and communications with governments, customers, and external partners.</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Founder &amp; E-Commerce Manager</span>
+        <span class="r-job-dates">Mar 2021 – Mar 2023</span>
+      </div>
+      <div class="r-job-org">Noah's Art · Remote</div>
+      <ul>
+        <li>Built the business's full operational infrastructure across Shopify, logistics, inventory workflows, supplier coordination, and customer service.</li>
+        <li>Managed backend product and inventory data flows including performance review, supplier updates, and order-related workflow tracking.</li>
+        <li>Used analytics tools to assess marketing performance, SEO, customer engagement, and conversion patterns; made data-driven adjustments to product and spend decisions.</li>
+        <li>Troubleshot international shipping, supply-chain delays, and fulfillment problems through direct supplier and factory communication.</li>
+        <li>Managed end-to-end customer communication, order follow-up, supplier negotiation, and daily store operations independently.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="r-section">
+    <h2 class="r-section-title">Education</h2>
+
+    <div class="r-edu">
+      <div class="r-edu-header">
+        <span class="r-edu-degree">Ontario College Advanced Diploma — Software Engineering Technology</span>
+        <span class="r-edu-year">Completed 2026</span>
+      </div>
+      <div class="r-edu-school">Centennial College · Toronto, ON</div>
+      <p class="r-edu-note">
+        3-year advanced diploma covering software engineering, database systems, systems design, application development,
+        enterprise integration, IT project management, cloud computing, DevOps, Unix/Linux, networking, software security,
+        REST APIs, and business systems analysis. Strong alignment with business information systems roles through combined
+        software development, communication, requirements, and applied project curriculum.
+      </p>
+    </div>
+
+    <div class="r-edu">
+      <div class="r-edu-header">
+        <span class="r-edu-degree">Bachelor of Arts — Linguistics &amp; Foreign Languages</span>
+        <span class="r-edu-year">2016 – 2018</span>
+      </div>
+      <div class="r-edu-school">University (abroad)</div>
+      <p class="r-edu-note">Studied linguistics and taught several languages — background supporting stakeholder communication, documentation, and multilingual environments.</p>
+    </div>
+
+    <div class="r-edu">
+      <div class="r-edu-header">
+        <span class="r-edu-degree">Information Technology</span>
+        <span class="r-edu-year">2014 – 2015</span>
+      </div>
+      <div class="r-edu-school">Tianshan College</div>
+      <p class="r-edu-note">Early IT foundation supporting later software engineering technology studies.</p>
+    </div>
+  </div>
+
+  <!-- ESRI / GIS TRAINING -->
+  <div class="r-section">
+    <h2 class="r-section-title">Esri Academy — ArcGIS Training</h2>
+    <table class="esri-t">
+      <thead>
+        <tr><th>Course</th><th>Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ArcGIS Business Analyst Pro Basics</td><td>Web Course</td></tr>
+        <tr><td>The Systems Approach to ArcGIS: System Life Cycle</td><td>Web Course</td></tr>
+        <tr><td>The Systems Approach to ArcGIS: An Introduction</td><td>Web Course</td></tr>
+        <tr><td>Administering ArcGIS Online Content</td><td>Web Course</td></tr>
+        <tr><td>Introduction to AI in ArcGIS</td><td>Web Course</td></tr>
+        <tr><td>Introduction to Coordinate Systems</td><td>Web Course</td></tr>
+        <tr><td>ArcGIS Online Basics</td><td>Web Course</td></tr>
+        <tr><td>ArcGIS Pro Basics</td><td>Web Course</td></tr>
+        <tr><td>GIS Basics</td><td>Web Course</td></tr>
+        <tr><td>Getting Started with Data Management</td><td>Web Course</td></tr>
+        <tr><td>Introduction to ArcGIS Monitor</td><td>Training Seminar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="r-section">
+    <h2 class="r-section-title">Technical Skills</h2>
+    <div class="r-skills">
+      <div class="r-skill-group">
+        <h4>GIS &amp; Spatial</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">ArcGIS Pro</span>
+          <span class="r-pill">ArcGIS Online</span>
+          <span class="r-pill">Business Analyst Pro</span>
+          <span class="r-pill">Story Maps</span>
+          <span class="r-pill">Coordinate Systems</span>
+          <span class="r-pill">Data Management</span>
+          <span class="r-pill">ArcGIS Enterprise</span>
+        </div>
+      </div>
+      <div class="r-skill-group">
+        <h4>Databases &amp; Data</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">SQL</span>
+          <span class="r-pill">Relational Design</span>
+          <span class="r-pill">MongoDB</span>
+          <span class="r-pill">Google BigQuery</span>
+          <span class="r-pill">Excel Reporting</span>
+        </div>
+      </div>
+      <div class="r-skill-group">
+        <h4>Programming</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">Java</span>
+          <span class="r-pill">Python</span>
+          <span class="r-pill">JavaScript</span>
+          <span class="r-pill">C#</span>
+          <span class="r-pill">Spring Boot</span>
+          <span class="r-pill">REST APIs</span>
+          <span class="r-pill">Postman</span>
+        </div>
+      </div>
+      <div class="r-skill-group">
+        <h4>Systems &amp; Tools</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">Salesforce CRM</span>
+          <span class="r-pill">NationBuilder CRM</span>
+          <span class="r-pill">Git</span>
+          <span class="r-pill">Jira</span>
+          <span class="r-pill">Shopify</span>
+        </div>
+      </div>
+      <div class="r-skill-group">
+        <h4>Cloud</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">AWS EC2 / S3</span>
+          <span class="r-pill">AWS RDS</span>
+          <span class="r-pill">AWS Lambda</span>
+        </div>
+      </div>
+      <div class="r-skill-group">
+        <h4>Business Analysis</h4>
+        <div class="r-skill-pills">
+          <span class="r-pill">Process Mapping</span>
+          <span class="r-pill">Workflow Documentation</span>
+          <span class="r-pill">Requirements Gathering</span>
+          <span class="r-pill">User Training</span>
+          <span class="r-pill">Stakeholder Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGUAGES -->
+  <div class="r-section">
+    <h2 class="r-section-title">Languages</h2>
+    <div class="r-lang-grid">
+      <div class="r-lang-item"><span class="r-lang-name">English</span><span class="r-lang-level">Fluent</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Mandarin (Chinese)</span><span class="r-lang-level">Fluent</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Uyghur</span><span class="r-lang-level">Fluent · IRB Certified</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Kazakh</span><span class="r-lang-level">Fluent · IRB Certified</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Arabic</span><span class="r-lang-level">Fluent (spoken), Intermediate (written)</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Russian</span><span class="r-lang-level">Intermediate</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Turkish</span><span class="r-lang-level">Beginner</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border); padding:28px; text-align:center;">
+  <p style="font-size:0.75rem; color:var(--text-faint);">
+    Talgat Dilmurat · <a href="index.html" style="color:var(--link);">← Back to Portfolio</a>
+  </p>
+</footer>
+
+</body>
+</html>
