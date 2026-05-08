@@ -23,7 +23,7 @@
       --text-faint:  #7ba4d0;   /* medium blue — hints & labels */
       --border:      #c8daf0;   /* light blue border */
       --border-dk:   #7ba4d0;   /* medium blue border */
-      --silver:      #2e5e99;   /* sapphire accent — main brand color */
+      --silver:      #64748b;   /* slate silver accent */
       --radius:      8px;
       --font:        'Inter', system-ui, sans-serif;
       --mono:        'JetBrains Mono', 'Courier New', monospace;
@@ -141,10 +141,19 @@
       font-family: var(--mono); font-size: 0.82rem; color: rgba(255,255,255,0.7);
       font-weight: 400; margin-bottom: 0; letter-spacing: 0.01em;
     }
+    .hero-tagline {
+      font-size: 0.9rem; font-style: italic;
+      color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.01em;
+    }
     .hero-divider {
-      width: 36px; height: 2px; background: rgba(255,255,255,0.5);
+      width: 36px; height: 2px; background: rgba(255,255,255,0.35);
       margin: 28px 0; border-radius: 1px;
     }
+    .hero-focus {
+      font-family: var(--mono); font-size: 0.75rem;
+      color: rgba(255,255,255,0.55); margin-bottom: 24px;
+    }
+    .hero-focus-key { color: rgba(255,255,255,0.3); }
     .hero-intro {
       font-size: 1.02rem; color: rgba(255,255,255,0.85); line-height: 1.82;
       max-width: 540px; margin-bottom: 36px;
@@ -537,8 +546,10 @@
   <div class="wrap">
     <p class="hero-eyebrow fade">London, Ontario</p>
     <h1 class="hero-name fade">Talgat<br>Dilmurat</h1>
-    <p class="hero-title fade">Business Systems Analyst &nbsp;·&nbsp; Software Engineering Technology</p>
+    <p class="hero-title fade">Aspiring GIS Analyst &nbsp;·&nbsp; Software Engineering Graduate</p>
+    <p class="hero-tagline fade">GIS · Systems · The space between</p>
     <div class="hero-divider fade"></div>
+    <p class="hero-focus fade"><span class="hero-focus-key">focus &nbsp;:&nbsp; </span>spatial data · automation · apps</p>
     <p class="hero-intro fade">
       GIS, SQL, REST APIs, CRM administration, and workflow documentation —
       focused on the seam between systems and the people who depend on them.
