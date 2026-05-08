@@ -340,6 +340,75 @@
     }
     .gis-link:hover { color: var(--text); }
 
+    /* ─── GRADIENT SECTIONS ────────────────────────────────────── */
+    .section-grad {
+      background: linear-gradient(160deg, #f0f6ff 0%, #e2edf9 50%, #eef4fb 100%);
+    }
+
+    /* ─── NAV PILL BUTTONS ──────────────────────────────────────── */
+    .nav-pill {
+      font-size: 0.8rem !important; font-weight: 500 !important;
+      padding: 5px 14px !important; border-radius: 20px !important;
+      border: 1.5px solid var(--border-dk) !important;
+      color: var(--text-mid) !important; transition: all 0.2s !important;
+    }
+    .nav-pill:hover {
+      border-color: var(--silver) !important;
+      color: var(--silver) !important;
+      background: var(--bg-soft) !important;
+    }
+    .nav-pill-filled {
+      background: var(--silver) !important;
+      border-color: var(--silver) !important;
+      color: #fff !important; font-weight: 600 !important;
+    }
+    .nav-pill-filled:hover {
+      background: #1e4878 !important;
+      border-color: #1e4878 !important;
+      color: #fff !important;
+    }
+    .nav-pill::after, .nav-pill-filled::after { display: none !important; }
+
+    /* ─── BACK TO TOP ───────────────────────────────────────────── */
+    #top-btn {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
+      background: var(--silver); color: #fff;
+      border: none; border-radius: 50%; font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s, transform 0.2s;
+      z-index: 150; box-shadow: 0 2px 14px rgba(46,94,153,0.35);
+    }
+    #top-btn.shown { opacity: 1; pointer-events: auto; }
+    #top-btn:hover { transform: translateY(-3px); }
+
+    /* ─── GATEWAY SECTION ───────────────────────────────────────── */
+    .gateway-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-top: 28px;
+    }
+    .gateway-card {
+      display: flex; align-items: center; gap: 20px;
+      padding: 28px 24px; border: 1.5px solid var(--border);
+      border-radius: var(--radius); background: #fff;
+      transition: all 0.2s; color: var(--text);
+    }
+    .gateway-card:hover {
+      border-color: var(--silver); transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(46,94,153,0.12);
+    }
+    .gateway-icon {
+      font-size: 1.6rem; width: 52px; height: 52px;
+      background: var(--bg-soft); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 1px solid var(--border);
+    }
+    .gateway-text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .gateway-text p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .gateway-arrow { font-size: 1.3rem; color: var(--silver); margin-left: auto; flex-shrink: 0; }
+    @media (max-width: 540px) { .gateway-grid { grid-template-columns: 1fr; } }
+
     /* ─── COURSEWORK ────────────────────────────────────────────── */
     .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
     .course-group h4 {
@@ -441,21 +510,18 @@
 <body>
 
 <div id="scroll-bar"></div>
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <!-- ─── NAV ──────────────────────────────────────────────────────── -->
 <nav>
   <div class="nav-inner">
     <span class="nav-logo">Talgat Dilmurat</span>
     <div class="nav-links">
-      <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#gis">GIS</a>
-      <a href="#storymaps">Story Maps</a>
       <a href="#skills">Skills</a>
-      <a href="#coursework">Coursework</a>
-      <a href="personal.html">Personal</a>
-      <a href="gap.html">Growth</a>
-      <a href="resume.html" class="nav-resume">Full Resume →</a>
+      <a href="personal.html" class="nav-pill">Personal</a>
+      <a href="resume.html" class="nav-pill nav-pill-filled">Resume →</a>
     </div>
     <div class="nav-ham" onclick="toggleMob()">
       <span></span><span></span><span></span>
@@ -463,15 +529,11 @@
   </div>
 </nav>
 <div id="mob-nav">
-  <a href="#about" onclick="toggleMob()">About</a>
   <a href="#projects" onclick="toggleMob()">Projects</a>
   <a href="#gis" onclick="toggleMob()">GIS</a>
-  <a href="#storymaps" onclick="toggleMob()">Story Maps</a>
   <a href="#skills" onclick="toggleMob()">Skills</a>
-  <a href="#coursework" onclick="toggleMob()">Coursework</a>
   <a href="personal.html" onclick="toggleMob()">Personal</a>
-  <a href="gap.html" onclick="toggleMob()">Growth</a>
-  <a href="resume.html" onclick="toggleMob()">Full Resume →</a>
+  <a href="resume.html" onclick="toggleMob()">Resume →</a>
 </div>
 
 <!-- ─── HERO ──────────────────────────────────────────────────────── -->
@@ -536,7 +598,7 @@
 </section>
 
 <!-- ─── PROJECTS ──────────────────────────────────────────────────── -->
-<section id="projects" class="section">
+<section id="projects" class="section section-grad">
   <div class="wrap">
     <p class="s-label fade">Projects</p>
     <h2 class="s-title fade">Selected work</h2>
@@ -682,7 +744,7 @@
 </section>
 
 <!-- ─── GIS PROJECTS ──────────────────────────────────────────────── -->
-<section id="gis" class="section" style="background: var(--bg-warm)">
+<section id="gis" class="section">
   <div class="wrap">
     <p class="s-label fade">GIS Projects</p>
     <h2 class="s-title fade">Spatial data &amp; dashboards</h2>
@@ -741,7 +803,7 @@
 </section>
 
 <!-- ─── STORY MAPS ────────────────────────────────────────────────── -->
-<section id="storymaps" class="section">
+<section id="storymaps" class="section section-grad">
   <div class="wrap">
     <p class="s-label fade">ArcGIS Story Maps</p>
     <h2 class="s-title fade">Spatial stories</h2>
@@ -781,7 +843,7 @@
 </section>
 
 <!-- ─── SKILLS ────────────────────────────────────────────────────── -->
-<section id="skills" class="section" style="background: var(--bg-warm)">
+<section id="skills" class="section">
   <div class="wrap">
     <p class="s-label fade">Skills</p>
     <h2 class="s-title fade">Technical skills</h2>
@@ -871,7 +933,7 @@
 </section>
 
 <!-- ─── COURSEWORK ────────────────────────────────────────────────── -->
-<section id="coursework" class="section">
+<section id="coursework" class="section section-grad">
   <div class="wrap">
     <p class="s-label fade">Education &amp; Training</p>
     <h2 class="s-title fade">Coursework</h2>
@@ -954,7 +1016,7 @@
 </section>
 
 <!-- ─── LEARNING LOG ───────────────────────────────────────────────── -->
-<section id="learning" class="section" style="background: var(--bg-warm)">
+<section id="learning" class="section">
   <div class="wrap">
     <p class="s-label fade">Currently</p>
     <h2 class="s-title fade">Learning log</h2>
@@ -999,6 +1061,32 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ─── GATEWAY ───────────────────────────────────────────────────── -->
+<section id="gateway" class="section section-grad">
+  <div class="wrap">
+    <p class="s-label fade">Explore further</p>
+    <h2 class="s-title fade">Want to know more?</h2>
+    <div class="gateway-grid">
+      <a href="personal.html" class="gateway-card fade">
+        <div class="gateway-icon">👤</div>
+        <div class="gateway-text">
+          <h4>Personal</h4>
+          <p>Background, languages, and what drives me outside of work.</p>
+        </div>
+        <span class="gateway-arrow">→</span>
+      </a>
+      <a href="resume.html" class="gateway-card fade">
+        <div class="gateway-icon">📄</div>
+        <div class="gateway-text">
+          <h4>Full Resume</h4>
+          <p>Complete work history, education, certifications, and credentials.</p>
+        </div>
+        <span class="gateway-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -1068,7 +1156,12 @@
     });
   }
 
-  window.addEventListener('scroll', () => { updateScroll(); updateNav(); }, { passive: true });
+  // Back to top visibility
+  const topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', () => {
+    updateScroll(); updateNav();
+    topBtn.classList.toggle('shown', window.scrollY > 500);
+  }, { passive: true });
 
   // Fade-in on scroll
   const obs = new IntersectionObserver(entries => {
