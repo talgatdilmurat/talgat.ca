@@ -31,11 +31,9 @@
 
     /* ─── HERO COLOR SHIFT ──────────────────────────────────────── */
     @keyframes hero-breathe {
-      0%   { background-color: #dde8f5; }
-      25%  { background-color: #c8daf0; }
-      50%  { background-color: #b8cde5; }
-      75%  { background-color: #c8daf0; }
-      100% { background-color: #dde8f5; }
+      0%   { background: linear-gradient(135deg, #2e5496 0%, #5b80b8 25%, #8aaad0 50%, #b8cde5 75%, #dde8f5 100%); }
+      50%  { background: linear-gradient(135deg, #dde8f5 0%, #b8cde5 25%, #8aaad0 50%, #5b80b8 75%, #2e5496 100%); }
+      100% { background: linear-gradient(135deg, #2e5496 0%, #5b80b8 25%, #8aaad0 50%, #b8cde5 75%, #dde8f5 100%); }
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -117,51 +115,50 @@
       padding: 108px 0 88px; border-top: none; position: relative;
       animation: hero-breathe 14s ease-in-out infinite;
     }
-    /* Sapphire dot grid */
+    /* Dot grid over gradient hero */
     #hero::before {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background-image: radial-gradient(circle, #7ba4d0 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
       background-size: 28px 28px;
-      opacity: 0.35;
     }
     #hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: linear-gradient(to bottom, transparent 0%, rgba(245,249,255,0.85) 100%);
+      background: linear-gradient(to bottom, transparent 60%, rgba(20,50,110,0.15) 100%);
     }
     #hero .wrap { position: relative; z-index: 1; }
     .hero-eyebrow {
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
-      color: var(--text-faint); margin-bottom: 20px;
+      color: rgba(255,255,255,0.65); margin-bottom: 20px;
       display: flex; align-items: center; gap: 10px;
     }
-    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--border-dk); }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: rgba(255,255,255,0.3); }
     .hero-name {
       font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 800;
       letter-spacing: -0.05em; line-height: 1.0;
-      color: var(--text); margin-bottom: 12px;
+      color: #ffffff; margin-bottom: 12px;
     }
     .hero-title {
-      font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted);
+      font-family: var(--mono); font-size: 0.82rem; color: rgba(255,255,255,0.7);
       font-weight: 400; margin-bottom: 0; letter-spacing: 0.01em;
     }
     .hero-divider {
-      width: 36px; height: 2px; background: var(--silver);
-      margin: 28px 0; border-radius: 1px; opacity: 0.5;
+      width: 36px; height: 2px; background: rgba(255,255,255,0.5);
+      margin: 28px 0; border-radius: 1px;
     }
     .hero-intro {
-      font-size: 1.02rem; color: var(--text-mid); line-height: 1.82;
+      font-size: 1.02rem; color: rgba(255,255,255,0.85); line-height: 1.82;
       max-width: 540px; margin-bottom: 36px;
     }
     .hero-links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
     .hero-links a {
-      font-size: 0.82rem; color: var(--text-muted);
+      font-size: 0.82rem; color: rgba(255,255,255,0.7);
       display: inline-flex; align-items: center; gap: 6px;
       transition: color 0.15s; border-bottom: 1px solid transparent;
       padding-bottom: 1px;
     }
-    .hero-links a:hover { color: var(--text); border-bottom-color: var(--border-dk); }
+    .hero-links a:hover { color: #fff; border-bottom-color: rgba(255,255,255,0.4); }
     .hero-links a span { font-size: 0.9rem; }
-    .hero-sep { color: var(--border-dk); }
+    .hero-sep { color: rgba(255,255,255,0.3); }
 
     /* ─── ABOUT ─────────────────────────────────────────────────── */
     .about-text { color: var(--text-mid); max-width: 660px; }
@@ -341,7 +338,7 @@
 
     /* ─── GRADIENT SECTIONS ────────────────────────────────────── */
     .section-grad {
-      background: linear-gradient(135deg, #dde8f5 0%, #a8c4e0 60%, #dde8f5 100%);
+      background: linear-gradient(135deg, #5b80b8 0%, #8aaad0 33%, #b8cde5 66%, #dde8f5 100%);
     }
 
     /* ─── NAV PILL BUTTONS ──────────────────────────────────────── */
