@@ -14,16 +14,16 @@
 
     :root {
       --bg:          #ffffff;
-      --bg-soft:     #f9fafb;
-      --bg-warm:     #faf8f5;   /* subtle warm off-white for section rhythm */
-      --bg-tag:      #f4f4f5;
-      --text:        #18181b;
-      --text-mid:    #3f3f46;
-      --text-muted:  #71717a;
-      --text-faint:  #a1a1aa;
-      --border:      #e4e4e7;
-      --border-dk:   #d4d4d8;
-      --silver:      #2563eb;   /* accent — deep blue, used sparingly */
+      --bg-soft:     #eef4fb;   /* ice blue — light section rhythm */
+      --bg-warm:     #e7f0fa;   /* sapphire light — alternating sections */
+      --bg-tag:      #ddeaf8;   /* tag background */
+      --text:        #0d2440;   /* deep navy — headings & strong text */
+      --text-mid:    #1e3a5c;   /* dark blue-grey — body text */
+      --text-muted:  #4a6a90;   /* muted blue — secondary text */
+      --text-faint:  #7ba4d0;   /* medium blue — hints & labels */
+      --border:      #c8daf0;   /* light blue border */
+      --border-dk:   #7ba4d0;   /* medium blue border */
+      --silver:      #2e5e99;   /* sapphire accent — main brand color */
       --radius:      8px;
       --font:        'Inter', system-ui, sans-serif;
       --mono:        'JetBrains Mono', 'Courier New', monospace;
@@ -31,12 +31,12 @@
 
     /* ─── HERO COLOR SHIFT ──────────────────────────────────────── */
     @keyframes hero-breathe {
-      0%   { background-color: #f9f8f6; }
-      20%  { background-color: #f5f2ec; }
-      45%  { background-color: #f7f4ef; }
-      70%  { background-color: #f4f2ee; }
-      85%  { background-color: #f6f4f0; }
-      100% { background-color: #f9f8f6; }
+      0%   { background-color: #f5f9ff; }
+      20%  { background-color: #eef4fb; }
+      45%  { background-color: #f0f6ff; }
+      70%  { background-color: #e8f1fc; }
+      85%  { background-color: #f2f7ff; }
+      100% { background-color: #f5f9ff; }
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -78,7 +78,7 @@
     /* ─── NAV ───────────────────────────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
+      background: rgba(245,249,255,0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -118,16 +118,16 @@
       padding: 108px 0 88px; border-top: none; position: relative;
       animation: hero-breathe 14s ease-in-out infinite;
     }
-    /* Subtle dot grid */
+    /* Sapphire dot grid */
     #hero::before {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background-image: radial-gradient(circle, #c7d2e8 1px, transparent 1px);
+      background-image: radial-gradient(circle, #7ba4d0 1px, transparent 1px);
       background-size: 28px 28px;
-      opacity: 0.55;
+      opacity: 0.35;
     }
     #hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: linear-gradient(to bottom, transparent 0%, rgba(249,248,246,0.8) 100%);
+      background: linear-gradient(to bottom, transparent 0%, rgba(245,249,255,0.85) 100%);
     }
     #hero .wrap { position: relative; z-index: 1; }
     .hero-eyebrow {
@@ -274,10 +274,10 @@
       height: 120px; display: flex; align-items: center; justify-content: center;
       font-size: 2rem; position: relative;
     }
-    /* Neutral architectural gradients — no primary colors */
-    .sm-thumb-1 { background: linear-gradient(135deg, #18181b 0%, #3f3f46 100%); }
-    .sm-thumb-2 { background: linear-gradient(135deg, #1e293b 0%, #475569 100%); }
-    .sm-thumb-3 { background: linear-gradient(135deg, #27272a 0%, #52525b 100%); }
+    /* Sapphire Veil gradients */
+    .sm-thumb-1 { background: linear-gradient(135deg, #0d2440 0%, #2e5e99 100%); }
+    .sm-thumb-2 { background: linear-gradient(135deg, #1a3a5c 0%, #7ba4d0 100%); }
+    .sm-thumb-3 { background: linear-gradient(135deg, #0d2440 0%, #4a6a90 100%); }
     .sm-body { padding: 16px; }
     .sm-body h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
     .sm-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
@@ -308,7 +308,7 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     }
     .gis-preview {
-      height: 160px;
+      height: 200px;
       display: flex; align-items: center; justify-content: center;
       font-size: 2.8rem; position: relative; overflow: hidden;
     }
@@ -694,7 +694,7 @@
       <!-- Dashboard card -->
       <div class="gis-card fade">
         <div class="gis-preview gis-preview-dash">
-          📊
+          <img src="images/dashboard-preview.png" alt="London 311 Operations Dashboard preview" style="width:100%;height:100%;object-fit:cover;display:block;">
           <span class="gis-preview-label">ArcGIS Dashboards</span>
         </div>
         <div class="gis-body">
@@ -716,7 +716,7 @@
       <!-- Map card -->
       <div class="gis-card fade">
         <div class="gis-preview gis-preview-map">
-          🗺️
+          <img src="images/service-request-map.png" alt="GIS Service Request Map preview" style="width:100%;height:100%;object-fit:cover;display:block;">
           <span class="gis-preview-label">ArcGIS Map Viewer</span>
         </div>
         <div class="gis-body">
