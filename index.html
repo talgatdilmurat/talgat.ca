@@ -288,6 +288,57 @@
     }
     .sm-placeholder p { font-size: 0.83rem; color: var(--text-muted); }
 
+    /* ─── GIS PROJECTS ─────────────────────────────────────────── */
+    .gis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .gis-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .gis-card:hover {
+      border-color: var(--silver);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    .gis-preview {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; position: relative; overflow: hidden;
+    }
+    .gis-preview-dash {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 50%, #1a4971 100%);
+    }
+    .gis-preview-map {
+      background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4a 50%, #1a4a35 100%);
+    }
+    .gis-preview-label {
+      position: absolute; bottom: 10px; right: 12px;
+      font-size: 0.65rem; font-family: var(--mono);
+      color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .gis-body { padding: 18px; }
+    .gis-body h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; }
+    .gis-body p { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
+    .gis-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+    .gis-tag {
+      font-size: 0.68rem; background: var(--bg-tag);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 2px 7px; color: var(--text-muted); font-family: var(--mono);
+    }
+    .gis-links { display: flex; gap: 12px; align-items: center; }
+    .gis-link {
+      font-size: 0.75rem; font-weight: 600; color: var(--silver);
+      display: flex; align-items: center; gap: 4px;
+      transition: color 0.15s;
+    }
+    .gis-link:hover { color: var(--text); }
+
     /* ─── COURSEWORK ────────────────────────────────────────────── */
     .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
     .course-group h4 {
@@ -397,6 +448,7 @@
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a href="#gis">GIS</a>
       <a href="#storymaps">Story Maps</a>
       <a href="#skills">Skills</a>
       <a href="#coursework">Coursework</a>
@@ -412,6 +464,7 @@
 <div id="mob-nav">
   <a href="#about" onclick="toggleMob()">About</a>
   <a href="#projects" onclick="toggleMob()">Projects</a>
+  <a href="#gis" onclick="toggleMob()">GIS</a>
   <a href="#storymaps" onclick="toggleMob()">Story Maps</a>
   <a href="#skills" onclick="toggleMob()">Skills</a>
   <a href="#coursework" onclick="toggleMob()">Coursework</a>
@@ -624,6 +677,65 @@
       <span id="more-btn-text">3 more projects</span>
     </button>
 
+  </div>
+</section>
+
+<!-- ─── GIS PROJECTS ──────────────────────────────────────────────── -->
+<section id="gis" class="section" style="background: var(--bg-warm)">
+  <div class="wrap">
+    <p class="s-label fade">GIS Projects</p>
+    <h2 class="s-title fade">Spatial data &amp; dashboards</h2>
+    <p class="s-body fade" style="max-width:560px;">
+      Hosted feature layers, interactive maps, and operational dashboards built with ArcGIS Online — turning raw service request data into spatial insight.
+    </p>
+    <div class="gis-grid">
+
+      <!-- Dashboard card -->
+      <div class="gis-card fade">
+        <div class="gis-preview gis-preview-dash">
+          📊
+          <span class="gis-preview-label">ArcGIS Dashboards</span>
+        </div>
+        <div class="gis-body">
+          <h4>London 311 Operations Dashboard</h4>
+          <p>Live operational dashboard visualizing 50 simulated 311 service requests — interactive map, total count indicator, issue-type pie chart, priority bar chart, and a searchable request list. Built on a hosted ArcGIS Online feature layer.</p>
+          <div class="gis-tags">
+            <span class="gis-tag">ArcGIS Dashboards</span>
+            <span class="gis-tag">ArcGIS Online</span>
+            <span class="gis-tag">Hosted Feature Layer</span>
+            <span class="gis-tag">Spatial Data</span>
+          </div>
+          <div class="gis-links">
+            <a href="https://talgat.maps.arcgis.com/apps/dashboards/152147e339b24fb2ae2f9cb491468849" target="_blank" class="gis-link">📊 Live Dashboard →</a>
+            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="gis-link">↗ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map card -->
+      <div class="gis-card fade">
+        <div class="gis-preview gis-preview-map">
+          🗺️
+          <span class="gis-preview-label">ArcGIS Map Viewer</span>
+        </div>
+        <div class="gis-body">
+          <h4>GIS Service Request Map — London ON</h4>
+          <p>50 simulated 311 service requests published as an ArcGIS Online hosted feature layer, styled by issue type with unique symbols. Includes a Leaflet.js browser version loading directly from CSV — no backend required.</p>
+          <div class="gis-tags">
+            <span class="gis-tag">ArcGIS Online</span>
+            <span class="gis-tag">Hosted Feature Layer</span>
+            <span class="gis-tag">Leaflet.js</span>
+            <span class="gis-tag">CSV</span>
+            <span class="gis-tag">GIS</span>
+          </div>
+          <div class="gis-links">
+            <a href="https://talgat.maps.arcgis.com/apps/mapviewer/index.html?webmap=f8924e3a2b9140aeb9e65f0b9888b2aa" target="_blank" class="gis-link">🗺 Live Map →</a>
+            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="gis-link">↗ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
