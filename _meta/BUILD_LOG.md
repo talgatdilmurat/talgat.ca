@@ -139,3 +139,41 @@ Running record of all build activity. Each entry is a commit (or a logged event 
 **Files moved:** MASTER_CONTEXT.md, BUILD_PLAN_NIGHT.md, BUILD_PLAN_DAY.md, NEXT_STEPS.md, BUILD_LOG.md → all into `_meta/`
 **Commit pairing:** the move ships together with the `netlify.toml` exclusion in the next commit so a public deploy can never serve these files before the redirect rule is in place.
 **Notes:** Future Claude sessions should look at `/_meta/BUILD_LOG.md` (and the other planning docs). The master plan's reference to "BUILD_LOG.md at repo root" is now `/_meta/BUILD_LOG.md` — worth a one-line update in MASTER_CONTEXT.md if Tal cares; not done tonight.
+
+---
+
+## [2026-05-11 18:22] — Post-push cleanup, Step 2: drop orphan CSS
+
+**What:** Removed CSS rules left dangling by Phase 1 content changes.
+
+`index.html` — removed:
+- `.lang-strip`, `.lang-pills`, `.lang-pill`, `.lang-pill:hover` (from old Languages strip in About)
+- `.irb-callout`, `.irb-callout .irb-icon`, `.irb-callout p`, `.irb-callout p span` (old IRB callout)
+- `.log-date` (dropped when Working notes lost the date column)
+- `.lang-chip` rule inside the `@media (max-width: 700px)` block (referred to a class that no longer exists anywhere)
+
+`personal.html` — removed:
+- `.s-title`, `.s-sub` (no longer used in the new minimal page)
+- `.page-title`, `.page-intro` (old "Beyond the work" hero classes)
+- All `.media-type-*`, `.photo-*`, `.ph-*` rules (Photos block deleted)
+- All `.video-*`, `.vid-*` rules (Videos block deleted)
+- All `.map-*` rules including `.map-card::before` (Story Maps block deleted)
+- All `.course-*`, `.badge-done`, `.badge-progress`, `.badge-placeholder` rules and `@keyframes pulse-border` (Independent studies block deleted)
+- All `.reading-grid`, `.book-*`, `.add-placeholder` rules (Reading list block deleted)
+- Both `@media` query blocks that only contained references to the deleted classes — removed entirely
+
+**Kept intentionally in personal.html:** the `#header` noise-texture background image and `#header::after` fade-out gradient. The new minimal header still uses the `#header` section; whether the noise texture suits the new shorter header is a visual judgment call I didn't want to make unilaterally. Eyeball in the morning — if it looks heavy, swap to a flat `var(--bg)` background.
+
+**Files touched:** index.html, personal.html
+**Commit:** `cleanup: drop orphan CSS rules from removed sections` (f069367)
+**Net change:** 189 deletions, 0 insertions.
+
+---
+
+## [2026-05-11 18:23] — Post-push cleanup, Step 3: fix `.project-item:hover` gap
+
+**What:** Removed `transform: translateY(-2px)` and `box-shadow: 0 4px 12px rgba(13, 36, 64, 0.08)` from `.project-item:hover`. Also removed `transform` and `box-shadow` from the `.project-item` `transition` rule since they're no longer animated. The hover state keeps its `border-left-color` change to silver and its `var(--bg-soft)` background — the affordance is still there without breaking the connected-list visual.
+**Why:** `.project-item` cards in the Projects list share a `border-bottom` divider with the next item. Lifting one card on hover opened a small visible gap between it and the item below. `.gis-card` lift was left intact — those cards live in an isolated grid where the lift reads cleanly.
+**Files touched:** index.html
+**Commit:** `fix: drop translateY/box-shadow from .project-item:hover` (bedb542)
+**Notes:** None.
