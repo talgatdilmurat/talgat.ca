@@ -264,6 +264,98 @@
     }
     .project-item:hover .project-link-icon { color: var(--silver); transform: translate(1px, -1px); }
 
+    /* ─── CIVICWORKS FEATURED ──────────────────────────────────── */
+    .featured-card {
+      border: 1.5px solid var(--border-dk); border-radius: var(--radius);
+      overflow: hidden; margin-bottom: 32px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .featured-card:hover { border-color: var(--silver); box-shadow: 0 6px 28px rgba(46,94,153,0.13); }
+    .featured-banner {
+      background: linear-gradient(135deg, #0d2440 0%, #2e5496 60%, #1a3a6e 100%);
+      padding: 32px; position: relative; overflow: hidden;
+    }
+    .featured-banner::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 260px; height: 260px; pointer-events: none;
+      background: radial-gradient(circle, rgba(184,205,229,0.1) 0%, transparent 70%);
+    }
+    .featured-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(184,205,229,0.65); margin-bottom: 12px;
+    }
+    .featured-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #8aaad0; animation: fp 2s infinite;
+    }
+    @keyframes fp { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .featured-title {
+      font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800;
+      color: #fff; letter-spacing: -0.04em; margin-bottom: 8px; position: relative; z-index: 1;
+    }
+    .featured-tagline {
+      font-size: 0.85rem; color: rgba(184,205,229,0.75);
+      max-width: 500px; line-height: 1.6; margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .featured-chips {
+      display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1;
+    }
+    .fchip {
+      font-size: 0.72rem; font-weight: 600;
+      padding: 4px 11px; border-radius: 20px;
+      background: rgba(184,205,229,0.12); border: 1px solid rgba(184,205,229,0.25);
+      color: rgba(255,255,255,0.8);
+    }
+    /* Card body */
+    .featured-body { padding: 24px 32px 28px; background: #fff; }
+    .featured-features {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 20px;
+    }
+    .ff-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+    }
+    .ff-icon { flex-shrink: 0; margin-top: 1px; }
+    .featured-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .ftag {
+      font-family: var(--mono); font-size: 0.68rem; padding: 3px 8px;
+      border-radius: 4px; background: var(--bg-tag); color: var(--text-mid); border: 1px solid var(--border);
+    }
+    .ftag.hi { background: #dde8f5; color: var(--text); border-color: var(--border-dk); font-weight: 600; }
+    .featured-footer {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding-top: 20px; border-top: 1px solid var(--border);
+    }
+    .btn-outline {
+      font-size: 0.8rem; font-weight: 500; padding: 7px 16px; border-radius: var(--radius);
+      border: 1.5px solid var(--border-dk); color: var(--text-mid);
+      display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+    .btn-solid {
+      font-size: 0.8rem; font-weight: 600; padding: 7px 16px; border-radius: var(--radius);
+      background: var(--silver); color: #fff;
+      display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;
+    }
+    .btn-solid:hover { background: #1e4878; }
+    .video-placeholder {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-soft); border: 1.5px dashed var(--border-dk);
+      border-radius: var(--radius); padding: 14px 18px; flex: 1; min-width: 200px;
+    }
+    .vp-play {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: var(--bg-warm); border: 1.5px solid var(--border-dk);
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+    .vp-text p:first-child { font-size: 0.8rem; font-weight: 600; color: var(--text-mid); }
+    .vp-text p:last-child  { font-size: 0.72rem; color: var(--text-faint); }
+    @media (max-width: 600px) {
+      .featured-features { grid-template-columns: 1fr; }
+      .featured-banner, .featured-body { padding: 20px; }
+    }
+
     /* ─── STORY MAPS ────────────────────────────────────────────── */
     .storymap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
     .storymap-card {
@@ -293,6 +385,66 @@
       margin-top: 16px;
     }
     .sm-placeholder p { font-size: 0.83rem; color: var(--text-muted); }
+
+    /* ─── C# PROJECT CARDS ─────────────────────────────────────── */
+    .cs-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 20px;
+    }
+    .cs-card {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .cs-card:hover { border-color: var(--silver); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .cs-preview {
+      height: 110px; display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      padding: 14px 16px; position: relative; overflow: hidden;
+    }
+    .cs-preview-1 { background: linear-gradient(135deg, #0d2440 0%, #2e5496 100%); }
+    .cs-preview-2 { background: linear-gradient(135deg, #1a3a5c 0%, #3d7abf 100%); }
+    .cs-preview-3 { background: linear-gradient(135deg, #0d2440 0%, #4a6a90 100%); }
+    .cs-preview-icon {
+      position: absolute; top: 12px; right: 14px;
+      font-size: 1.8rem; opacity: 0.25;
+    }
+    .cs-preview-label {
+      font-size: 0.6rem; font-family: var(--mono); letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;
+    }
+    .cs-preview h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0; }
+    .cs-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
+    .cs-title { font-size: 0.92rem; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+    .cs-desc { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
+    .cs-body p { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
+    .cs-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+    .cs-tag { font-size: 0.65rem; font-family: var(--mono); background: var(--bg-tag); border: 1px solid var(--border); border-radius: 3px; padding: 2px 6px; color: var(--text-muted); }
+    .cs-actions { display: flex; gap: 8px; margin-top: auto; }
+    .cs-btn {
+      font-size: 0.74rem; font-weight: 600; padding: 6px 12px;
+      border-radius: var(--radius); border: 1.5px solid var(--border-dk);
+      color: var(--text-mid); transition: all 0.18s;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .cs-btn:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); text-decoration: none; }
+    .cs-btn.primary { background: var(--silver); border-color: var(--silver); color: #fff; }
+    .cs-btn.primary:hover { background: #1e4878; border-color: #1e4878; }
+    .cs-app-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .cs-app-item { font-size: 0.78rem; color: var(--text-mid); background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 10px; }
+    .cs-video {
+      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+      background: var(--bg-soft); border: 1px dashed var(--border-dk);
+      border-radius: var(--radius); padding: 8px 10px;
+    }
+    .cs-video-play {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: var(--bg-warm); border: 1px solid var(--border-dk);
+      display: flex; align-items: center; justify-content: center; font-size: 0.65rem;
+    }
+    .cs-video p:first-child { font-size: 0.72rem; font-weight: 600; color: var(--text-mid); }
+    .cs-video p:last-child  { font-size: 0.65rem; color: var(--text-faint); }
+    @media (max-width: 700px) { .cs-grid { grid-template-columns: 1fr; } }
 
     /* ─── GIS PROJECTS ─────────────────────────────────────────── */
     .gis-grid {
@@ -611,8 +763,58 @@
     <h2 class="s-title fade">Selected work</h2>
     <div class="project-list">
 
+      <!-- ── CIVICWORKS FEATURED CARD ── -->
+      <div class="featured-card fade">
+
+        <div class="featured-banner">
+          <div class="featured-eyebrow"><div class="featured-dot"></div>Featured Project</div>
+          <h3 class="featured-title">CivicWorks</h3>
+          <p class="featured-tagline">Full-stack municipal asset management — React frontend, Node.js API, PostgreSQL database, live GIS map, and an AI triage engine built on the Anthropic Claude API.</p>
+          <div class="featured-chips">
+            <span class="fchip">5 pages</span>
+            <span class="fchip">15+ REST endpoints</span>
+            <span class="fchip">6 DB tables</span>
+            <span class="fchip">AI triage</span>
+            <span class="fchip">30+ mapped assets</span>
+          </div>
+        </div>
+
+        <div class="featured-body">
+          <div class="featured-features">
+            <div class="ff-item"><span class="ff-icon">🗺️</span>Interactive map — live asset pins by category (Leaflet + OpenStreetMap)</div>
+            <div class="ff-item"><span class="ff-icon">🤖</span>AI triage — Claude API classifies and prioritises every service request</div>
+            <div class="ff-item"><span class="ff-icon">🔧</span>Work order lifecycle — create, assign, update, resolve with audit log</div>
+            <div class="ff-item"><span class="ff-icon">📊</span>Executive dashboard — KPI charts, resolution stats, and trend lines</div>
+          </div>
+
+          <div class="featured-tech">
+            <span class="ftag hi">React 18</span>
+            <span class="ftag hi">Node.js + Express</span>
+            <span class="ftag hi">PostgreSQL</span>
+            <span class="ftag hi">Claude API</span>
+            <span class="ftag">Leaflet.js</span>
+            <span class="ftag">Recharts</span>
+            <span class="ftag">Tailwind CSS</span>
+            <span class="ftag">Vite</span>
+          </div>
+
+          <div class="featured-footer">
+            <a href="https://github.com/talgatdilmurat" target="_blank" class="btn-outline">↗ GitHub</a>
+            <div class="video-placeholder" id="civicworks-demo">
+              <div class="vp-play">▶</div>
+              <div class="vp-text">
+                <p>Walkthrough video — coming soon</p>
+                <p>Map · work orders · AI triage · dashboard</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- ── END CIVICWORKS ── -->
+
       <!-- Municipal Portfolio — featured group label -->
-      <p class="s-label fade" style="margin-bottom:4px; margin-top:4px;">Municipal Services Portfolio — City of London, ON</p>
+      <p class="s-label fade" style="margin-bottom:4px; margin-top:4px;">Earlier Work — Municipal Services Portfolio</p>
 
       <div class="project-item fade">
         <div>
@@ -683,69 +885,31 @@
 
     </div>
 
-    <!-- More projects (hidden by default) -->
-    <div id="more-projects" style="display:none;">
-      <div class="project-list" style="margin-top:0;">
+    <!-- ── C# / ASP.NET CORE PROJECTS ── -->
+    <p class="s-label fade" style="margin-bottom:4px; margin-top:32px;">C# / ASP.NET Core</p>
 
-        <div class="project-item fade">
-          <div>
-            <h3>CRM Administration — NationBuilder</h3>
-            <p>Full administration of a NationBuilder CRM for a nonprofit organization — managing 5,000+ donor and volunteer records, configuring email campaign tracking, building segmentation lists, and documenting data hygiene procedures for staff handover. <strong>Improved campaign targeting accuracy through custom segmentation — documented for zero-friction staff handover.</strong></p>
-            <div class="project-tech">
-              <span class="tech-tag">NationBuilder</span>
-              <span class="tech-tag">CRM</span>
-              <span class="tech-tag">Data Hygiene</span>
-              <span class="tech-tag">Campaign Analytics</span>
-              <span class="tech-tag">Documentation</span>
-            </div>
-          </div>
-          <a href="#" class="project-link-icon">↗</a>
+    <div class="project-item fade cs-group">
+      <div>
+        <h3>C# Web Applications — ASP.NET Core MVC</h3>
+        <p>Three full-stack applications built with ASP.NET Core MVC, Entity Framework Core, and SQL Server — each with its own dashboard, CRUD workflows, and data model.</p>
+        <div class="cs-app-list">
+          <span class="cs-app-item">📅 Interpreter Scheduling System</span>
+          <span class="cs-app-item">🌐 Multi-Language Learning Platform</span>
+          <span class="cs-app-item">🏆 Study &amp; Certification Tracker</span>
         </div>
-
-        <div class="project-item fade">
-          <div>
-            <h3>E-Commerce Operations System — Noah's Art</h3>
-            <p>End-to-end setup and operation of a multi-channel e-commerce system on Shopify — product catalogue management, inventory tracking, supplier logistics coordination, and analytics reporting across Amazon, eBay, and direct sales channels. <strong>Maintained inventory accuracy and fulfillment consistency across three platforms simultaneously.</strong></p>
-            <div class="project-tech">
-              <span class="tech-tag">Shopify</span>
-              <span class="tech-tag">Operations</span>
-              <span class="tech-tag">Inventory Management</span>
-              <span class="tech-tag">Multi-channel Analytics</span>
-              <span class="tech-tag">Supplier Management</span>
-            </div>
-          </div>
-          <a href="#" class="project-link-icon">↗</a>
+        <div class="project-tech" style="margin-top:10px;">
+          <span class="tech-tag">ASP.NET Core 8</span>
+          <span class="tech-tag">C# 12</span>
+          <span class="tech-tag">Entity Framework Core</span>
+          <span class="tech-tag">SQL Server</span>
+          <span class="tech-tag">Bootstrap 5</span>
+          <span class="tech-tag">Razor Views</span>
         </div>
-
-        <div class="project-item fade">
-          <div>
-            <h3>AWS Cloud Infrastructure Deployment</h3>
-            <p>Designed and deployed cloud infrastructure on AWS — EC2 instance provisioning, S3 bucket configuration for static assets, RDS database setup with access control, and Lambda function implementation for a serverless web application backend. <strong>Delivered a fully functional cloud-native app using industry-standard architecture patterns end-to-end.</strong></p>
-            <div class="project-tech">
-              <span class="tech-tag">AWS EC2</span>
-              <span class="tech-tag">S3</span>
-              <span class="tech-tag">RDS</span>
-              <span class="tech-tag">Lambda</span>
-              <span class="tech-tag">Cloud Architecture</span>
-            </div>
-          </div>
-          <a href="#" class="project-link-icon">↗</a>
-        </div>
-
       </div>
+      <a href="csharp-projects.html" target="_blank" class="project-link-icon" title="View C# Projects">↗</a>
     </div>
+    <!-- ── END C# PROJECTS ── -->
 
-    <button id="more-btn" onclick="toggleMoreProjects()" style="
-      margin-top: 24px; background: none; border: 1px solid var(--border-dk);
-      padding: 10px 20px; border-radius: var(--radius); font-size: 0.82rem;
-      font-family: var(--font); color: var(--text-muted); cursor: pointer;
-      display: flex; align-items: center; gap: 7px;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-    " onmouseover="this.style.borderColor='var(--silver)';this.style.color='var(--text)';this.style.background='var(--bg-soft)'"
-       onmouseout="this.style.borderColor='var(--border-dk)';this.style.color='var(--text-muted)';this.style.background='none'">
-      <span id="more-btn-icon">+</span>
-      <span id="more-btn-text">3 more projects</span>
-    </button>
 
   </div>
 </section>
@@ -891,6 +1055,9 @@
               <span class="pill">Python</span>
               <span class="pill">JavaScript</span>
               <span class="pill">C#</span>
+              <span class="pill">React 18</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">Express</span>
               <span class="pill">Spring Boot</span>
               <span class="pill">REST APIs</span>
               <span class="pill">Postman</span>
@@ -1031,6 +1198,15 @@
       An ongoing record of what I'm studying and building — courses, tools, and practical experiments.
     </p>
     <div class="log-list">
+
+      <div class="log-item fade">
+        <span class="log-date">May 2026</span>
+        <div class="log-content">
+          <span class="log-tag">Full-Stack</span>
+          <h4>Built CivicWorks — Municipal Asset Management System</h4>
+          <p>Designed and built a production-grade full-stack app from scratch: React 18 frontend, Node.js + Express REST API, PostgreSQL database (6 tables, triggers, audit log), interactive Leaflet.js map, AI triage via Anthropic Claude API, and a live KPI dashboard with Recharts. Every layer built and debugged end-to-end.</p>
+        </div>
+      </div>
 
       <div class="log-item fade">
         <span class="log-date">May 2026</span>
