@@ -610,7 +610,7 @@
     .log-list { display: flex; flex-direction: column; gap: 0; }
     .log-item {
       padding: 20px 0; border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: baseline;
+      display: grid; grid-template-columns: 1fr; gap: 20px; align-items: baseline;
       transition: background 0.15s;
     }
     .log-item:hover { background: var(--bg-soft); padding-left: 8px; padding-right: 8px; margin: 0 -8px; border-radius: var(--radius); }
@@ -1167,54 +1167,49 @@
 <section id="learning" class="section">
   <div class="wrap">
     <p class="s-label fade">Currently</p>
-    <h2 class="s-title fade">Learning log</h2>
+    <h2 class="s-title fade">Working notes</h2>
     <p class="s-body fade" style="max-width:520px; margin-bottom:32px;">
-      An ongoing record of what I'm studying and building — courses, tools, and practical experiments.
+      A running record of what I'm studying and building right now.
     </p>
     <div class="log-list">
 
       <div class="log-item fade">
-        <span class="log-date">May 2026</span>
         <div class="log-content">
           <span class="log-tag">Full-Stack</span>
-          <h4>Built CivicWorks — Municipal Asset Management System</h4>
-          <p>Designed and built a production-grade full-stack app from scratch: React 18 frontend, Node.js + Express REST API, PostgreSQL database (6 tables, triggers, audit log), interactive Leaflet.js map, AI triage via Anthropic Claude API, and a live KPI dashboard with Recharts. Every layer built and debugged end-to-end.</p>
+          <h4>Built CityFlow — Municipal Asset Management System</h4>
+          <p>Full-stack app: React 18 frontend, Node.js + Express REST API, PostgreSQL database with audit log, interactive Leaflet.js map, AI-assisted triage via the Anthropic API, and a KPI dashboard.</p>
         </div>
       </div>
 
       <div class="log-item fade">
-        <span class="log-date">May 2026</span>
-        <div class="log-content">
-          <span class="log-tag">ArcGIS</span>
-          <h4>ArcGIS Enterprise Quick Start Guide</h4>
-          <p>Self-directed preparation on Enterprise architecture — Portal for ArcGIS, ArcGIS Server, licensing, patching, and geodatabases. Building familiarity with administration concepts beyond ArcGIS Online.</p>
-        </div>
-      </div>
-
-      <div class="log-item fade">
-        <span class="log-date">May 2026</span>
-        <div class="log-content">
-          <span class="log-tag">ArcGIS</span>
-          <h4>Hands-on ArcGIS Pro Practice</h4>
-          <p>Active desktop work: map and layer navigation, attribute table operations, symbology configuration, coordinate systems, and data management exercises using real geographic datasets.</p>
-        </div>
-      </div>
-
-      <div class="log-item fade">
-        <span class="log-date">2026</span>
         <div class="log-content">
           <span class="log-tag">GIS</span>
-          <h4>11 Esri Academy Courses Completed</h4>
-          <p>Completed foundational Esri curriculum: ArcGIS Pro, ArcGIS Online, Business Analyst Pro, GIS Basics, Coordinate Systems, Data Management, AI in ArcGIS, Systems Approach to ArcGIS, and ArcGIS Monitor.</p>
+          <h4>London ON Bikeability Analysis</h4>
+          <p>Current-state spatial analysis using City of London open data. Three-tier classification, buffer analysis, gap polygon identification. Methodology, findings, and recommendations report in progress.</p>
         </div>
       </div>
 
       <div class="log-item fade">
-        <span class="log-date">2025–26</span>
+        <div class="log-content">
+          <span class="log-tag">ArcGIS</span>
+          <h4>Working through ArcGIS Enterprise architecture</h4>
+          <p>Self-directed study on Portal for ArcGIS, ArcGIS Server, licensing, patching, and geodatabases. Building familiarity beyond ArcGIS Online.</p>
+        </div>
+      </div>
+
+      <div class="log-item fade">
+        <div class="log-content">
+          <span class="log-tag">Esri</span>
+          <h4>Esri Academy — eleven courses completed</h4>
+          <p>Foundational curriculum: ArcGIS Pro, ArcGIS Online, Business Analyst Pro, GIS Basics, Coordinate Systems, Data Management, AI in ArcGIS, Systems Approach to ArcGIS, ArcGIS Monitor.</p>
+        </div>
+      </div>
+
+      <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">Software Engineering</span>
           <h4>Advanced Diploma — Centennial College</h4>
-          <p>Completed 3-year program covering databases, APIs, cloud, DevOps, networking, security, enterprise systems, and business analysis.</p>
+          <p>Three-year program covering databases, APIs, cloud, DevOps, networking, security, enterprise systems, and business analysis.</p>
         </div>
       </div>
 
