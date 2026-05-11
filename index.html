@@ -245,6 +245,60 @@
     }
     .project-item:hover .project-link-icon { color: var(--silver); transform: translate(1px, -1px); }
 
+    /* ─── STUDIES GRID ─────────────────────────────────────────── */
+    .studies-intro { margin-top: 48px; margin-bottom: 24px; max-width: 680px; }
+    .studies-intro h3 {
+      font-size: 1.15rem; font-weight: 600; color: var(--text);
+      letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 10px;
+    }
+    .studies-intro p {
+      color: var(--text-muted); font-size: 0.9rem; line-height: 1.65;
+    }
+    .studies-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 18px; margin-bottom: 24px;
+    }
+    .study-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .study-card:hover {
+      border-color: var(--border-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(13, 36, 64, 0.06);
+    }
+    .study-card .study-stage {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--silver); margin-bottom: 8px; display: block;
+    }
+    .study-card h4 {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .study-card p {
+      font-size: 0.82rem; color: var(--text-muted);
+      line-height: 1.55; margin-bottom: 10px;
+    }
+    .study-card .study-tech {
+      font-size: 0.72rem; color: var(--text-faint);
+      font-family: var(--mono);
+    }
+    .studies-shared-link {
+      text-align: center; margin-top: 16px;
+      font-size: 0.82rem;
+    }
+    .studies-shared-link a {
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-dk);
+      padding-bottom: 1px; transition: color 0.2s;
+    }
+    .studies-shared-link a:hover { color: var(--text); }
+    @media (max-width: 700px) {
+      .studies-grid { grid-template-columns: 1fr; }
+    }
+
     /* ─── CITYFLOW FEATURED ────────────────────────────────────── */
     .featured-card {
       border: 1.5px solid var(--border-dk); border-radius: var(--radius);
@@ -774,75 +828,47 @@
       </div>
       <!-- ── END BIKEABILITY ── -->
 
-      <!-- Municipal Portfolio — featured group label -->
-      <p class="s-label fade" style="margin-bottom:4px; margin-top:4px;">Earlier Work — Municipal Services Portfolio</p>
-
-      <div class="project-item fade">
-        <div>
-          <h3>Work Order REST API</h3>
-          <p>8-endpoint Spring Boot REST API for managing municipal service requests — potholes, streetlights, graffiti, drainage. Full CRUD with status filtering, keyword search, and an analytics summary endpoint. Runs on Java 17, Spring Data JPA, Hibernate 6, and H2 in development with MySQL production config included. <strong>Demonstrates production-ready backend design — built to plug directly into a GIS frontend or CRM system.</strong></p>
-          <div class="project-tech">
-            <span class="tech-tag">Java 17</span>
-            <span class="tech-tag">Spring Boot 3</span>
-            <span class="tech-tag">Spring Data JPA</span>
-            <span class="tech-tag">Hibernate 6</span>
-            <span class="tech-tag">H2 / MySQL</span>
-            <span class="tech-tag">REST API</span>
-            <span class="tech-tag">Maven</span>
-          </div>
-        </div>
-        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+      <!-- ── STUDIES ── -->
+      <div class="studies-intro fade">
+        <p class="s-label" style="margin-bottom: 6px;">Studies</p>
+        <h3>Four lenses on municipal service requests</h3>
+        <p>Same problem domain — municipal service requests — explored through four lenses before I assembled them into CityFlow. Each study is a stage of learning: schema design, REST API patterns, spatial publication, then process modeling.</p>
       </div>
 
-      <div class="project-item fade">
-        <div>
-          <h3>Municipal SQL Database &amp; Reporting</h3>
-          <p>Normalized MySQL schema for a full service request system — 6 tables with foreign keys, indexes, and a status history audit trail. Includes realistic seed data covering London ON wards and departments, plus analytical queries for resolution time, volume by type, and SLA compliance reporting. <strong>Queries surface average resolution time, SLA breach rates, and ward-level volume — the kind of reporting a GIS analyst actually hands to a manager.</strong></p>
-          <div class="project-tech">
-            <span class="tech-tag">MySQL 8</span>
-            <span class="tech-tag">Schema Design</span>
-            <span class="tech-tag">Normalization</span>
-            <span class="tech-tag">Audit Trail</span>
-            <span class="tech-tag">Analytics Queries</span>
-          </div>
+      <div class="studies-grid">
+
+        <div class="study-card fade">
+          <span class="study-stage">Study 01</span>
+          <h4>Schema design</h4>
+          <p>First I needed to understand how municipal service request data should be structured. Designed a normalized 6-table schema with foreign keys, indexes, and a status history audit trail.</p>
+          <p class="study-tech">MySQL · normalization · audit trail</p>
         </div>
-        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
+
+        <div class="study-card fade">
+          <span class="study-stage">Study 02</span>
+          <h4>REST API patterns</h4>
+          <p>Built an 8-endpoint Spring Boot REST API around that schema — full CRUD plus filtering, keyword search, and an analytics endpoint. Production config included.</p>
+          <p class="study-tech">Java 17 · Spring Boot · Hibernate · H2 / MySQL</p>
+        </div>
+
+        <div class="study-card fade">
+          <span class="study-stage">Study 03</span>
+          <h4>Spatial publication</h4>
+          <p>Published the data spatially in ArcGIS Online as a hosted feature layer — plus a Leaflet.js browser version loading from CSV with no backend.</p>
+          <p class="study-tech">ArcGIS Online · Leaflet.js · CSV</p>
+        </div>
+
+        <div class="study-card fade">
+          <span class="study-stage">Study 04</span>
+          <h4>Process modeling</h4>
+          <p>Stepped back and modeled the underlying business process — current-state mapping, root cause analysis of 7 pain points, redesigned workflow with SLA escalation.</p>
+          <p class="study-tech">Process mapping · BPMN · SLA design</p>
+        </div>
+
       </div>
 
-      <div class="project-item fade">
-        <div>
-          <h3>GIS Service Request Map — London ON</h3>
-          <p>Interactive map of 50 simulated 311 service requests across London, Ontario — published as an ArcGIS Online hosted feature layer and styled by issue type (road, water, parks, bylaw, transit). Also includes a Leaflet.js browser version loading directly from CSV with no backend required. <strong>Live and publicly accessible — raw CSV turned into a queryable spatial layer anyone can open in a browser.</strong></p>
-          <div class="project-tech">
-            <span class="tech-tag">ArcGIS Online</span>
-            <span class="tech-tag">Hosted Feature Layer</span>
-            <span class="tech-tag">Leaflet.js</span>
-            <span class="tech-tag">HTML / CSS / JS</span>
-            <span class="tech-tag">CSV Data</span>
-            <span class="tech-tag">GIS</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center;flex-shrink:0;">
-          <a href="https://talgat.maps.arcgis.com/apps/mapviewer/index.html?webmap=f8924e3a2b9140aeb9e65f0b9888b2aa" target="_blank" class="project-link-icon" title="View live ArcGIS map">🗺</a>
-          <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
-        </div>
-      </div>
-
-      <div class="project-item fade">
-        <div>
-          <h3>Workflow Analysis — Intake, Triage &amp; Escalation</h3>
-          <p>Business systems case study on London's 311 service request process — current-state mapping, root cause analysis of 7 key pain points (18% duplicate rate, 2-day triage delay, no citizen status visibility), and a redesigned workflow with automated triage rules, 4-tier SLA escalation, and functional requirements specification. <strong>The proposed redesign cuts estimated triage time from 2 days to under 4 hours.</strong></p>
-          <div class="project-tech">
-            <span class="tech-tag">Business Analysis</span>
-            <span class="tech-tag">Process Mapping</span>
-            <span class="tech-tag">BPMN</span>
-            <span class="tech-tag">SVG</span>
-            <span class="tech-tag">SLA Design</span>
-            <span class="tech-tag">Requirements</span>
-          </div>
-        </div>
-        <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="project-link-icon">↗</a>
-      </div>
+      <p class="studies-shared-link fade"><a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank">All four studies on GitHub →</a></p>
+      <!-- ── END STUDIES ── -->
 
     </div>
 
