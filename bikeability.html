@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>London ON Bikeability Analysis — Talgat Dilmurat</title>
+  <meta name="description" content="A current-state spatial analysis of London Ontario's cycling network using City of London open data — tier classification, buffer analysis, gap polygon identification, and a methodology audit finding." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #ffffff;
+      --bg-soft:    #f9fafb;
+      --bg-warm:    #faf8f5;
+      --bg-tag:     #f4f4f5;
+      --text:       #18181b;
+      --text-mid:   #3f3f46;
+      --text-muted: #71717a;
+      --text-faint: #a1a1aa;
+      --border:     #e4e4e7;
+      --border-dk:  #d4d4d8;
+      --silver:     #64748b;
+      --accent-brass:#b08949;
+      --radius:     8px;
+      --font:       'Inter', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── SCROLL BAR ────────────────────────────────────────────── */
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--silver); z-index: 200; transition: width 0.08s linear; pointer-events: none; }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 880px; margin: 0 auto; padding: 0 28px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
+    .nav-right { display: flex; gap: 18px; align-items: center; }
+    .nav-right a { font-size: 0.8rem; color: var(--text-faint); transition: color 0.15s; }
+    .nav-right a:hover { color: var(--text); }
+    .nav-right .nav-resume {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      border: 1px solid var(--border-dk); padding: 5px 13px; border-radius: 5px;
+      transition: all 0.2s;
+    }
+    .nav-right .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────── */
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 72px 0; border-top: 1px solid var(--border); }
+    .s-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--silver); margin-bottom: 10px; }
+    .s-title { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 24px; line-height: 1.2; }
+
+    /* ─── PAGE HEADER ───────────────────────────────────────────── */
+    #header { padding: 88px 0 60px; border-top: none; background: var(--bg); }
+    .page-title { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; color: var(--text); max-width: 760px; }
+    .page-intro { font-size: 1rem; color: var(--text-mid); max-width: 700px; line-height: 1.78; }
+
+    /* ─── PROSE ─────────────────────────────────────────────────── */
+    .prose-body p { margin-bottom: 16px; }
+    .prose-body p:last-child { margin-bottom: 0; }
+
+    /* ─── TABLES ────────────────────────────────────────────────── */
+    .data-table { width: 100%; max-width: 680px; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 32px; }
+    .data-table th { text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border-dk); }
+    .data-table td { color: var(--text-mid); border-bottom: 1px solid var(--border); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .col-tier { padding: 10px 14px 10px 0; font-weight: 700; color: var(--text); width: 12%; }
+    .data-table .col-mid  { padding: 10px 14px; }
+    .data-table .col-end  { padding: 10px 0 10px 14px; color: var(--text-mid); }
+    .data-table thead th.col-tier { padding: 10px 14px 10px 0; }
+    .data-table thead th.col-mid  { padding: 10px 14px; }
+    .data-table thead th.col-end  { padding: 10px 0 10px 14px; }
+    .subhead {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 12px; letter-spacing: -0.005em;
+    }
+
+    /* ─── MAP OUTPUTS ───────────────────────────────────────────── */
+    .map-outputs { display: grid; grid-template-columns: 1fr; gap: 28px; max-width: 800px; }
+    .map-outputs figure { margin: 0; }
+    .img-placeholder {
+      aspect-ratio: 16/10;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-faint);
+      font-family: var(--mono); font-size: 0.8rem;
+    }
+    .map-outputs figcaption {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    /* ─── ROADMAP ───────────────────────────────────────────────── */
+    .roadmap-list { padding-left: 22px; max-width: 680px; color: var(--text-mid); line-height: 1.78; margin-bottom: 32px; }
+    .roadmap-list li { margin-bottom: 14px; }
+    .roadmap-list li:last-child { margin-bottom: 0; }
+
+    /* ─── FADE ──────────────────────────────────────────────────── */
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      .data-table { font-size: 0.82rem; }
+      .data-table .col-tier { padding-right: 8px; }
+      .data-table .col-mid  { padding: 10px 8px; }
+      .data-table .col-end  { padding-left: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <span class="nav-title">Bikeability</span>
+    <div class="nav-right">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#gis">GIS</a>
+      <a href="building.html">Building</a>
+      <a href="personal.html">Personal</a>
+      <a href="resume.html" class="nav-resume">Resume →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section id="header">
+  <div class="wrap">
+    <p class="s-label fade">London ON Bikeability Analysis</p>
+    <h1 class="page-title fade">How bikeable is London, and where are the gaps?</h1>
+    <p class="page-intro fade">
+      A current-state spatial analysis of London Ontario's cycling infrastructure, built on City of London open data. The work classifies every bike route segment into a three-tier protection hierarchy, applies tier-weighted buffer analysis, identifies infrastructure gap polygons, and — equally important — audits the data infrastructure itself.
+    </p>
+  </div>
+</section>
+
+<!-- DATA AUDIT -->
+<section id="audit" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">The data audit (and what it found)</p>
+    <h2 class="s-title fade">Methodology choice as a BSA finding</h2>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8;">
+      <p>The original plan was a Level of Traffic Stress (LTS) analysis — a standard methodology in cycling network planning that classifies street segments by how stressful they are to ride, using speed limits, lane counts, and road class.</p>
+      <p>The audit of London's open data found those fields aren't available in the published Road_Edges dataset. LTS wasn't feasible.</p>
+      <p>This is itself a finding. The analysis pivoted to a buffer-based approach using the protection-tier metadata that <em>is</em> available — a defensible methodology in its own right. But the data limitation is worth flagging back to the open data program as a recommendation: with speed-limit and lane-count fields added, the City would unlock LTS-grade analysis for any future bikeability work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Methodology</p>
+    <h2 class="s-title fade">Tier classification and tier-weighted buffers</h2>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8; margin-bottom: 32px;">
+      <p>Every bike infrastructure segment is classified into a protection tier based on infrastructure type, then buffered by a distance calibrated to cyclist behaviour for that tier.</p>
+    </div>
+
+    <h3 class="subhead fade">Tier classification</h3>
+    <table class="data-table fade">
+      <thead>
+        <tr>
+          <th class="col-tier">Tier</th>
+          <th class="col-mid">Infrastructure type</th>
+          <th class="col-end">Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-tier">1</td>
+          <td class="col-mid">Separated cycle track or multi-use path</td>
+          <td class="col-end">On-Street (Separated) + all Multi-Use Trails</td>
+        </tr>
+        <tr>
+          <td class="col-tier">2</td>
+          <td class="col-mid">Designated / painted bike lane</td>
+          <td class="col-end">On-Street (Designated)</td>
+        </tr>
+        <tr>
+          <td class="col-tier">3</td>
+          <td class="col-mid">Shared / signed route</td>
+          <td class="col-end">On-Street (Shared)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subhead fade">Buffer distances</h3>
+    <table class="data-table fade">
+      <thead>
+        <tr>
+          <th class="col-tier">Tier</th>
+          <th class="col-mid">Distance</th>
+          <th class="col-end">Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-tier">1</td>
+          <td class="col-mid">800 m</td>
+          <td class="col-end">Cyclists travel further to access protected infrastructure</td>
+        </tr>
+        <tr>
+          <td class="col-tier">2</td>
+          <td class="col-mid">400 m</td>
+          <td class="col-end">Standard comfortable cycling access (~¼ mile)</td>
+        </tr>
+        <tr>
+          <td class="col-tier">3</td>
+          <td class="col-mid">200 m</td>
+          <td class="col-end">Useful only if very nearby — shared roads are less attractive</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8;">
+      <p>Tier-weighted distances follow standard planning practice — ¼ mile (~400 m) is the commonly cited comfortable cycling access distance in NACTO and CROW design guidance, scaled up for protected infrastructure (cyclists will travel further when the experience is safer) and down for shared-road conditions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSIS -->
+<section id="analysis" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">The analysis</p>
+    <h2 class="s-title fade">Tier buffers and gap surfaces</h2>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8; margin-bottom: 32px;">
+      <p>The workflow in ArcGIS Pro: buffer each tier of bike routes at its designated distance, union the results into a single bikeability surface, then erase that surface from the city boundary to produce gap polygons — areas of London more than the tier-appropriate distance from any bike infrastructure.</p>
+    </div>
+
+    <div class="map-outputs">
+      <figure>
+        <div class="img-placeholder fade">
+          <!-- Replace with: <img src="images/bikeability/tier-buffers.png" alt="Tier-classified bike route buffers across London ON" style="width:100%; border-radius: var(--radius);"> -->
+          [tier-buffers.png — ArcGIS Pro export]
+        </div>
+        <figcaption>Bike route tiers with buffered access areas (T1 = 800 m, T2 = 400 m, T3 = 200 m).</figcaption>
+      </figure>
+
+      <figure>
+        <div class="img-placeholder fade">
+          <!-- Replace with: <img src="images/bikeability/gap-polygons.png" alt="Infrastructure gap polygons across London ON" style="width:100%; border-radius: var(--radius);"> -->
+          [gap-polygons.png — ArcGIS Pro export]
+        </div>
+        <figcaption>Infrastructure gap surface — areas of London not served by any tier of bike infrastructure within the tier-appropriate distance.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="img-placeholder fade">
+          <!-- Replace with: <img src="images/bikeability/final-layout.png" alt="Final map layout — London ON bikeability analysis" style="width:100%; border-radius: var(--radius);"> -->
+          [final-layout.png — ArcGIS Pro export]
+        </div>
+        <figcaption>Final composed map layout — bikeability analysis report.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section id="recommendations" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Recommendations</p>
+    <h2 class="s-title fade">For the City</h2>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8;">
+      <p><strong>For the cycling network:</strong> the gap polygons identify specific neighbourhoods of London that fall outside tier-weighted access to existing bike infrastructure. These areas are candidates for investment prioritization — particularly where Tier 3 (shared-route) coverage is the only infrastructure available, since Tier 3 is the least attractive form of cycling provision.</p>
+      <p><strong>For the open data program:</strong> the published Road_Edges dataset would unlock Level of Traffic Stress (LTS) analysis if it included speed-limit, lane-count, and road-class fields. Adding these would let any analyst — internal or external — produce a more sensitive bikeability assessment than the buffer methodology used here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">What's next</p>
+    <h2 class="s-title fade">Phase 2 and Phase 3</h2>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8; margin-bottom: 32px;">
+      <p>This page documents Phase 1 — a descriptive current-state analysis. The work is designed to extend in two further phases that progressively answer different questions about London's cycling network.</p>
+    </div>
+
+    <h3 class="subhead fade">Phase 2 — Three directions</h3>
+    <ol class="roadmap-list fade">
+      <li><strong>Population overlay.</strong> Statistics Canada Census Dissemination Areas overlaid on the gap polygons — quantifies how many residents live in underserved areas.</li>
+      <li><strong>Collision correlation.</strong> Tests whether infrastructure tier predicts cycling collision rates. A finding here would directly justify infrastructure investment priorities.</li>
+      <li><strong>Historical reconstruction.</strong> Uses the installation and rehabilitation year fields already in the layer attribute tables to map the network at past dates, revealing the network's growth trajectory over time.</li>
+    </ol>
+
+    <h3 class="subhead fade">Phase 3 — Synthesis</h3>
+    <div class="prose-body fade" style="max-width: 680px; color: var(--text-mid); line-height: 1.8;">
+      <p>A composite bikeability scoring methodology derived from Phase 2 findings — combining access, quality, connectivity, exposure, and trajectory into a single index. Calibrated to London ON, and designed to be adaptable to any municipality with comparable open data, providing a standardized comparison metric.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--border); padding: 28px; text-align: center;">
+  <p style="font-size: 0.75rem; color: var(--text-faint);">
+    Talgat Dilmurat · <a href="index.html" style="color: var(--silver);">← Portfolio</a> · <a href="resume.html" style="color: var(--silver);">Resume</a>
+  </p>
+</footer>
+
+<script>
+  const bar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
