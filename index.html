@@ -242,13 +242,15 @@
       border-left: 2px solid transparent;
       display: grid; grid-template-columns: 1fr auto;
       gap: 16px; align-items: start;
-      transition: border-left-color 0.25s, background 0.2s;
+      transition: border-left-color 0.25s, background 0.2s, transform 0.2s ease, box-shadow 0.2s ease;
       margin-left: -20px;
       border-radius: 0 var(--radius) var(--radius) 0;
     }
     .project-item:hover {
       border-left-color: var(--silver);
       background: var(--bg-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(13, 36, 64, 0.08);
     }
     .project-item:last-child { border-bottom: none; }
     .project-item h3 {
