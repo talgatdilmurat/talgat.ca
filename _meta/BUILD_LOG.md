@@ -177,3 +177,56 @@ Running record of all build activity. Each entry is a commit (or a logged event 
 **Files touched:** index.html
 **Commit:** `fix: drop translateY/box-shadow from .project-item:hover` (bedb542)
 **Notes:** None.
+
+---
+
+## [2026-05-11] — Pre-Phase-2 Cleanup (6 fixes)
+
+### Fix 1 — Phone number from hero
+**What:** Removed `<a href="tel:4169099610">` and its preceding separator from `hero-links`. Hero now shows email + GitHub only.
+**Files touched:** index.html
+**Commit:** `hero: remove phone link, leave email + GitHub only` (409cdf9)
+
+---
+
+### Fix 2 — Hide Story Maps section
+**What:** Added `style="display:none"` to `<section id="storymaps">` with an HTML comment marking it for re-enable when real Story Maps are built.
+**Files touched:** index.html
+**Commit:** `storymaps: hide section until real Story Maps are ready` (7c7d938)
+
+---
+
+### Fix 3 — Remove CityFlow video placeholder
+**What:** Removed the entire `<div class="video-placeholder" id="cityflow-demo">` block from the CityFlow featured footer. GitHub button remains.
+**Files touched:** index.html
+**Commit:** `cityflow: remove video placeholder block from featured footer` (584f0be)
+
+---
+
+### Fix 4 — AI triage chip wording
+**What:** Updated CityFlow featured-chips label from `AI triage` → `AI-assisted triage (experimental)`.
+**Files touched:** index.html
+**Commit:** `cityflow: update chip label to 'AI-assisted triage (experimental)'` (41fc4bb)
+
+---
+
+### Fix 5 — Favicon redesign
+**What:** Replaced `favicon.svg` with cream background (`#f8f5ed`) + bold navy T (`#0d2440`, weight 900, size 22). Much more legible at 16×16.
+**Files touched:** favicon.svg
+**Commit:** `favicon: redesign to cream background with bold navy T for 16x16 legibility` (5442889)
+
+---
+
+### Fix 6 — Hero panel legibility and calm
+**What:** Three related changes:
+- (a) Gradient: replaced the aggressive navy→near-white sweep with a uniform deep navy (`#0d2440` → `#1e4070`, tiny delta). Text now sits on a predictably dark backdrop throughout the animation cycle.
+- (b) Text opacity: `.hero-tagline` 0.5 → 0.82; `.hero-focus` 0.55 → 0.75; `.hero-focus-key` 0.3 → 0.45. Subtitle and focus line now read at roughly the same brightness as the tagline above.
+- (c) Bottom transition: `#hero::after` changed from a dark vignette (`rgba(20,50,110,0.15)`) to a white fade (`rgba(255,255,255,0.18)`). The drop into the white About section now feels gradual rather than abrupt.
+**Files touched:** index.html
+**Commit:** `hero: soften gradient to uniform navy, boost subtitle/focus opacity, add white bottom fade` (dedd116)
+
+---
+
+## [2026-05-11] — Pre-Phase-2 Cleanup complete
+
+All 6 fixes committed. Pushed to remote. Phase 2 starts next session.
