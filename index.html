@@ -177,32 +177,6 @@
     .about-text p { margin-bottom: 14px; }
     .about-text p:last-child { margin-bottom: 0; }
 
-    /* Language pills */
-    .lang-strip { margin-top: 36px; }
-    .lang-pills {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
-    }
-    .lang-pill {
-      padding: 8px 18px; border-radius: 999px;
-      font-size: 0.82rem; font-weight: 500; color: var(--text-mid);
-      background: var(--bg-soft); border: 1px solid var(--border-dk);
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
-      letter-spacing: 0.01em;
-    }
-    .lang-pill:hover { background: #f1f5f9; border-color: var(--silver); color: var(--text); }
-    /* IRB callout */
-    .irb-callout {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 9px 14px; border-radius: var(--radius);
-      background: var(--bg-soft); border: 1px solid var(--border);
-      border-left: 3px solid var(--silver);
-    }
-    .irb-callout .irb-icon { font-size: 0.75rem; color: var(--silver); }
-    .irb-callout p {
-      font-size: 0.8rem; font-weight: 500; color: var(--text-mid); line-height: 1.4;
-    }
-    .irb-callout p span { font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 1px; }
-
     /* ─── SKILLS ────────────────────────────────────────────────── */
     .skills-table { width: 100%; border-collapse: collapse; }
     .skills-table tr {
@@ -618,7 +592,6 @@
     }
     .log-item:hover { background: var(--bg-soft); padding-left: 8px; padding-right: 8px; margin: 0 -8px; border-radius: var(--radius); }
     .log-item:last-child { border-bottom: none; }
-    .log-date { font-size: 0.72rem; color: var(--text-faint); font-family: var(--mono); padding-top: 2px; }
     .log-content h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .log-content p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
     .log-tag {
@@ -644,7 +617,6 @@
 
     /* ─── RESPONSIVE ────────────────────────────────────────────── */
     @media (max-width: 700px) {
-      .lang-chip { min-width: 90px; padding: 9px 12px; }
       .course-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .nav-ham { display: flex; }
