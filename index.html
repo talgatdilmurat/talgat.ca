@@ -33,9 +33,9 @@
 
     /* ─── HERO COLOR SHIFT ──────────────────────────────────────── */
     @keyframes hero-breathe {
-      0%   { background: linear-gradient(135deg, #2e5496 0%, #5b80b8 25%, #8aaad0 50%, #b8cde5 75%, #dde8f5 100%); }
-      50%  { background: linear-gradient(135deg, #dde8f5 0%, #b8cde5 25%, #8aaad0 50%, #5b80b8 75%, #2e5496 100%); }
-      100% { background: linear-gradient(135deg, #2e5496 0%, #5b80b8 25%, #8aaad0 50%, #b8cde5 75%, #dde8f5 100%); }
+      0%   { background: linear-gradient(160deg, #0d2440 0%, #1a3860 55%, #1e4070 100%); }
+      50%  { background: linear-gradient(160deg, #112b50 0%, #0d2440 55%, #1a3860 100%); }
+      100% { background: linear-gradient(160deg, #0d2440 0%, #1a3860 55%, #1e4070 100%); }
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -126,7 +126,7 @@
     }
     #hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: linear-gradient(to bottom, transparent 60%, rgba(20,50,110,0.15) 100%);
+      background: linear-gradient(to bottom, transparent 55%, rgba(255,255,255,0.18) 100%);
     }
     #hero .wrap { position: relative; z-index: 1; }
     .hero-eyebrow {
@@ -146,7 +146,7 @@
     }
     .hero-tagline {
       font-size: 0.9rem; font-style: italic;
-      color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.82); margin-top: 6px; letter-spacing: 0.01em;
     }
     .hero-divider {
       width: 36px; height: 2px; background: rgba(255,255,255,0.35);
@@ -154,9 +154,9 @@
     }
     .hero-focus {
       font-family: var(--mono); font-size: 0.75rem;
-      color: rgba(255,255,255,0.55); margin-bottom: 24px;
+      color: rgba(255,255,255,0.75); margin-bottom: 24px;
     }
-    .hero-focus-key { color: rgba(255,255,255,0.3); }
+    .hero-focus-key { color: rgba(255,255,255,0.45); }
     .hero-intro {
       font-size: 1.02rem; color: rgba(255,255,255,0.85); line-height: 1.82;
       max-width: 540px; margin-bottom: 36px;
