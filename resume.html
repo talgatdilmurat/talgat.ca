@@ -153,9 +153,24 @@
     .esri-t td:last-child { text-align: right; }
     /* sbadge removed */
 
+    /* ONE-PAGER */
+    .resume-onepager .op-section { margin-top: 22px; }
+    .resume-onepager .op-section:first-of-type { margin-top: 0; }
+    .resume-onepager .op-section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.95rem; font-weight: 700; color: var(--text);
+      border-bottom: 1px solid var(--border-dk); padding-bottom: 4px;
+      margin-bottom: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .resume-onepager .op-job { margin-bottom: 6px; font-size: 0.85rem; }
+    .resume-onepager .op-bullets { margin: 0 0 14px 22px; padding: 0; list-style: disc; }
+    .resume-onepager .op-bullets li {
+      font-size: 0.83rem; color: var(--text-mid); line-height: 1.55; margin-bottom: 3px;
+    }
+
     /* PRINT */
     @media print {
-      nav { display: none !important; }
+      nav, .extended-cta, .download-cta { display: none !important; }
       .page { padding: 0 0 40px; }
       .r-header { padding: 20px 0 24px; }
       .r-job li, .r-edu-note { font-size: 0.8rem; }
@@ -175,11 +190,109 @@
     <div style="display:flex;gap:16px;align-items:center;">
       <a href="personal.html" style="font-size:0.82rem;color:var(--text-muted);">Personal</a>
       <a href="building.html" style="font-size:0.82rem;color:var(--text-muted);">Building</a>
-    <span class="nav-title">Talgat Dilmurat — Resume</span>
+      <span class="nav-title">Resume</span>
     </div>
     <button class="nav-print" onclick="window.print()">Print / PDF</button>
   </div>
 </nav>
+
+<!-- ONE-PAGE RESUME -->
+<section id="onepager" class="resume-onepager" style="max-width: 760px; margin: 0 auto; padding: 60px 28px 40px;">
+
+  <div style="text-align: center; margin-bottom: 24px;">
+    <h1 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.9rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; margin-bottom: 6px;">Talgat Dilmurat</h1>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">London, Ontario · talgat.dilmurat.tech@gmail.com · talgat.ca · github.com/talgatdilmurat</p>
+  </div>
+
+  <div class="download-cta" style="text-align: center; margin-bottom: 36px;">
+    <a href="/resume.pdf" download style="display: inline-block; padding: 8px 16px; border: 1px solid var(--border-dk); border-radius: 5px; font-size: 0.78rem; color: var(--text-mid); text-decoration: none;">Download PDF →</a>
+  </div>
+
+  <!-- Education -->
+  <div class="op-section">
+    <h2 class="op-section-title">Education</h2>
+    <p style="margin-bottom: 14px; font-size: 0.85rem;"><strong>Advanced Diploma, Software Engineering Technology</strong> · Centennial College, Toronto ON · 2023–2026<br>
+    <span style="color: var(--text-muted);">Coursework: Databases, Enterprise Systems, REST APIs, Cloud Computing, Business Systems Analysis, Programming</span></p>
+    <p style="margin-bottom: 0; font-size: 0.85rem;"><strong>ArcGIS Training</strong> · Esri Academy · 2026<br>
+    <span style="color: var(--text-muted);">11 courses including: ArcGIS Pro / Online, Business Analyst Pro, Systems Approach to ArcGIS, Coordinate Systems, Data Management, AI in ArcGIS, Administering ArcGIS Online, ArcGIS Monitor</span></p>
+  </div>
+
+  <!-- Experience -->
+  <div class="op-section">
+    <h2 class="op-section-title">Experience</h2>
+
+    <p class="op-job"><strong>Sales Delivery Specialist</strong> · Frito-Lay / PepsiCo · London ON · Aug 2023 – Present</p>
+    <ul class="op-bullets">
+      <li>Operate handheld logistics systems to track deliveries, inventory, and daily transactions with high accuracy</li>
+      <li>Reconcile physical stock against system records in real time, maintaining data integrity</li>
+      <li>Coordinate with retail partners to resolve delivery issues and improve route efficiency</li>
+    </ul>
+
+    <p class="op-job"><strong>Certified Language Interpreter</strong> · Freelance / Agency · 2020 – Present</p>
+    <ul class="op-bullets">
+      <li>IRB Certified Interpreter (Mandarin · Uyghur · Kazakh); interpreted across medical, legal, government, banking, and emergency-services contexts</li>
+      <li>Operate under formal procedural requirements with high accuracy and confidentiality demands</li>
+    </ul>
+
+    <p class="op-job"><strong>Founder &amp; Operations Lead</strong> · Noah's Art (E-commerce) · Remote · Mar 2021 – Mar 2023</p>
+    <ul class="op-bullets">
+      <li>Designed and managed end-to-end workflows: inventory, fulfillment, supplier coordination, international shipping</li>
+      <li>Analyzed sales and customer data to optimize marketing spend and product performance</li>
+    </ul>
+
+    <p class="op-job"><strong>Administrative &amp; Development Operations</strong> · Nonprofit / Freelance · Apr 2020 – Sep 2021</p>
+    <ul class="op-bullets">
+      <li>Managed NationBuilder CRM data and produced reports for fundraising, revenue, and leadership decisions</li>
+      <li>Documented operational workflows, calling procedures, and SOPs for staff and volunteer consistency</li>
+      <li>Trained staff and volunteers on CRM usage, data handling, and reporting</li>
+    </ul>
+
+    <p class="op-job"><strong>Marketing Operations Assistant</strong> · ONESTUDIO · Remote · Dec 2021 – Mar 2023</p>
+    <ul class="op-bullets" style="margin-bottom: 0;">
+      <li>Generated performance reports and analyzed campaign data across CRM, CMS, and email marketing platforms</li>
+      <li>Troubleshot workflow and system issues across marketing operations</li>
+    </ul>
+  </div>
+
+  <!-- Projects -->
+  <div class="op-section">
+    <h2 class="op-section-title">Projects</h2>
+
+    <p style="margin-bottom: 6px; font-size: 0.85rem;"><strong>CityFlow</strong> — Full-stack municipal asset management system · React, Node.js, PostgreSQL, Leaflet, Anthropic API · <a href="https://talgat.ca" style="color: var(--text-mid);">talgat.ca</a></p>
+    <p style="margin-bottom: 12px; font-size: 0.83rem; color: var(--text-mid); line-height: 1.55;">Interactive asset map, work order lifecycle, AI-assisted triage (experimental), KPI dashboard.</p>
+
+    <p style="margin-bottom: 6px; font-size: 0.85rem;"><strong>London ON Bikeability Analysis</strong> — ArcGIS Pro spatial analysis · City of London open data</p>
+    <p style="margin-bottom: 12px; font-size: 0.83rem; color: var(--text-mid); line-height: 1.55;">Tier classification, buffer analysis, gap polygon identification, and a methodology audit finding on the open data program.</p>
+
+    <p style="margin-bottom: 0; font-size: 0.85rem;"><strong>Municipal Service Request Studies</strong> — Four lenses: SQL schema, Spring Boot REST API, ArcGIS Online map, workflow analysis · <a href="https://github.com/talgatdilmurat/municipal-portfolio" style="color: var(--text-mid);">GitHub</a></p>
+  </div>
+
+  <!-- Skills -->
+  <div class="op-section">
+    <h2 class="op-section-title">Technical Skills</h2>
+    <p style="font-size: 0.82rem; color: var(--text-mid); line-height: 1.75;">
+      <strong>GIS:</strong> ArcGIS Pro, ArcGIS Online, Leaflet.js, Spatial Data, Coordinate Systems<br>
+      <strong>Web:</strong> React, Node.js, .NET / C#, REST APIs, JSON<br>
+      <strong>Data:</strong> SQL, PostgreSQL, MySQL, Relational Modeling<br>
+      <strong>Systems:</strong> Python, Git, Jira, Linux/Unix<br>
+      <strong>Business Analysis:</strong> Process Mapping, Workflow Documentation, Requirements Gathering<br>
+      <strong>Languages:</strong> English, Mandarin (IRB), Uyghur (IRB), Kazakh (IRB), Arabic, Russian, Turkish
+    </p>
+  </div>
+
+</section>
+
+<!-- DIVIDER + ANCHOR -->
+<div style="max-width: 760px; margin: 24px auto 0; padding: 0 28px; text-align: center;">
+  <div style="border-top: 1px solid var(--border); padding-top: 32px;">
+    <p style="font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase;">Beyond the one-pager ↓</p>
+  </div>
+</div>
+
+<!-- EXTENDED — the existing detailed content stays below this point -->
+<div class="extended-cta" style="max-width: 760px; margin: 28px auto 0; padding: 0 28px; text-align: center;">
+  <a href="/resume-extended.pdf" download style="display: inline-block; padding: 8px 16px; border: 1px solid var(--border-dk); border-radius: 5px; font-size: 0.78rem; color: var(--text-mid); text-decoration: none;">Download extended PDF →</a>
+</div>
 
 <div class="page">
 
