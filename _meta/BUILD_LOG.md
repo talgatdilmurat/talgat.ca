@@ -416,3 +416,11 @@ All 6 fixes committed. Pushed to remote. Phase 2 starts next session.
 **Files touched:** index.html, images/capstone-lingosync-demo.gif (new), images/capstone-certpath-demo.gif (new), images/capstone-vocana-demo.gif (new)
 **Commit:** `Capstone trio: drop in LingoSync / CertPath / Vocana demo GIFs` (4d7e467)
 
+---
+
+## [2026-05-12] — CityFlow demo GIF in featured card + optimize all capstone GIFs
+
+**What:** Dropped the new `cityflow-demo.gif` (~8 MB) into the CityFlow featured card on index.html. Inserted a `.cityflow-demo-thumb` container at the top of `featured-body`, between the chips list and the features list, mirroring the inline-style pattern used elsewhere on the site (100% width, 16px vertical margin, 8px radius, overflow hidden). Also re-optimized the three existing capstone GIFs (LingoSync, CertPath, Vocana) — same filenames so existing HTML refs resolve, but reduced file sizes by roughly 35% on average.
+**Files touched:** index.html, images/cityflow-demo.gif (new), images/capstone-certpath-demo.gif (optimized), images/capstone-lingosync-demo.gif (optimized), images/capstone-vocana-demo.gif (optimized)
+**Commit:** `Add CityFlow demo GIF to featured card; optimize all capstone GIFs (~35% size reduction)`
+
