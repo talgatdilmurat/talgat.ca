@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CityFlow — Talgat Dilmurat</title>
+  <meta name="description" content="CityFlow — a full-stack municipal asset management system. The question it answers, the constraints it was built under, the architecture decisions, and what I'd change with another month." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #ffffff;
+      --bg-soft:    #f9fafb;
+      --bg-warm:    #faf8f5;
+      --bg-tag:     #f4f4f5;
+      --text:       #18181b;
+      --text-mid:   #3f3f46;
+      --text-muted: #71717a;
+      --text-faint: #a1a1aa;
+      --border:     #e4e4e7;
+      --border-dk:  #d4d4d8;
+      --silver:     #64748b;
+      --accent-brass:#b08949;
+      --radius:     8px;
+      --font:       'Inter', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── SCROLL BAR ────────────────────────────────────────────── */
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--silver); z-index: 200; transition: width 0.08s linear; pointer-events: none; }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 880px; margin: 0 auto; padding: 0 28px;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
+    .nav-right { display: flex; gap: 18px; align-items: center; }
+    .nav-right a { font-size: 0.8rem; color: var(--text-faint); transition: color 0.15s; }
+    .nav-right a:hover { color: var(--text); }
+    .nav-right .nav-resume {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      border: 1px solid var(--border-dk); padding: 5px 13px; border-radius: 5px;
+      transition: all 0.2s;
+    }
+    .nav-right .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────── */
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 72px 0; border-top: 1px solid var(--border); }
+    .s-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--silver); margin-bottom: 10px; }
+    .s-title { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; letter-spacing: -0.025em; color: var(--text); margin-bottom: 24px; line-height: 1.2; }
+
+    /* ─── PAGE HEADER ───────────────────────────────────────────── */
+    #header { padding: 88px 0 60px; border-top: none; background: var(--bg); }
+    .page-title { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; color: var(--text); max-width: 760px; }
+    .page-intro { font-size: 1rem; color: var(--text-mid); max-width: 700px; line-height: 1.78; }
+
+    /* ─── PROSE ─────────────────────────────────────────────────── */
+    .prose-body { max-width: 720px; color: var(--text-mid); line-height: 1.8; }
+    .prose-body p { margin-bottom: 16px; }
+    .prose-body p:last-child { margin-bottom: 0; }
+
+    /* ─── CONSTRAINTS / DECISIONS LIST ──────────────────────────── */
+    .struct-list {
+      list-style: none; padding: 0; max-width: 760px;
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    .struct-list li {
+      padding: 18px 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--silver);
+      border-radius: var(--radius);
+    }
+    .struct-list li h3 {
+      font-size: 0.92rem; font-weight: 600; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .struct-list li p {
+      font-size: 0.86rem; color: var(--text-mid); line-height: 1.65;
+    }
+
+    /* ─── DIAGRAMS ──────────────────────────────────────────────── */
+    .diagram-frame {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 12px;
+    }
+    .diagram-frame svg { display: block; width: 100%; height: auto; }
+    .diagram-caption {
+      font-size: 0.78rem; color: var(--text-muted);
+      font-style: italic; line-height: 1.55; margin-bottom: 32px;
+      max-width: 720px;
+    }
+
+    /* ─── FADE ──────────────────────────────────────────────────── */
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      .diagram-frame { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">← Portfolio</a>
+    <span class="nav-title">CityFlow</span>
+    <div class="nav-right">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#gis">GIS</a>
+      <a href="building.html">Building</a>
+      <a href="personal.html">Personal</a>
+      <a href="resume.html" class="nav-resume">Resume →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section id="header">
+  <div class="wrap">
+    <p class="s-label fade">CityFlow</p>
+    <h1 class="page-title fade">A municipal asset management system, end to end</h1>
+    <p class="page-intro fade">
+      A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API. Built over three weeks alongside school and full-time work.
+    </p>
+  </div>
+</section>
+
+<!-- THE QUESTION -->
+<section id="question" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">The question</p>
+    <h2 class="s-title fade">What does a municipal asset team actually need?</h2>
+    <div class="prose-body fade">
+      <p>Before writing a single line of code, the question worth sitting with: what is the simplest shape of a system that <em>actually helps</em> a small municipal operations team? Not a full Cityworks replacement, not an enterprise suite — the minimum viable surface that lets someone log a pothole, route it to the right person, and close the loop.</p>
+      <p>Four primitives kept coming back: <strong>assets</strong> (the things the city maintains), <strong>work orders</strong> (planned and reactive work against those assets), <strong>service requests</strong> (citizen intake — the raw, often-unstructured signal that <em>becomes</em> work), and <strong>staff</strong> (who does the work and who supervises). Everything else — the map, the dashboard, the AI triage — sits on top of those four.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTRAINTS -->
+<section id="constraints" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Constraints</p>
+    <h2 class="s-title fade">What this project had to live inside</h2>
+    <ul class="struct-list fade">
+      <li>
+        <h3>Single developer, three weeks, alongside school and full-time work</h3>
+        <p>No team, no design partner, no budget. The scope had to be defensible by one person in evenings and weekends.</p>
+      </li>
+      <li>
+        <h3>Public-sector deployment realities — even though this isn't deployed</h3>
+        <p>FIPPA, audit requirements, data residency. Any AI feature has to be framed honestly about what's actually safe to ship in a public-sector context vs. what's demonstration-only.</p>
+      </li>
+      <li>
+        <h3>A common, well-documented stack — no exotic choices</h3>
+        <p>React, Node, PostgreSQL. The point isn't to flex on framework selection — it's to demonstrate working software that a municipal IT shop could actually pick up.</p>
+      </li>
+      <li>
+        <h3>One source of truth per concept — no schema drift</h3>
+        <p>One table per primitive, foreign keys between them, an audit timestamp on every row. The schema is small enough to keep in your head.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- DECISIONS -->
+<section id="decisions" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">Key decisions</p>
+    <h2 class="s-title fade">The choices worth naming</h2>
+    <ul class="struct-list fade">
+      <li>
+        <h3>Leaflet + OpenStreetMap, not Mapbox</h3>
+        <p>Free tiles, no API key, no usage limits to plan around. The map is a primary surface and shouldn't depend on a vendor relationship for a demo.</p>
+      </li>
+      <li>
+        <h3>AI triage as an <em>experimental</em> capability, not a deployed one</h3>
+        <p>LLM classification is non-deterministic, lacks an audit trail, and raises PII concerns under FIPPA. The feature is framed in the UI as experimental — a real deployment would need human-in-the-loop review on every suggestion and a self-hosted model for data residency.</p>
+      </li>
+      <li>
+        <h3>Audit columns inline, not separate audit tables</h3>
+        <p>At this scale, <code>created_at</code> / <code>updated_at</code> / <code>resolved_at</code> per row plus a status history log is enough. A separate audit table is the right call at production scale; for v1, it's premature.</p>
+      </li>
+      <li>
+        <h3>No auth in v1 — but scaffolded for it</h3>
+        <p>A single Admin user is hardcoded in the sidebar. The Building page tracks the in-flight work to add OAuth properly. Adding auth before the rest of the system is real felt like the wrong order.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- WHAT I BUILT -->
+<section id="built" class="section">
+  <div class="wrap">
+    <p class="s-label fade">What I built</p>
+    <h2 class="s-title fade">Architecture and data flow</h2>
+
+    <div class="prose-body fade" style="margin-bottom: 32px;">
+      <p>Four layers, plain and load-bearing. The frontend renders maps and lists; the API does business logic and validation; the database is the source of truth; the Anthropic API is consulted only for the AI triage suggestion, and only as a separate code path.</p>
+    </div>
+
+    <div class="diagram-frame fade">
+      <svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CityFlow architecture: React frontend talks to Express API, which talks to PostgreSQL and the Anthropic API.">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+          </marker>
+        </defs>
+
+        <!-- Frontend box -->
+        <g>
+          <rect x="240" y="30" width="320" height="86" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="400" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#0d2440">React frontend</text>
+          <text x="400" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e3a5c">Leaflet · Recharts · React Router · Tailwind</text>
+          <text x="400" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-style="italic" fill="#4a6a90">The user sees this. Renders maps, lists, dashboards.</text>
+        </g>
+
+        <!-- Arrow: frontend → API -->
+        <line x1="400" y1="116" x2="400" y2="184" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="412" y="155" font-family="'JetBrains Mono', monospace" font-size="10" fill="#4a6a90">HTTPS · JSON</text>
+
+        <!-- Express API box -->
+        <g>
+          <rect x="240" y="190" width="320" height="86" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="400" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#0d2440">Express API</text>
+          <text x="400" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e3a5c">REST endpoints · validation · business logic</text>
+          <text x="400" y="260" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-style="italic" fill="#4a6a90">Translates HTTP requests into safe DB operations.</text>
+        </g>
+
+        <!-- Arrow: API → DB -->
+        <line x1="400" y1="276" x2="400" y2="344" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="412" y="315" font-family="'JetBrains Mono', monospace" font-size="10" fill="#4a6a90">pg pool · SQL</text>
+
+        <!-- PostgreSQL box -->
+        <g>
+          <rect x="240" y="350" width="320" height="86" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="400" y="378" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#0d2440">PostgreSQL</text>
+          <text x="400" y="400" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e3a5c">assets · work_orders · service_requests · staff</text>
+          <text x="400" y="420" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-style="italic" fill="#4a6a90">Source of truth. Audit columns on every row.</text>
+        </g>
+
+        <!-- Anthropic API box (off to the right of Express API) -->
+        <g>
+          <rect x="600" y="190" width="180" height="86" rx="6" fill="#f9fafb" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="690" y="216" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0d2440">Anthropic API</text>
+          <text x="690" y="234" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1e3a5c">Claude · triage prompt</text>
+          <text x="690" y="254" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-style="italic" fill="#4a6a90">Experimental.</text>
+          <text x="690" y="268" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-style="italic" fill="#4a6a90">FIPPA-flagged.</text>
+        </g>
+
+        <!-- Arrow: API → Anthropic (bidirectional, drawn as two arrows for clarity) -->
+        <line x1="560" y1="220" x2="596" y2="220" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="596" y1="248" x2="560" y2="248" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="578" y="212" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">prompt</text>
+        <text x="578" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">suggestion</text>
+
+        <!-- Browser bracket cue (top edge) -->
+        <line x1="100" y1="30" x2="100" y2="116" stroke="#c8daf0" stroke-width="1"/>
+        <line x1="100" y1="30" x2="115" y2="30" stroke="#c8daf0" stroke-width="1"/>
+        <line x1="100" y1="116" x2="115" y2="116" stroke="#c8daf0" stroke-width="1"/>
+        <text x="92" y="76" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7ba4d0">browser</text>
+
+        <!-- Server bracket cue (covers API + DB + Anthropic) -->
+        <line x1="100" y1="190" x2="100" y2="436" stroke="#c8daf0" stroke-width="1"/>
+        <line x1="100" y1="190" x2="115" y2="190" stroke="#c8daf0" stroke-width="1"/>
+        <line x1="100" y1="436" x2="115" y2="436" stroke="#c8daf0" stroke-width="1"/>
+        <text x="92" y="316" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7ba4d0">server</text>
+
+        <!-- Footer note inside SVG -->
+        <text x="400" y="490" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#7ba4d0">React 18 (Vite)  ·  Node 20 + Express 4  ·  PostgreSQL 14+  ·  @anthropic-ai/sdk 0.30</text>
+      </svg>
+    </div>
+    <p class="diagram-caption fade">Four boxes, one direction. The AI integration is intentionally drawn as a side branch off the API rather than between the user and the database — it's a feature you can disable without breaking the rest of the system.</p>
+
+    <!-- Data flow diagram -->
+    <h3 class="fade" style="font-size: 1rem; font-weight: 600; color: var(--text); margin-top: 8px; margin-bottom: 16px;">Service request lifecycle</h3>
+
+    <div class="diagram-frame fade">
+      <svg viewBox="0 0 800 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Service request lifecycle: citizen submits, API receives, DB writes, AI triages, human reviewer confirms, work order created.">
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+          </marker>
+        </defs>
+
+        <!-- Six stages, evenly spaced -->
+        <!-- Stage 1: Citizen submits -->
+        <g>
+          <circle cx="70" cy="100" r="22" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="70" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">1</text>
+          <text x="70" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">Citizen</text>
+          <text x="70" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">submits</text>
+          <text x="70" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">"There's a pothole"</text>
+        </g>
+
+        <!-- Stage 2: API receives -->
+        <g>
+          <circle cx="200" cy="100" r="22" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="200" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">2</text>
+          <text x="200" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">API</text>
+          <text x="200" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">receives</text>
+          <text x="200" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">validates input</text>
+        </g>
+
+        <!-- Stage 3: DB writes -->
+        <g>
+          <circle cx="330" cy="100" r="22" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="330" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">3</text>
+          <text x="330" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">DB</text>
+          <text x="330" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">writes (status: pending)</text>
+          <text x="330" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">audited row</text>
+        </g>
+
+        <!-- Stage 4: AI triages (experimental) -->
+        <g>
+          <circle cx="460" cy="100" r="22" fill="#f9fafb" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="460" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">4</text>
+          <text x="460" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">AI</text>
+          <text x="460" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">suggests (experimental)</text>
+          <text x="460" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">category · priority</text>
+        </g>
+
+        <!-- Stage 5: Human confirms -->
+        <g>
+          <circle cx="590" cy="100" r="22" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="590" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">5</text>
+          <text x="590" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">Human</text>
+          <text x="590" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">confirms / overrides</text>
+          <text x="590" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">required, not optional</text>
+        </g>
+
+        <!-- Stage 6: Work order created -->
+        <g>
+          <circle cx="720" cy="100" r="22" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+          <text x="720" y="106" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#0d2440">6</text>
+          <text x="720" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#0d2440">Work order</text>
+          <text x="720" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1e3a5c">created</text>
+          <text x="720" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4a6a90">assigned · scheduled</text>
+        </g>
+
+        <!-- Connecting arrows between stages -->
+        <line x1="92" y1="100" x2="178" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <line x1="222" y1="100" x2="308" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <line x1="352" y1="100" x2="438" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <line x1="482" y1="100" x2="568" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <line x1="612" y1="100" x2="698" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+        <!-- Top label for the experimental step -->
+        <text x="460" y="60" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#7ba4d0">/experimental</text>
+        <line x1="438" y1="68" x2="482" y2="68" stroke="#c8daf0" stroke-width="1"/>
+
+        <!-- Top label for the human-in-the-loop gate -->
+        <text x="590" y="60" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#7ba4d0">human-in-the-loop</text>
+      </svg>
+    </div>
+    <p class="diagram-caption fade">The AI step is bracketed: it never writes to the database directly, and it never advances state on its own. A human reviewer at step 5 is mandatory before a work order is created.</p>
+  </div>
+</section>
+
+<!-- WHAT I'D CHANGE -->
+<section id="next" class="section" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <p class="s-label fade">What I'd change</p>
+    <h2 class="s-title fade">With another month</h2>
+    <ul class="struct-list fade">
+      <li>
+        <h3>Real authentication — OAuth or SSO</h3>
+        <p>Auth0 or Google OAuth for v1.5. SSO with the City's identity provider would be the production target. The hardcoded admin user goes away.</p>
+      </li>
+      <li>
+        <h3>Self-hosted LLM for the triage path</h3>
+        <p>Anthropic Claude was the right call for a demo, but a real deployment needs a model running inside the City's data residency. Llama or Mistral, hosted on internal infrastructure.</p>
+      </li>
+      <li>
+        <h3>A dedicated review queue for AI suggestions</h3>
+        <p>Currently the AI suggestion appears inline on each service request. A queue of pending suggestions with confirm/override buttons would make the human-in-the-loop loop tighter and easier to audit.</p>
+      </li>
+      <li>
+        <h3>Separate audit_log table</h3>
+        <p>Inline audit columns are fine for v1. A separate <code>audit_log</code> table — one row per state transition with actor, timestamp, before/after — is the right call at scale.</p>
+      </li>
+      <li>
+        <h3>Real-time updates via Server-Sent Events</h3>
+        <p>Right now the frontend polls. SSE would push status changes to all connected clients — useful when multiple operators are working the same work order.</p>
+      </li>
+      <li>
+        <h3>An ETL pipeline pulling London open data on a schedule</h3>
+        <p>Today the seed data is hand-crafted. A nightly job that pulls fresh data from opendata.london.ca, normalizes it, and merges into the database would make the system feel less like a demo and more like a working tool.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid var(--border); padding: 28px; text-align: center;">
+  <p style="font-size: 0.75rem; color: var(--text-faint);">
+    Talgat Dilmurat · <a href="index.html" style="color: var(--silver);">← Portfolio</a> · <a href="https://github.com/talgatdilmurat/cityflow" target="_blank" style="color: var(--silver);">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  const bar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
