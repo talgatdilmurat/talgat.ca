@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <style>
     /* ─── RESET ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -957,6 +959,17 @@
       </div>
 
     </div>
+
+    <!-- INLINE LEAFLET MAP -->
+    <div class="inline-map-block fade" style="margin-top: 48px;">
+      <p class="s-label" style="margin-bottom: 6px;">Live data</p>
+      <h3 style="font-size: 1.05rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 10px;">Service requests, inline</h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 18px; max-width: 560px;">
+        The same kind of service request records published to ArcGIS Online, also rendered here as a Leaflet.js map loading directly in the browser. No backend, no plugins — just data on a basemap.
+      </p>
+      <div id="inline-leaflet-map" style="height: 400px; width: 100%; max-width: 800px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;"></div>
+    </div>
+
   </div>
 </section>
 
@@ -1328,6 +1341,36 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Inline Leaflet map — service requests
+  window.addEventListener('load', () => {
+    const inlineMapEl = document.getElementById('inline-leaflet-map');
+    if (!inlineMapEl || typeof L === 'undefined') return;
+    const inlineMap = L.map('inline-leaflet-map').setView([42.984, -81.246], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(inlineMap);
+
+    const demoRequests = [
+      { lat: 42.984, lng: -81.246, type: 'pothole',     priority: 'medium' },
+      { lat: 43.010, lng: -81.275, type: 'streetlight', priority: 'low'    },
+      { lat: 42.965, lng: -81.225, type: 'graffiti',    priority: 'low'    },
+      { lat: 42.998, lng: -81.260, type: 'drainage',    priority: 'high'   },
+      { lat: 42.972, lng: -81.290, type: 'pothole',     priority: 'high'   }
+    ];
+    const colors = { pothole: '#c97b54', streetlight: '#5b80b8', graffiti: '#8aaad0', drainage: '#2e5496' };
+    demoRequests.forEach(r => {
+      L.circleMarker([r.lat, r.lng], {
+        radius: 8,
+        fillColor: colors[r.type] || '#64748b',
+        color: '#fff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.85
+      }).bindPopup(`<strong>${r.type}</strong><br>priority: ${r.priority}`).addTo(inlineMap);
+    });
+  });
 </script>
 </body>
 </html>
