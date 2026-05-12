@@ -408,3 +408,11 @@ All 6 fixes committed. Pushed to remote. Phase 2 starts next session.
 
 **End-of-session state:** All 14 Phase 2 tasks complete. Two cross-repo `[NEEDS TAL]` items (GitHub repo creation + Render deploy). Manual walkthrough deferred to Tal in browser. Phase 2 ready to push.
 
+---
+
+## [2026-05-12] — Capstone trio: LingoSync / CertPath / Vocana GIFs
+
+**What:** Replaced the three placeholder `[screenshot]` capstone cards in the Coursework section with live GIF demos of the renamed apps (LingoSync, CertPath, Vocana). Renamed the GIF files from `.gif.gif` double-extension (ScreenToGif default when saving over a `.gif` path) to clean `.gif`. Updated card copy: app names, feature descriptions, and tech stacks (CertPath correctly shows SQLite; Vocana adds Session; LingoSync stays SQL Server). Removed the three stale HTML comments referencing the old `capstone-scheduling.png`, `capstone-learning.png`, `capstone-certification.png` placeholder paths — zero remaining stale references confirmed.
+**Files touched:** index.html, images/capstone-lingosync-demo.gif (new), images/capstone-certpath-demo.gif (new), images/capstone-vocana-demo.gif (new)
+**Commit:** `Capstone trio: drop in LingoSync / CertPath / Vocana demo GIFs` (4d7e467)
+
