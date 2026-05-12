@@ -467,8 +467,29 @@
     .cs-btn:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); text-decoration: none; }
     .cs-btn.primary { background: var(--silver); border-color: var(--silver); color: #fff; }
     .cs-btn.primary:hover { background: #1e4878; border-color: #1e4878; }
-    .cs-app-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .cs-app-item { font-size: 0.78rem; color: var(--text-mid); background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 10px; }
+    /* ─── CAPSTONE CARDS (Coursework) ──────────────────────────── */
+    .capstone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .capstone-card {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px; background: var(--bg);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .capstone-card:hover {
+      border-color: var(--border-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(13, 36, 64, 0.06);
+    }
+    .capstone-thumb {
+      aspect-ratio: 4/3; background: var(--bg-soft);
+      border-radius: 4px; margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-faint);
+      font-family: var(--mono); font-size: 0.7rem;
+    }
+    .capstone-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .capstone-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+    .capstone-card .capstone-tech { font-size: 0.7rem; color: var(--text-faint); font-family: var(--mono); margin-top: 8px; }
+    @media (max-width: 700px) { .capstone-grid { grid-template-columns: 1fr; } }
     .cs-video {
       display: flex; align-items: center; gap: 8px; margin-top: 10px;
       background: var(--bg-soft); border: 1px dashed var(--border-dk);
@@ -874,30 +895,6 @@
 
     </div>
 
-    <!-- ── C# / ASP.NET CORE PROJECTS ── -->
-    <p class="s-label fade" style="margin-bottom:4px; margin-top:32px;">C# / ASP.NET Core</p>
-
-    <div class="project-item fade cs-group">
-      <div>
-        <h3>C# Web Applications — ASP.NET Core MVC</h3>
-        <p>Three full-stack applications built with ASP.NET Core MVC, Entity Framework Core, and SQL Server — each with its own dashboard, CRUD workflows, and data model.</p>
-        <div class="cs-app-list">
-          <span class="cs-app-item">📅 Interpreter Scheduling System</span>
-          <span class="cs-app-item">🌐 Multi-Language Learning Platform</span>
-          <span class="cs-app-item">🏆 Study &amp; Certification Tracker</span>
-        </div>
-        <div class="project-tech" style="margin-top:10px;">
-          <span class="tech-tag">ASP.NET Core 8</span>
-          <span class="tech-tag">C# 12</span>
-          <span class="tech-tag">Entity Framework Core</span>
-          <span class="tech-tag">SQL Server</span>
-          <span class="tech-tag">Bootstrap 5</span>
-          <span class="tech-tag">Razor Views</span>
-        </div>
-      </div>
-      <a href="csharp-projects.html" target="_blank" class="project-link-icon" title="View C# Projects">↗</a>
-    </div>
-    <!-- ── END C# PROJECTS ── -->
 
 
   </div>
@@ -1181,6 +1178,45 @@
           </ul>
         </div>
       </div>
+
+      <!-- Capstone-style projects -->
+      <div class="capstone-block fade" style="margin-top: 48px;">
+        <h3 style="font-size: 0.88rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 16px;">Capstone-style projects</h3>
+        <div class="capstone-grid">
+
+          <div class="capstone-card">
+            <div class="capstone-thumb">
+              <!-- Replace with: <img src="images/capstone-scheduling.png" alt="Interpreter Scheduling System" style="width:100%; height:100%; object-fit:cover; border-radius: 4px;"> -->
+              [screenshot]
+            </div>
+            <h4>Interpreter Scheduling System</h4>
+            <p>Multi-language appointment scheduling with analytics dashboard, profile management, and appointment lifecycle.</p>
+            <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQL Server</p>
+          </div>
+
+          <div class="capstone-card">
+            <div class="capstone-thumb">
+              <!-- Replace with: <img src="images/capstone-learning.png" alt="Language Learning Platform" style="width:100%; height:100%; object-fit:cover; border-radius: 4px;"> -->
+              [screenshot]
+            </div>
+            <h4>Language Learning Platform</h4>
+            <p>Multi-language learning platform with structured progression, vocabulary tracking, and admin tools.</p>
+            <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQL Server</p>
+          </div>
+
+          <div class="capstone-card">
+            <div class="capstone-thumb">
+              <!-- Replace with: <img src="images/capstone-certification.png" alt="Certification Tracker" style="width:100%; height:100%; object-fit:cover; border-radius: 4px;"> -->
+              [screenshot]
+            </div>
+            <h4>Certification Tracker</h4>
+            <p>Study and certification tracking application with progress dashboards and reminder workflows.</p>
+            <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQL Server</p>
+          </div>
+
+        </div>
+      </div>
+
       <p style="font-size:0.75rem; color:var(--text-faint); margin-top:20px;" class="fade">Full transcript available on request.</p>
     </div>
   </div>
