@@ -560,6 +560,23 @@
       background: linear-gradient(135deg, #f5f9ff 0%, #dde8f5 50%, #eef4fb 100%);
     }
 
+    /* ─── TOPOGRAPHIC DIVIDER ──────────────────────────────────── */
+    .section-divider-topo { position: relative; border-top: none; }
+    .section-divider-topo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 860px;
+      height: 24px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 860 24' preserveAspectRatio='none'><path d='M0,12 Q 60,4 120,12 T 240,12 T 360,12 T 480,12 T 600,12 T 720,12 T 840,12 L 860,12' fill='none' stroke='%23c8daf0' stroke-width='0.8' opacity='0.5'/><path d='M0,18 Q 50,12 100,18 T 200,18 T 300,18 T 400,18 T 500,18 T 600,18 T 700,18 T 800,18 L 860,18' fill='none' stroke='%23c8daf0' stroke-width='0.6' opacity='0.35'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      pointer-events: none;
+    }
+
     /* ─── BACK TO TOP ───────────────────────────────────────────── */
     #top-btn {
       position: fixed; bottom: 28px; right: 28px;
@@ -763,7 +780,7 @@
 </section>
 
 <!-- ─── PROJECTS ──────────────────────────────────────────────────── -->
-<section id="projects" class="section section-grad">
+<section id="projects" class="section section-grad section-divider-topo">
   <div class="wrap">
     <p class="s-label fade">Projects</p>
     <h2 class="s-title fade">Selected work</h2>
@@ -1101,7 +1118,7 @@
 </section>
 
 <!-- ─── COURSEWORK ────────────────────────────────────────────────── -->
-<section id="coursework" class="section section-grad">
+<section id="coursework" class="section section-grad section-divider-topo">
   <div class="wrap">
     <p class="s-label fade">Education &amp; Training</p>
     <h2 class="s-title fade">Coursework</h2>
@@ -1223,7 +1240,7 @@
 </section>
 
 <!-- ─── LEARNING LOG ───────────────────────────────────────────────── -->
-<section id="learning" class="section">
+<section id="learning" class="section section-divider-topo">
   <div class="wrap">
     <p class="s-label fade">Currently</p>
     <h2 class="s-title fade">Working notes</h2>
@@ -1303,7 +1320,7 @@
 </section>
 
 <!-- ─── CONTACT ───────────────────────────────────────────────────── -->
-<section id="contact">
+<section id="contact" class="section-divider-topo">
   <div class="wrap">
     <p class="s-label fade">Contact</p>
     <div class="contact-row fade">
