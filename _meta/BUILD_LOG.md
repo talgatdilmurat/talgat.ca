@@ -424,3 +424,12 @@ All 6 fixes committed. Pushed to remote. Phase 2 starts next session.
 **Files touched:** index.html, images/cityflow-demo.gif (new), images/capstone-certpath-demo.gif (optimized), images/capstone-lingosync-demo.gif (optimized), images/capstone-vocana-demo.gif (optimized)
 **Commit:** `Add CityFlow demo GIF to featured card; optimize all capstone GIFs (~35% size reduction)`
 
+---
+
+## [2026-05-13] — Surface Story Maps section, integrate CityFlow Story Map (#1)
+
+**What:** Unhid the Story Maps section by removing `style="display:none"` and the now-obsolete `TO RE-ENABLE` HTML comment on the `#storymaps` section. Filled card slot 1 with the live CityFlow — Service Request Lifecycle Story Map (https://arcg.is/1XfbL85): real title, locked short description, and an italic short-form disclaimer line ("Illustrative composite — not real City of London data.") below the description. The Story Map page itself carries the full disclaimer in three places, so the card only flags the framing. Cards 2 and 3 stay as placeholder cards but now carry their working titles ("Reading London's Open Data Through a BSA Lens", "London ON Bikeability Infrastructure") with one-line status text in place of the generic copy, and the broken outbound `storymaps.arcgis.com` links were removed (no link rather than a misleading silver `.sm-link` that goes nowhere). The stale `sm-placeholder` block below the grid was rewritten — not deleted — to summarize the two in-development Story Maps. No CSS changes; all existing tokens, gradients, hover lift (2px + shadow), and silver accents preserved.
+**Files touched:** index.html, _meta/BUILD_LOG.md
+**Commit:** `storymaps: surface section, integrate CityFlow (#1) live, keep #2/#3 as labeled placeholders`
+**Notes:** No brass on this section — silver only, per the rule (brass is reserved for studying markers and IRB Certified labels). The disclaimer is a new `<p><em>...</em></p>` inside `.sm-body` and inherits the existing muted-text styling — no new classes or inline styles introduced. The `sm-link` for card 1 retains `target="_blank"`. Touched `_meta/` (BUILD_LOG only) — `_meta/` is excluded from Netlify per netlify.toml, so no public-site impact from the log entry itself.
+
