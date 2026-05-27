@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <style>
     /* ─── RESET ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -197,6 +195,8 @@
       transition: color 0.15s;
     }
     .skills-table tr:hover td:first-child { color: var(--silver); }
+    .skills-table tr.row-building td:first-child,
+    .skills-table tr.row-building:hover td:first-child { color: var(--accent-brass); }
     .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; }
     .pill {
       font-family: var(--mono); font-size: 0.71rem;
@@ -394,7 +394,8 @@
     }
 
     /* ─── STORY MAPS ────────────────────────────────────────────── */
-    .storymap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+    .storymap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+    @media (max-width: 700px) { .storymap-grid { grid-template-columns: 1fr; } }
     .storymap-card {
       border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
@@ -412,6 +413,11 @@
     .sm-thumb-1 { background: linear-gradient(135deg, #0d2440 0%, #2e5e99 100%); }
     .sm-thumb-2 { background: linear-gradient(135deg, #1a3a5c 0%, #7ba4d0 100%); }
     .sm-thumb-3 { background: linear-gradient(135deg, #0d2440 0%, #4a6a90 100%); }
+    .sm-thumb-label {
+      position: absolute; bottom: 10px; right: 12px;
+      font-size: 0.65rem; font-family: var(--mono);
+      color: rgba(255,255,255,0.55); letter-spacing: 0.08em; text-transform: uppercase;
+    }
     .sm-body { padding: 16px; }
     .sm-body h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
     .sm-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
@@ -606,11 +612,10 @@
       border-color: var(--silver); transform: translateY(-2px);
       box-shadow: 0 4px 20px rgba(46,94,153,0.12);
     }
-    .gateway-icon {
-      font-size: 1.6rem; width: 52px; height: 52px;
-      background: var(--bg-soft); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; border: 1px solid var(--border);
+    .gateway-stage {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--silver); margin-bottom: 8px; display: block;
     }
     .gateway-text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
     .gateway-text p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
@@ -748,13 +753,15 @@
     <p class="hero-eyebrow fade">London, Ontario</p>
     <h1 class="hero-name fade">Talgat<br>Dilmurat</h1>
     <p class="hero-title fade">GIS, Systems, and the work between them</p>
-    <p class="hero-tagline fade">Software Engineering graduate building toward municipal systems work</p>
+    <p class="hero-tagline fade">Business systems analyst — municipal platforms, spatial data, full-stack</p>
     <div class="hero-divider fade"></div>
     <p class="hero-focus fade"><span class="hero-focus-key">focus &nbsp;:&nbsp; </span>spatial data · process · the seam between systems and people</p>
     <div class="hero-links fade">
       <a href="mailto:talgat.dilmurat.tech@gmail.com"><span>✉</span> talgat.dilmurat.tech@gmail.com</a>
       <span class="hero-sep">·</span>
       <a href="https://github.com/talgatdilmurat" target="_blank"><span>⌥</span> GitHub</a>
+      <span class="hero-sep">·</span>
+      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank"><span>⌘</span> LinkedIn</a>
     </div>
   </div>
 </section>
@@ -979,20 +986,6 @@
 
     </div>
 
-    <!-- INLINE LEAFLET MAP -->
-    <div class="inline-map-block fade" style="margin-top: 48px;">
-      <p class="s-label" style="margin-bottom: 6px;">Live data</p>
-      <h3 style="font-size: 1.05rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; margin-bottom: 10px;">Service requests, inline</h3>
-      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 18px; max-width: 560px;">
-        The same kind of service request records published to ArcGIS Online, also rendered here as a Leaflet.js map loading directly in the browser. No backend, no plugins — just data on a basemap.
-      </p>
-      <div id="inline-leaflet-map" style="height: 400px; width: 100%; max-width: 800px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;"></div>
-    </div>
-
-    <p class="fade" style="margin-top: 32px; font-size: 0.88rem; color: var(--text-muted); padding-top: 24px; border-top: 1px solid var(--border); max-width: 680px;">
-      Also see: <a href="bikeability.html" style="color: var(--text); border-bottom: 1px solid var(--silver); padding-bottom: 1px;">London Bikeability Analysis →</a> — a longer-form spatial analysis report on London's cycling network and infrastructure gaps.
-    </p>
-
   </div>
 </section>
 
@@ -1006,31 +999,28 @@
     </p>
     <div class="storymap-grid">
       <div class="storymap-card fade">
-        <div class="sm-thumb sm-thumb-1">🗺️</div>
+        <div class="sm-thumb sm-thumb-1">🗺️<span class="sm-thumb-label">Lifecycle</span></div>
         <div class="sm-body">
           <h4>CityFlow — Service Request Lifecycle</h4>
-          <p>Walks one illustrative pothole through the spatial lifecycle of a municipal service request — report, intake, AI triage, dispatch, resolution — anchored on Oxford & Richmond in London ON.</p>
+          <p>One pothole through the full lifecycle of a municipal service request — intake, AI triage, dispatch, resolution. Anchored on Oxford & Richmond, London ON.</p>
           <p><em>Illustrative composite — not real City of London data.</em></p>
           <a href="https://arcg.is/1XfbL85" target="_blank" class="sm-link">Open in ArcGIS →</a>
         </div>
       </div>
       <div class="storymap-card fade">
-        <div class="sm-thumb sm-thumb-2">🌍</div>
+        <div class="sm-thumb sm-thumb-2">🌍<span class="sm-thumb-label">Audit</span></div>
         <div class="sm-body">
           <h4>Reading London's Open Data Through a BSA Lens</h4>
-          <p>In progress.</p>
+          <p>A BSA-lens read of how London publishes its open spatial data — what the datasets do well, where the gaps are. In progress.</p>
         </div>
       </div>
       <div class="storymap-card fade">
-        <div class="sm-thumb sm-thumb-3">📍</div>
+        <div class="sm-thumb sm-thumb-3">📍<span class="sm-thumb-label">Infrastructure</span></div>
         <div class="sm-body">
           <h4>London ON Bikeability Infrastructure</h4>
-          <p>Gated by Phase 2 ArcGIS Pro work.</p>
+          <p>A spatial walkthrough of London's cycling network — tier classification, buffer coverage, and gap polygons. Gated by Phase 2 ArcGIS Pro work.</p>
         </div>
       </div>
-    </div>
-    <div class="sm-placeholder fade">
-      <p>Two more Story Maps in development — an audit of London's open data publishing, and a bikeability infrastructure analysis using ArcGIS Pro.</p>
     </div>
   </div>
 </section>
@@ -1049,8 +1039,6 @@
               <span class="pill">ArcGIS Pro</span>
               <span class="pill">ArcGIS Online</span>
               <span class="pill">Leaflet.js</span>
-              <span class="pill">ArcGIS Enterprise<span class="pill-studying-marker">(studying)</span></span>
-              <span class="pill">ArcGIS Monitor<span class="pill-studying-marker">(studying)</span></span>
               <span class="pill">Spatial Data</span>
               <span class="pill">Coordinate Systems</span>
             </div>
@@ -1065,7 +1053,6 @@
               <span class="pill">.NET / C#</span>
               <span class="pill">REST APIs</span>
               <span class="pill">JSON</span>
-              <span class="pill">OAuth<span class="pill-studying-marker">(studying)</span></span>
             </div>
           </td>
         </tr>
@@ -1077,7 +1064,6 @@
               <span class="pill">PostgreSQL</span>
               <span class="pill">MySQL</span>
               <span class="pill">Relational Modeling</span>
-              <span class="pill">ETL<span class="pill-studying-marker">(studying)</span></span>
             </div>
           </td>
         </tr>
@@ -1086,11 +1072,8 @@
           <td>
             <div class="skill-pills">
               <span class="pill">Python</span>
-              <span class="pill">PowerShell<span class="pill-studying-marker">(studying)</span></span>
               <span class="pill">Git</span>
               <span class="pill">Jira</span>
-              <span class="pill">Windows Server<span class="pill-studying-marker">(studying)</span></span>
-              <span class="pill">IIS<span class="pill-studying-marker">(studying)</span></span>
             </div>
           </td>
         </tr>
@@ -1112,6 +1095,20 @@
               <span class="pill">Java</span>
               <span class="pill">Spring Boot</span>
               <span class="pill">Object-Oriented Design</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="row-building">
+          <td>Actively building</td>
+          <td>
+            <div class="skill-pills">
+              <span class="pill">ArcGIS Enterprise</span>
+              <span class="pill">ArcGIS Monitor</span>
+              <span class="pill">OAuth</span>
+              <span class="pill">ETL</span>
+              <span class="pill">PowerShell</span>
+              <span class="pill">Windows Server</span>
+              <span class="pill">IIS</span>
             </div>
           </td>
         </tr>
@@ -1296,22 +1293,22 @@
 <!-- ─── GATEWAY ───────────────────────────────────────────────────── -->
 <section id="gateway" class="section section-grad">
   <div class="wrap">
-    <p class="s-label fade">Explore further</p>
-    <h2 class="s-title fade">Want to know more?</h2>
+    <p class="s-label fade">Beyond the work</p>
+    <h2 class="s-title fade">The longer story</h2>
     <div class="gateway-grid">
       <a href="personal.html" class="gateway-card fade">
-        <div class="gateway-icon">👤</div>
         <div class="gateway-text">
-          <h4>Personal</h4>
-          <p>Background, languages, and what drives me outside of work.</p>
+          <span class="gateway-stage">01</span>
+          <h4>Personal Life</h4>
+          <p>The career before the code — and what it taught me.</p>
         </div>
         <span class="gateway-arrow">→</span>
       </a>
       <a href="resume.html" class="gateway-card fade">
-        <div class="gateway-icon">📄</div>
         <div class="gateway-text">
+          <span class="gateway-stage">02</span>
           <h4>Full Resume</h4>
-          <p>Complete work history, education, certifications, and credentials.</p>
+          <p>The full record — work history, schooling, certifications.</p>
         </div>
         <span class="gateway-arrow">→</span>
       </a>
@@ -1330,6 +1327,9 @@
       <a href="https://github.com/talgatdilmurat" target="_blank" class="contact-link">
         <span>⌥</span> GitHub
       </a>
+      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" class="contact-link">
+        <span>⌘</span> LinkedIn
+      </a>
     </div>
   </div>
 </section>
@@ -1339,6 +1339,8 @@
     <a href="mailto:talgat.dilmurat.tech@gmail.com" style="font-size: 0.8rem; color: var(--text-muted);">talgat.dilmurat.tech@gmail.com</a>
     <span style="color: var(--text-faint);">·</span>
     <a href="https://github.com/talgatdilmurat" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);">GitHub</a>
+    <span style="color: var(--text-faint);">·</span>
+    <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);">LinkedIn</a>
   </div>
   <p style="font-size: 0.75rem; color: var(--text-faint);">Talgat Dilmurat · London, Ontario · 2026</p>
 </footer>
@@ -1398,36 +1400,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
-
-  // Inline Leaflet map — service requests
-  window.addEventListener('load', () => {
-    const inlineMapEl = document.getElementById('inline-leaflet-map');
-    if (!inlineMapEl || typeof L === 'undefined') return;
-    const inlineMap = L.map('inline-leaflet-map').setView([42.984, -81.246], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      maxZoom: 18
-    }).addTo(inlineMap);
-
-    const demoRequests = [
-      { lat: 42.984, lng: -81.246, type: 'pothole',     priority: 'medium' },
-      { lat: 43.010, lng: -81.275, type: 'streetlight', priority: 'low'    },
-      { lat: 42.965, lng: -81.225, type: 'graffiti',    priority: 'low'    },
-      { lat: 42.998, lng: -81.260, type: 'drainage',    priority: 'high'   },
-      { lat: 42.972, lng: -81.290, type: 'pothole',     priority: 'high'   }
-    ];
-    const colors = { pothole: '#c97b54', streetlight: '#5b80b8', graffiti: '#8aaad0', drainage: '#2e5496' };
-    demoRequests.forEach(r => {
-      L.circleMarker([r.lat, r.lng], {
-        radius: 8,
-        fillColor: colors[r.type] || '#64748b',
-        color: '#fff',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.85
-      }).bindPopup(`<strong>${r.type}</strong><br>priority: ${r.priority}`).addTo(inlineMap);
-    });
-  });
 </script>
 </body>
 </html>

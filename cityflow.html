@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CityFlow — Talgat Dilmurat</title>
-  <meta name="description" content="CityFlow — a full-stack municipal asset management system. The question it answers, the constraints it was built under, the architecture decisions, and what I'd change with another month." />
+  <meta name="description" content="CityFlow — a full-stack municipal asset management system. The question it answers, the constraints it was built under, the architecture decisions, and the roadmap ahead." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -143,7 +143,7 @@
     <p class="s-label fade">CityFlow</p>
     <h1 class="page-title fade">A municipal asset management system, end to end</h1>
     <p class="page-intro fade">
-      A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API. Built over three weeks alongside school and full-time work.
+      A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API.
     </p>
   </div>
 </section>
@@ -167,12 +167,12 @@
     <h2 class="s-title fade">What this project had to live inside</h2>
     <ul class="struct-list fade">
       <li>
-        <h3>Single developer, three weeks, alongside school and full-time work</h3>
-        <p>No team, no design partner, no budget. The scope had to be defensible by one person in evenings and weekends.</p>
+        <h3>Built solo, across the stack</h3>
+        <p>No team, no design partner. The schema, API, frontend, and AI integration are all built by one person — which keeps the layers consistent, but every design decision lands without a second pair of eyes.</p>
       </li>
       <li>
-        <h3>Public-sector deployment realities — even though this isn't deployed</h3>
-        <p>FIPPA, audit requirements, data residency. Any AI feature has to be framed honestly about what's actually safe to ship in a public-sector context vs. what's demonstration-only.</p>
+        <h3>Public-sector deployment realities</h3>
+        <p>FIPPA, audit requirements, data residency. The app itself runs on a familiar municipal-friendly stack, but the AI triage layer is the part I've kept flagged as experimental — anything closer to a real public-sector deployment would need a self-hosted model and a proper human-review path.</p>
       </li>
       <li>
         <h3>A common, well-documented stack — no exotic choices</h3>
@@ -384,7 +384,7 @@
 <section id="next" class="section" style="background: var(--bg-warm);">
   <div class="wrap">
     <p class="s-label fade">What I'd change</p>
-    <h2 class="s-title fade">With another month</h2>
+    <h2 class="s-title fade">Roadmap</h2>
     <ul class="struct-list fade">
       <li>
         <h3>Real authentication — OAuth or SSO</h3>

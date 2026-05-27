@@ -66,6 +66,18 @@
     /* ─── PAGE HEADER ───────────────────────────────────────────── */
     #header { padding: 72px 0 60px; border-top: none; background: var(--bg); }
 
+    /* ─── HEADER LAYOUT + PORTRAIT ───────────────────────────────── */
+    .header-flex { display: flex; gap: 32px; align-items: center; }
+    .header-text { flex: 1; min-width: 0; }
+    .portrait img {
+      width: 115px; height: 115px;
+      border-radius: 50%; object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .header-flex { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+    }
+
     /* ─── FADE ──────────────────────────────────────────────────── */
     .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade.in { opacity: 1; transform: none; }
@@ -91,11 +103,16 @@
 
 <!-- HEADER -->
 <section id="header">
-  <div class="wrap">
-    <p class="s-label fade">Personal</p>
-    <p class="page-subtitle fade" style="font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 32px; max-width: 620px;">
-      The route to here was non-linear: linguistics, interpretation, e-commerce, nonprofit work, marketing, and now software engineering.
-    </p>
+  <div class="wrap header-flex">
+    <div class="header-text">
+      <p class="s-label fade">Personal</p>
+      <p class="page-subtitle fade" style="font-style: italic; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; max-width: 620px;">
+        The route to here was non-linear: linguistics, interpretation, e-commerce, nonprofit work, marketing, and now software engineering.
+      </p>
+    </div>
+    <div class="portrait fade">
+      <img src="images/talgat-portrait.jpg" alt="Talgat Dilmurat" />
+    </div>
   </div>
 </section>
 
