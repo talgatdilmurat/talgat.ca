@@ -70,7 +70,7 @@
     .page-intro { font-size: 1rem; color: var(--text-mid); max-width: 700px; line-height: 1.78; }
     .btn-solid {
       font-size: 0.8rem; font-weight: 600; padding: 7px 16px; border-radius: var(--radius);
-      background: var(--silver); color: #fff;
+      background: #0d2440; color: #fff;
       display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;
     }
     .btn-solid:hover { background: #1e4878; }
@@ -149,7 +149,7 @@
     <p class="s-label fade">CityFlow</p>
     <h1 class="page-title fade">A municipal asset management system, end to end</h1>
     <p class="page-intro fade">
-      A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API.
+      A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API. Built as a way to learn how platforms like Cityworks shape municipal operations under the hood.
     </p>
     <a href="https://cityflow-oopa.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-solid fade" style="margin-top: 28px;">See it live →</a>
   </div>
@@ -164,32 +164,6 @@
       <p>Before writing a single line of code, the question worth sitting with: what is the simplest shape of a system that <em>actually helps</em> a small municipal operations team? Not a full Cityworks replacement, not an enterprise suite — the minimum viable surface that lets someone log a pothole, route it to the right person, and close the loop.</p>
       <p>Four primitives kept coming back: <strong>assets</strong> (the things the city maintains), <strong>work orders</strong> (planned and reactive work against those assets), <strong>service requests</strong> (citizen intake — the raw, often-unstructured signal that <em>becomes</em> work), and <strong>staff</strong> (who does the work and who supervises). Everything else — the map, the dashboard, the AI triage — sits on top of those four.</p>
     </div>
-  </div>
-</section>
-
-<!-- CONSTRAINTS -->
-<section id="constraints" class="section">
-  <div class="wrap">
-    <p class="s-label fade">Constraints</p>
-    <h2 class="s-title fade">What this project had to live inside</h2>
-    <ul class="struct-list fade">
-      <li>
-        <h3>Built solo, across the stack</h3>
-        <p>No team, no design partner. The schema, API, frontend, and AI integration are all built by one person — which keeps the layers consistent, but every design decision lands without a second pair of eyes.</p>
-      </li>
-      <li>
-        <h3>Public-sector deployment realities</h3>
-        <p>FIPPA, audit requirements, data residency. The app itself runs on a familiar municipal-friendly stack, but the AI triage layer is the part I've kept flagged as experimental — anything closer to a real public-sector deployment would need a self-hosted model and a proper human-review path.</p>
-      </li>
-      <li>
-        <h3>A common, well-documented stack — no exotic choices</h3>
-        <p>React, Node, PostgreSQL. The point isn't to flex on framework selection — it's to demonstrate working software that a municipal IT shop could actually pick up.</p>
-      </li>
-      <li>
-        <h3>One source of truth per concept — no schema drift</h3>
-        <p>One table per primitive, foreign keys between them, an audit timestamp on every row. The schema is small enough to keep in your head.</p>
-      </li>
-    </ul>
   </div>
 </section>
 
@@ -399,7 +373,7 @@
       </li>
       <li>
         <h3>Self-hosted LLM for the triage path</h3>
-        <p>Anthropic Claude was the right call for a demo, but a real deployment needs a model running inside the City's data residency. Llama or Mistral, hosted on internal infrastructure.</p>
+        <p>Anthropic Claude was the right call for this build, but a real deployment needs a model running inside the City's data residency. Llama or Mistral, hosted on internal infrastructure.</p>
       </li>
       <li>
         <h3>A dedicated review queue for AI suggestions</h3>
@@ -415,7 +389,7 @@
       </li>
       <li>
         <h3>An ETL pipeline pulling London open data on a schedule</h3>
-        <p>Today the seed data is hand-crafted. A nightly job that pulls fresh data from opendata.london.ca, normalizes it, and merges into the database would make the system feel less like a demo and more like a working tool.</p>
+        <p>Today the seed data is hand-crafted. A nightly job that pulls fresh data from opendata.london.ca, normalizes it, and merges into the database would make the system feel less like a prototype and more like a working tool.</p>
       </li>
     </ul>
   </div>
