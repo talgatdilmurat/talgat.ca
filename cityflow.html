@@ -68,6 +68,12 @@
     #header { padding: 88px 0 60px; border-top: none; background: var(--bg); }
     .page-title { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px; color: var(--text); max-width: 760px; }
     .page-intro { font-size: 1rem; color: var(--text-mid); max-width: 700px; line-height: 1.78; }
+    .btn-solid {
+      font-size: 0.8rem; font-weight: 600; padding: 7px 16px; border-radius: var(--radius);
+      background: var(--silver); color: #fff;
+      display: inline-flex; align-items: center; gap: 5px; transition: background 0.2s;
+    }
+    .btn-solid:hover { background: #1e4878; }
 
     /* ─── PROSE ─────────────────────────────────────────────────── */
     .prose-body { max-width: 720px; color: var(--text-mid); line-height: 1.8; }
@@ -145,6 +151,7 @@
     <p class="page-intro fade">
       A full-stack web application for managing city infrastructure assets, work orders, and citizen service requests. React frontend, Node.js + Express API, PostgreSQL database, Leaflet map, and an experimental AI-assisted triage feature built on the Anthropic Claude API.
     </p>
+    <a href="https://cityflow-oopa.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-solid fade" style="margin-top: 28px;">See it live →</a>
   </div>
 </section>
 
