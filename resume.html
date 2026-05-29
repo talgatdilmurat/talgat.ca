@@ -4,7 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume — Talgat Dilmurat</title>
-  <meta name="description" content="Resume of Talgat Dilmurat — Software Engineering Technology graduate working toward business systems analysis and GIS work in municipal IT." />
+  <meta name="description" content="Resume of Talgat Dilmurat — business systems analyst working across GIS, data, and full-stack systems, based in London, Ontario." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://talgat.ca/resume.html" />
+  <meta property="og:title" content="Resume — Talgat Dilmurat" />
+  <meta property="og:description" content="Business systems analyst working across GIS, data, and full-stack systems. London, Ontario." />
+  <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Resume — Talgat Dilmurat" />
+  <meta name="twitter:description" content="Business systems analyst working across GIS, data, and full-stack systems. London, Ontario." />
+  <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -168,12 +177,10 @@
       font-size: 0.83rem; color: var(--text-mid); line-height: 1.55; margin-bottom: 3px;
     }
 
-    /* PRINT */
+    /* PRINT — one-pager only */
     @media print {
-      nav, .extended-cta, .download-cta { display: none !important; }
-      .page { padding: 0 0 40px; }
-      .r-header { padding: 20px 0 24px; }
-      .r-job li, .r-edu-note { font-size: 0.8rem; }
+      nav, .download-cta, .op-divider, .page { display: none !important; }
+      #onepager { padding: 0 0 24px; }
     }
 
     @media (max-width: 600px) {
@@ -205,7 +212,7 @@
   </div>
 
   <div class="download-cta" style="text-align: center; margin-bottom: 36px;">
-    <a href="/resume.pdf" download style="display: inline-block; padding: 8px 16px; border: 1px solid var(--border-dk); border-radius: 5px; font-size: 0.78rem; color: var(--text-mid); text-decoration: none;">Download PDF →</a>
+    <button onclick="window.print()" style="display: inline-block; padding: 8px 16px; border: 1px solid var(--border-dk); border-radius: 5px; font-size: 0.78rem; color: var(--text-mid); background: none; cursor: pointer; font-family: inherit;">Download PDF →</button>
   </div>
 
   <!-- Education -->
@@ -283,17 +290,13 @@
 </section>
 
 <!-- DIVIDER + ANCHOR -->
-<div style="max-width: 760px; margin: 24px auto 0; padding: 0 28px; text-align: center;">
+<div class="op-divider" style="max-width: 760px; margin: 24px auto 0; padding: 0 28px; text-align: center;">
   <div style="border-top: 1px solid var(--border); padding-top: 32px;">
     <p style="font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase;">Beyond the one-pager ↓</p>
   </div>
 </div>
 
 <!-- EXTENDED — the existing detailed content stays below this point -->
-<div class="extended-cta" style="max-width: 760px; margin: 28px auto 0; padding: 0 28px; text-align: center;">
-  <a href="/resume-extended.pdf" download style="display: inline-block; padding: 8px 16px; border: 1px solid var(--border-dk); border-radius: 5px; font-size: 0.78rem; color: var(--text-mid); text-decoration: none;">Download extended PDF →</a>
-</div>
-
 <div class="page">
 
   <!-- HEADER -->
@@ -301,18 +304,10 @@
     <h1 class="r-name">Talgat Dilmurat</h1>
     <div class="r-contact">
       <span>London, Ontario</span>
-      <a href="tel:4169099610">(416) 909-9610</a>
       <a href="mailto:talgat.dilmurat.tech@gmail.com">talgat.dilmurat.tech@gmail.com</a>
       <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank">LinkedIn</a>
       <a href="https://github.com/talgatdilmurat" target="_blank">GitHub</a>
     </div>
-    <p class="r-summary">
-      Business systems analyst and software engineering technology graduate with hands-on experience across
-      CRM administration, data integrity, operational reporting, workflow documentation, SaaS tool
-      implementation, GIS mapping, REST API development, and stakeholder communication. Background in
-      translating raw operational data into actionable reports, building repeatable workflows, and training
-      non-technical users across nonprofit, marketing, e-commerce, and operations environments.
-    </p>
   </div>
 
   <!-- EXPERIENCE -->
@@ -335,7 +330,7 @@
     <div class="r-job">
       <div class="r-job-header">
         <span class="r-job-title">Language Interpreter</span>
-        <span class="r-job-dates">Feb 2022 – Present</span>
+        <span class="r-job-dates">2020 – Present</span>
       </div>
       <div class="r-job-org">Freelance / Agencies / Government</div>
       <ul>
@@ -419,7 +414,7 @@
         <span class="r-edu-degree">Bachelor of Arts — Linguistics &amp; Foreign Languages</span>
         <span class="r-edu-year">2016 – 2018</span>
       </div>
-      <div class="r-edu-school">University (abroad)</div>
+      <div class="r-edu-school">Ablai Khan University</div>
       <p class="r-edu-note">Studied linguistics and taught several languages — background supporting stakeholder communication, documentation, and multilingual environments.</p>
     </div>
 

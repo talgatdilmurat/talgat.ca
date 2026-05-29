@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Talgat Dilmurat · Portfolio</title>
   <meta name="description" content="Portfolio of Talgat Dilmurat — GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://talgat.ca/" />
+  <meta property="og:title" content="Talgat Dilmurat · Portfolio" />
+  <meta property="og:description" content="GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
+  <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Talgat Dilmurat · Portfolio" />
+  <meta name="twitter:description" content="GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
+  <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -91,7 +100,7 @@
     }
     .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-links a {
-      font-size: 0.82rem; color: var(--text-faint); font-weight: 400;
+      font-size: 0.82rem; color: var(--text-muted); font-weight: 400;
       transition: color 0.2s; position: relative;
     }
     .nav-links a::after {
@@ -695,7 +704,9 @@
       .nav-ham { display: flex; }
       .project-item { grid-template-columns: 1fr; }
       .log-item { grid-template-columns: 1fr; gap: 4px; }
-      .skills-table td:first-child { display: none; }
+      .skills-table td { display: block; width: 100%; min-width: 0; }
+      .skills-table td:first-child { padding: 14px 0 0; }
+      .skills-table td:last-child { padding-top: 4px; }
     }
 
     /* ─── FADE IN (staggered) ───────────────────────────────────── */
@@ -704,6 +715,12 @@
     .fade:nth-child(2) { transition-delay: 0.05s; }
     .fade:nth-child(3) { transition-delay: 0.1s; }
     .fade:nth-child(4) { transition-delay: 0.15s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .fade { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
 
     /* ─── MOBILE NAV MENU ───────────────────────────────────────── */
     #mob-nav {
@@ -755,13 +772,13 @@
     <p class="hero-title fade">GIS, Systems, and the work between them</p>
     <p class="hero-tagline fade">Software Engineering graduate building toward municipal systems work</p>
     <div class="hero-divider fade"></div>
-    <p class="hero-focus fade"><span class="hero-focus-key">focus &nbsp;:&nbsp; </span>spatial data · process · the seam between systems and people</p>
+    <p class="hero-focus fade"><span class="hero-focus-key">focus &nbsp;:&nbsp; </span>spatial data · process · turning data into decisions</p>
     <div class="hero-links fade">
-      <a href="mailto:talgat.dilmurat.tech@gmail.com"><span>✉</span> talgat.dilmurat.tech@gmail.com</a>
+      <a href="mailto:talgat.dilmurat.tech@gmail.com"><span aria-hidden="true">✉</span> talgat.dilmurat.tech@gmail.com</a>
       <span class="hero-sep">·</span>
-      <a href="https://github.com/talgatdilmurat" target="_blank"><span>⌥</span> GitHub</a>
+      <a href="https://github.com/talgatdilmurat" target="_blank">GitHub</a>
       <span class="hero-sep">·</span>
-      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank"><span>⌘</span> LinkedIn</a>
+      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -811,13 +828,13 @@
 
         <div class="featured-body">
           <div class="cityflow-demo-thumb" style="width:100%; margin: 16px 0; border-radius: 8px; overflow: hidden;">
-            <img src="images/cityflow-demo.gif" alt="CityFlow walkthrough — map, service request, AI triage, dashboard" style="width:100%; height:auto; display:block;">
+            <video src="images/cityflow-demo.mp4" autoplay muted loop playsinline preload="metadata" width="1100" height="618" aria-label="CityFlow walkthrough — map, service request, AI triage, dashboard" style="width:100%; height:auto; display:block;"></video>
           </div>
           <div class="featured-features">
-            <div class="ff-item"><span class="ff-icon">🗺️</span>Interactive map — live asset pins by category (Leaflet + OpenStreetMap)</div>
-            <div class="ff-item"><span class="ff-icon">🤖</span>AI triage — Claude API classifies and prioritises every service request</div>
-            <div class="ff-item"><span class="ff-icon">🔧</span>Work order lifecycle — create, assign, update, resolve with audit log</div>
-            <div class="ff-item"><span class="ff-icon">📊</span>Executive dashboard — KPI charts, resolution stats, and trend lines</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">🗺️</span>Interactive map — live asset pins by category (Leaflet + OpenStreetMap)</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">🤖</span>AI triage — Claude API classifies and prioritises every service request</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">🔧</span>Work order lifecycle — create, assign, update, resolve with audit log</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">📊</span>Executive dashboard — KPI charts, resolution stats, and trend lines</div>
           </div>
 
           <div class="featured-tech">
@@ -858,10 +875,10 @@
 
         <div class="featured-body">
           <div class="featured-features">
-            <div class="ff-item"><span class="ff-icon">🗺️</span>Bike infrastructure classified into a protection tier hierarchy</div>
-            <div class="ff-item"><span class="ff-icon">📐</span>Tier-weighted buffer analysis (800m / 400m / 200m)</div>
-            <div class="ff-item"><span class="ff-icon">🔍</span>Gap polygons identifying underserved neighbourhoods</div>
-            <div class="ff-item"><span class="ff-icon">📋</span>BSA-style methodology audit and recommendations report</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">🗺️</span>Bike infrastructure classified into a protection tier hierarchy</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">📐</span>Tier-weighted buffer analysis (800m / 400m / 200m)</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">🔍</span>Gap polygons identifying underserved neighbourhoods</div>
+            <div class="ff-item"><span class="ff-icon" aria-hidden="true">📋</span>BSA-style methodology audit and recommendations report</div>
           </div>
 
           <div class="featured-tech">
@@ -942,7 +959,7 @@
       <!-- Dashboard card -->
       <div class="gis-card fade">
         <div class="gis-preview gis-preview-dash">
-          <img src="images/dashboard-preview.png" alt="London 311 Operations Dashboard preview" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="images/dashboard-preview.jpg" loading="lazy" alt="London 311 Operations Dashboard preview" style="width:100%;height:100%;object-fit:cover;display:block;">
           <span class="gis-preview-label">ArcGIS Dashboards</span>
         </div>
         <div class="gis-body">
@@ -964,7 +981,7 @@
       <!-- Map card -->
       <div class="gis-card fade">
         <div class="gis-preview gis-preview-map">
-          <img src="images/service-request-map.png" alt="GIS Service Request Map preview" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="images/service-request-map.jpg" loading="lazy" alt="GIS Service Request Map preview" style="width:100%;height:100%;object-fit:cover;display:block;">
           <span class="gis-preview-label">ArcGIS Map Viewer</span>
         </div>
         <div class="gis-body">
@@ -1346,23 +1363,6 @@
 </footer>
 
 <script>
-  // More projects toggle
-  function toggleMoreProjects() {
-    const more = document.getElementById('more-projects');
-    const icon = document.getElementById('more-btn-icon');
-    const text = document.getElementById('more-btn-text');
-    const open = more.style.display === 'block';
-    more.style.display = open ? 'none' : 'block';
-    icon.textContent = open ? '+' : '−';
-    text.textContent = open ? '3 more projects' : 'Show less';
-    if (!open) {
-      // trigger fade on newly revealed items
-      more.querySelectorAll('.fade:not(.in)').forEach(el => {
-        setTimeout(() => el.classList.add('in'), 50);
-      });
-    }
-  }
-
   // Mobile nav
   function toggleMob() {
     const m = document.getElementById('mob-nav');

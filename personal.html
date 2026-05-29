@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal — Talgat Dilmurat</title>
   <meta name="description" content="Personal page of Talgat Dilmurat — the non-linear path from linguistics and interpretation to software engineering, plus reading, languages, and life in London, Ontario." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://talgat.ca/personal.html" />
+  <meta property="og:title" content="Personal — Talgat Dilmurat" />
+  <meta property="og:description" content="The non-linear path from linguistics and interpretation to software engineering — plus reading, languages, and life in London, Ontario." />
+  <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Personal — Talgat Dilmurat" />
+  <meta name="twitter:description" content="The non-linear path from linguistics and interpretation to software engineering — plus reading, languages, and life in London, Ontario." />
+  <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,7 +57,7 @@
     .nav-back:hover { color: var(--text); }
     .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
     .nav-right { display: flex; gap: 18px; align-items: center; }
-    .nav-right a { font-size: 0.8rem; color: var(--text-faint); transition: color 0.15s; }
+    .nav-right a { font-size: 0.8rem; color: var(--text-muted); transition: color 0.15s; }
     .nav-right a:hover { color: var(--text); }
     .nav-right .nav-resume {
       font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
@@ -81,6 +90,12 @@
     /* ─── FADE ──────────────────────────────────────────────────── */
     .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .fade { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 <body>

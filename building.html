@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Building — Talgat Dilmurat</title>
   <meta name="description" content="A working record of what's coming together right now — the technical skills, scripts, lab environments, and reference documents I'm developing alongside the portfolio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://talgat.ca/building.html" />
+  <meta property="og:title" content="Building — Talgat Dilmurat" />
+  <meta property="og:description" content="A working inventory of the GIS, systems, and BSA skills I'm hands-on with today and actively deepening." />
+  <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Building — Talgat Dilmurat" />
+  <meta name="twitter:description" content="A working inventory of the GIS, systems, and BSA skills I'm hands-on with today and actively deepening." />
+  <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,7 +58,7 @@
     .nav-back:hover { color: var(--text); }
     .nav-title { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
     .nav-right { display: flex; gap: 18px; align-items: center; }
-    .nav-right a { font-size: 0.8rem; color: var(--text-faint); transition: color 0.15s; }
+    .nav-right a { font-size: 0.8rem; color: var(--text-muted); transition: color 0.15s; }
     .nav-right a:hover { color: var(--text); }
     .nav-right .nav-resume {
       font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
@@ -82,6 +91,12 @@
       opacity: 0.06;
     }
     #header .wrap { position: relative; z-index: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .fade { opacity: 1 !important; transform: none !important; }
+      html { scroll-behavior: auto; }
+    }
     .page-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     .page-label::before { content: ''; width: 20px; height: 1px; background: var(--border-dk); }
     .page-title { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 16px; }
@@ -229,6 +244,46 @@
     .next-item h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
     .next-item p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
 
+    /* ─── CREDENTIALS ───────────────────────────────────────── */
+    .cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+    .cred-card {
+      display: flex; flex-direction: column; gap: 7px;
+      border: 1px solid var(--border); border-left: 3px solid var(--silver);
+      border-radius: var(--radius); background: var(--bg); padding: 18px 18px 16px;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      color: inherit; text-decoration: none;
+    }
+    a.cred-card:hover { border-color: var(--silver); transform: translateY(-1px); box-shadow: 0 2px 12px rgba(24,24,27,0.06); }
+    .cred-card.done { border-left-color: var(--accent-brass); }
+    .cred-provider { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); }
+    .cred-title { font-size: 0.9rem; font-weight: 600; color: var(--text); line-height: 1.35; }
+    .cred-meta { display: flex; align-items: center; gap: 9px; margin-top: auto; padding-top: 8px; }
+    .cred-status { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+    .cs-done { background: #faf4ea; color: var(--accent-brass); border: 1px solid #e7d3b0; }
+    .cs-prog { background: #eef2f7; color: var(--silver); border: 1px solid #cbd5e1; }
+    .cred-note { font-size: 0.72rem; color: var(--text-faint); }
+
+    /* ─── MOTION STATUS ─────────────────────────────────────── */
+    .mstat { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+    .ms-learn { background: #eef2f7; color: var(--silver); border: 1px solid #cbd5e1; }
+    .ms-exp   { background: var(--bg-tag); color: var(--text-muted); border: 1px solid var(--border-dk); }
+
+    /* ─── LEVEL BADGES ──────────────────────────────────────── */
+    .lvl { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 8px; border-radius: 999px; margin-right: 10px; white-space: nowrap; vertical-align: middle; }
+    .lvl-hands { background: #faf4ea; color: var(--accent-brass); border: 1px solid #e7d3b0; }
+    .lvl-train { background: #eef2f7; color: var(--silver); border: 1px solid #cbd5e1; }
+    .lvl-learn { background: transparent; color: var(--text-muted); border: 1px dashed var(--border-dk); }
+
+    /* ─── ROADMAP ───────────────────────────────────────────── */
+    .rm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .rm-item { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); padding: 18px; display: flex; flex-direction: column; gap: 7px; transition: border-color 0.2s, transform 0.15s; }
+    .rm-item:hover { border-color: var(--silver); transform: translateY(-1px); }
+    .rm-prog { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
+    .rm-prog .lvl { margin-right: 0; }
+    .rm-arrow { color: var(--text-faint); font-weight: 700; }
+    .rm-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+    .rm-item p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
     /* ─── FADE ──────────────────────────────────────────────── */
     .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade.in { opacity: 1; transform: none; }
@@ -239,6 +294,8 @@
       .matrix-col { border-right: none; border-bottom: 1px solid var(--border); }
       .matrix-col:last-child { border-bottom: none; }
       .gis-grid { grid-template-columns: 1fr; }
+      .cred-grid { grid-template-columns: 1fr; }
+      .rm-grid { grid-template-columns: 1fr; }
       .advantage-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 480px) {
@@ -293,396 +350,147 @@
   </div>
 </section>
 
-<!-- CURRENTLY BUILDING -->
-<section id="position" class="section" style="background: var(--bg-warm)">
+<!-- TRAINING & CREDENTIALS -->
+<section id="credentials" class="section" style="background: var(--bg-warm)">
   <div class="wrap">
-    <p class="s-label fade">Currently building</p>
-    <h2 class="s-title fade">Where I am, where the role calls for, what's in motion</h2>
+    <p class="s-label fade">Training &amp; credentials</p>
+    <h2 class="s-title fade">Completed &mdash; and actively in progress</h2>
+    <p class="s-sub fade">The formal track behind the skills above: what's done, and the certifications I'm working through right now.</p>
+    <div class="cred-grid fade">
+
+      <div class="cred-card done">
+        <span class="cred-provider">Centennial College</span>
+        <span class="cred-title">Advanced Diploma &mdash; Software Engineering Technology</span>
+        <div class="cred-meta"><span class="cred-status cs-done">&#10003; Completed</span><span class="cred-note">3-year &middot; 2026</span></div>
+      </div>
+
+      <div class="cred-card done">
+        <span class="cred-provider">Esri Academy</span>
+        <span class="cred-title">ArcGIS training &mdash; 11 courses (Pro, Online, Enterprise, Monitor)</span>
+        <div class="cred-meta"><span class="cred-status cs-done">&#10003; Completed</span><span class="cred-note">2026</span></div>
+      </div>
+
+      <a class="cred-card" href="https://www.coursera.org/specializations/gis-mapping-spatial-analysis" target="_blank" rel="noopener">
+        <span class="cred-provider">Coursera &middot; University of Toronto</span>
+        <span class="cred-title">GIS, Mapping &amp; Spatial Analysis Specialization</span>
+        <div class="cred-meta"><span class="cred-status cs-prog">&#9679; In progress</span><span class="cred-note">~3&ndash;8 mo</span></div>
+      </a>
+
+      <a class="cred-card" href="https://www.coursera.org/professional-certificates/ibm-business-analyst-professional-certificate" target="_blank" rel="noopener">
+        <span class="cred-provider">Coursera &middot; IBM</span>
+        <span class="cred-title">Business Analyst Professional Certificate</span>
+        <div class="cred-meta"><span class="cred-status cs-prog">&#9679; In progress</span><span class="cred-note">~3&ndash;8 mo</span></div>
+      </a>
+
+      <a class="cred-card" href="https://www.coursera.org/specializations/postgresql-for-everybody" target="_blank" rel="noopener">
+        <span class="cred-provider">Coursera &middot; Univ. of Michigan</span>
+        <span class="cred-title">PostgreSQL for Everybody Specialization</span>
+        <div class="cred-meta"><span class="cred-status cs-prog">&#9679; In progress</span><span class="cred-note">~3&ndash;8 mo</span></div>
+      </a>
+
+    </div>
+    <p class="fade" style="margin-top: 24px; font-size: 0.85rem; color: var(--text-mid); line-height: 1.7;">
+      <strong style="color: var(--text);">Published &amp; live:</strong>
+      <a href="https://talgat.maps.arcgis.com/apps/mapviewer/index.html?webmap=f8924e3a2b9140aeb9e65f0b9888b2aa" target="_blank" rel="noopener" style="color: var(--accent-brass); border-bottom: 1px solid #e7d3b0;">service-request map</a>,
+      <a href="https://talgat.maps.arcgis.com/apps/dashboards/152147e339b24fb2ae2f9cb491468849" target="_blank" rel="noopener" style="color: var(--accent-brass); border-bottom: 1px solid #e7d3b0;">311 operations dashboard</a>, and a
+      <a href="https://arcg.is/1XfbL85" target="_blank" rel="noopener" style="color: var(--accent-brass); border-bottom: 1px solid #e7d3b0;">service-request lifecycle Story Map</a>
+      &mdash; all built on ArcGIS Online.
+    </p>
+  </div>
+</section>
+
+<!-- CURRENTLY BUILDING -->
+<section id="position" class="section">
+  <div class="wrap">
+    <p class="s-label fade">Skill inventory</p>
+    <h2 class="s-title fade">Where I stand against the role</h2>
     <div class="position-text fade">
-      <p>The table below maps the C1425 role's technical surface against what I currently have hands-on and what I'm actively building. It's not a confession of gaps — it's a working inventory of where I'm putting my time before May 20.</p>
+      <p>The technical surface of a municipal GIS / BSA role, mapped against where I actually stand on each. A working inventory, not a checklist of gaps.</p>
     </div>
 
-    <table class="inventory-table fade" style="margin-top: 32px; width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+    <table class="inventory-table fade" style="margin-top: 28px; width: 100%; border-collapse: collapse; font-size: 0.86rem;">
       <thead>
         <tr style="border-bottom: 2px solid var(--border-dk);">
-          <th style="text-align: left; padding: 12px 14px 12px 0; font-weight: 600; color: var(--text); width: 28%;">Job calls for</th>
-          <th style="text-align: left; padding: 12px 14px; font-weight: 600; color: var(--text); width: 36%;">What I have</th>
-          <th style="text-align: left; padding: 12px 0 12px 14px; font-weight: 600; color: var(--text); width: 36%;">What's in motion</th>
+          <th style="text-align: left; padding: 10px 14px 10px 0; font-weight: 600; color: var(--text); width: 38%;">Job calls for</th>
+          <th style="text-align: left; padding: 10px 0 10px 14px; font-weight: 600; color: var(--text);">Where I'm at</th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>ArcGIS Pro</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Hands-on — using it now for the London Bikeability spatial analysis (buffer, union, erase workflow; tier-based classification; map layout)</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Deepening through the bikeability project's remaining phases</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>ArcGIS Pro</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>London bikeability analysis — buffers, tiering, map layouts</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>ArcGIS Online · hosted feature layers · dashboards</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Hands-on — published service request layers, built an operational dashboard, content admin work</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-faint);">—</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>ArcGIS Online · hosted feature layers · dashboards</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>Published feature layers + an operational dashboard</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>ArcGIS Enterprise</strong> (Portal, Server, Monitor)</td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Esri Academy Monitor course; conceptual familiarity with architecture</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Working through Trimble and Esri Enterprise architecture documentation; writing an internal primer</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>ArcGIS Enterprise</strong> (Portal, Server, Monitor)</td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-train">Trained</span>Esri Monitor course; architecture fundamentals</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>Cityworks</strong> (AMS, PLL)</td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">No direct exposure</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Reading Trimble's Cityworks documentation; writing a primer on AMS/PLL and ArcGIS Enterprise integration</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>Cityworks</strong> (AMS, PLL)</td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-learn">Learning</span>Studying AMS/PLL + ArcGIS Enterprise integration</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>REST APIs · JSON</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Built and documented full CRUD APIs in Spring Boot (Java) and Express (Node); Postman-tested</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Adding OAuth login to CityFlow</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>REST APIs · JSON</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>Full CRUD APIs in Spring Boot &amp; Express, Postman-tested</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>OAuth · SSO · Kerberos</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Coursework exposure; conceptual familiarity</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Implementing OAuth in CityFlow; writing a comparison cheat-sheet for the three protocols</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>OAuth · SSO · Kerberos</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-train">Trained</span>Coursework; conceptual familiarity</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>SQL Server · PostgreSQL · geodatabases</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Schema design and analytical queries in PostgreSQL (CityFlow), MySQL (municipal-portfolio studies), ArcGIS Online geodatabase work</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Adding versioning and access-control patterns to the CityFlow schema</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>SQL Server · PostgreSQL · geodatabases</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>Schema design + queries: PostgreSQL, MySQL, AGOL</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>Windows Server · IIS</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Coursework on enterprise infrastructure</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Setting up a Windows Server 2022 trial lab and an IIS-hosted .NET deployment</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>Windows Server · IIS</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-train">Trained</span>Enterprise infrastructure coursework</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>PowerShell · Python · ETL</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Python for scripting and data analysis</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Writing PowerShell scripts for AGOL backup, IIS health checks, Node-on-IIS deployment; building a Python ETL pipeline using London ON open data</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>PowerShell · Python · ETL</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>Python for scripting &amp; data analysis</td>
         </tr>
         <tr style="border-bottom: 1px solid var(--border);">
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>.NET · React · Leaflet</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Three ASP.NET Core MVC apps; React + Leaflet on CityFlow; Leaflet on the inline service-request map</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-faint);">—</td>
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>.NET · React · Leaflet</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>3 ASP.NET Core apps; React + Leaflet on CityFlow</td>
         </tr>
-        <tr>
-          <td style="padding: 14px 14px 14px 0; vertical-align: top;"><strong>Business process review · workflow analysis</strong></td>
-          <td style="padding: 14px; vertical-align: top; color: var(--text-mid);">Workflow Analysis study (current-state mapping, SLA design, redesigned process); CRM administration and reporting work</td>
-          <td style="padding: 14px 0 14px 14px; vertical-align: top; color: var(--text-mid);">Treating the bikeability methodology decision itself as a BSA finding</td>
+        <tr style="">
+          <td style="padding: 10px 14px 10px 0; vertical-align: middle;"><strong>Business process review · workflow analysis</strong></td>
+          <td style="padding: 10px 0 10px 14px; vertical-align: middle; color: var(--text-mid);"><span class="lvl lvl-hands">Hands-on</span>Workflow Analysis study; CRM admin &amp; reporting</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</section>
-
-<!-- COMPETENCY MATRIX -->
-<section id="matrix" class="section">
-  <div class="wrap">
-    <p class="s-label fade">Year-by-year</p>
-    <h2 class="s-title fade">BSA competency progression</h2>
-    <p class="s-sub fade">
-      What a BSA analyst typically builds at each stage of their career —
-      and where I stand on each area. Filled = done. Pulsing = actively building. Empty = on the roadmap.
+    <p class="fade" style="margin-top: 16px; font-size: 0.72rem; color: var(--text-faint); line-height: 1.7;">
+      <strong style="color: var(--silver); font-weight: 600;">Hands-on</strong> &mdash; built or used it in real work &nbsp;&middot;&nbsp;
+      <strong style="color: var(--silver); font-weight: 600;">Trained</strong> &mdash; completed the coursework &nbsp;&middot;&nbsp;
+      <strong style="color: var(--silver); font-weight: 600;">Learning</strong> &mdash; picking it up now
     </p>
-
-    <div class="matrix-wrap fade">
-
-      <!-- Entry Level -->
-      <div class="matrix-col col-entry">
-        <div class="col-header">
-          <div class="col-level">Entry Level</div>
-          <div class="col-title">Foundation</div>
-          <div class="col-years">Year 0–1</div>
-        </div>
-        <ul class="check-list">
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Requirements gathering &amp; documentation</span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Process mapping &amp; workflow analysis</span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Basic SQL queries &amp; data reporting</span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Stakeholder communication</span>
-          </li>
-          <li class="ci ci-above">
-            <span class="ci-dot"></span>
-            <span>CRM data management <span class="above-badge">above level</span></span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>System testing &amp; UAT support</span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Technical documentation</span>
-          </li>
-          <li class="ci ci-above">
-            <span class="ci-dot"></span>
-            <span>API understanding <span class="above-badge">above level</span></span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Developing -->
-      <div class="matrix-col col-mid">
-        <div class="col-header">
-          <div class="col-level">Developing</div>
-          <div class="col-title">Applied</div>
-          <div class="col-years">Years 1–3</div>
-        </div>
-        <ul class="check-list">
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>End-to-end process improvement</span>
-          </li>
-          <li class="ci ci-above">
-            <span class="ci-dot"></span>
-            <span>Full CRM administration <span class="above-badge">above level</span></span>
-          </li>
-          <li class="ci ci-above">
-            <span class="ci-dot"></span>
-            <span>REST API design &amp; documentation <span class="above-badge">above level</span></span>
-          </li>
-          <li class="ci ci-above">
-            <span class="ci-dot"></span>
-            <span>Relational data modeling <span class="above-badge">above level</span></span>
-          </li>
-          <li class="ci ci-prog">
-            <span class="ci-dot"></span>
-            <span>GIS &amp; spatial data analysis</span>
-          </li>
-          <li class="ci ci-done">
-            <span class="ci-dot"></span>
-            <span>Multi-stakeholder communication</span>
-          </li>
-          <li class="ci ci-prog">
-            <span class="ci-dot"></span>
-            <span>Change management documentation</span>
-          </li>
-          <li class="ci ci-prog">
-            <span class="ci-dot"></span>
-            <span>Business case development</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Advanced -->
-      <div class="matrix-col col-senior">
-        <div class="col-header">
-          <div class="col-level">Advanced</div>
-          <div class="col-title">Strategic</div>
-          <div class="col-years">Years 3+</div>
-        </div>
-        <ul class="check-list">
-          <li class="ci ci-prog">
-            <span class="ci-dot"></span>
-            <span>Enterprise GIS architecture</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Strategic system recommendations</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Cross-department program management</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Spatial data governance</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Vendor &amp; contract management</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Enterprise-wide data strategy</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Mentoring junior analysts</span>
-          </li>
-          <li class="ci ci-plan">
-            <span class="ci-dot"></span>
-            <span>Policy &amp; compliance ownership</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="matrix-note fade">
-      <span>→</span>
-      <span>Current position: Foundation complete, most of Applied covered through transferable experience and technical training. Enterprise GIS is the active frontier — targeted directly by current Esri study.</span>
-    </div>
   </div>
 </section>
 
-<!-- GIS IN PRACTICE -->
-<section id="gis" class="section" style="background: var(--bg-warm)">
-  <div class="wrap">
-    <p class="s-label fade">GIS specifically</p>
-    <h2 class="s-title fade">GIS in practice</h2>
-    <p class="s-sub fade">
-      GIS is the primary technical focus of this application. Here's what's been built so far.
-    </p>
-
-    <div class="gis-grid fade">
-      <div class="gis-card">
-        <div class="gis-card-icon">📐</div>
-        <h4>ArcGIS Pro — Desktop Work</h4>
-        <p>Hands-on map and layer navigation, attribute table operations, custom symbology configuration, coordinate system management, and data analysis using real geographic datasets.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">ArcGIS Pro</span>
-          <span class="gis-pill">Symbology</span>
-          <span class="gis-pill">Coordinate Systems</span>
-          <span class="gis-pill">Attribute Tables</span>
-        </div>
-      </div>
-      <div class="gis-card">
-        <div class="gis-card-icon">🌐</div>
-        <h4>ArcGIS Online — Web Maps</h4>
-        <p>Web map creation and sharing, layer configuration, content administration, and publishing spatial data for web-based access and collaboration.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">ArcGIS Online</span>
-          <span class="gis-pill">Web Maps</span>
-          <span class="gis-pill">Content Admin</span>
-          <span class="gis-pill">Data Publishing</span>
-        </div>
-      </div>
-      <div class="gis-card">
-        <div class="gis-card-icon">📊</div>
-        <h4>Business Analyst Pro</h4>
-        <p>Spatial business intelligence — site analysis, trade area definition, demographic data integration, and mapping for business decision support.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">Business Analyst</span>
-          <span class="gis-pill">Trade Areas</span>
-          <span class="gis-pill">Demographics</span>
-          <span class="gis-pill">Site Analysis</span>
-        </div>
-      </div>
-      <div class="gis-card">
-        <div class="gis-card-icon">🗺️</div>
-        <h4>ArcGIS Story Maps</h4>
-        <p>Narrative mapping combining spatial layers with structured storytelling — designed to make geographic information accessible to non-GIS audiences.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">Story Maps</span>
-          <span class="gis-pill">Spatial Narrative</span>
-          <span class="gis-pill">Data Visualization</span>
-        </div>
-      </div>
-      <div class="gis-card">
-        <div class="gis-card-icon">🏗️</div>
-        <h4>Enterprise Fundamentals</h4>
-        <p>Currently studying ArcGIS Enterprise architecture — Portal for ArcGIS, ArcGIS Server, geodatabases, licensing, and administration concepts for large-scale GIS deployment.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">ArcGIS Enterprise</span>
-          <span class="gis-pill">Portal</span>
-          <span class="gis-pill">Server</span>
-          <span class="gis-pill">Geodatabases</span>
-        </div>
-      </div>
-      <div class="gis-card">
-        <div class="gis-card-icon">🤖</div>
-        <h4>AI in ArcGIS</h4>
-        <p>Introduction to AI-assisted workflows within the ArcGIS platform — machine learning integration, intelligent mapping, and automated feature extraction.</p>
-        <div class="gis-pill-row">
-          <span class="gis-pill">AI in ArcGIS</span>
-          <span class="gis-pill">ML Integration</span>
-          <span class="gis-pill">Automation</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LEARNING TIMELINE -->
-<section id="timeline" class="section">
-  <div class="wrap">
-    <p class="s-label fade">How fast</p>
-    <h2 class="s-title fade">The learning sprint</h2>
-    <p class="s-sub fade">From zero GIS training to 11 Esri courses and hands-on ArcGIS work — in under five months.</p>
-
-    <div class="timeline fade">
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-month">Jan 2026</div>
-        <h4>Esri Academy — GIS Basics &amp; ArcGIS Pro Basics</h4>
-        <p>Started from the ground up. GIS fundamentals, then ArcGIS Pro Basics. Immediate hands-on desktop work alongside coursework.</p>
-      </div>
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-month">Feb 2026</div>
-        <h4>ArcGIS Online, Coordinate Systems, Data Management</h4>
-        <p>Three more Esri courses completed. First web map workflows. Coordinate system fundamentals and spatial data management concepts.</p>
-      </div>
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-month">Mar 2026</div>
-        <h4>Business Analyst Pro, Systems Approach (×2), AI in ArcGIS</h4>
-        <p>Moved into more applied territory — spatial business intelligence, enterprise systems thinking, and AI-assisted mapping workflows.</p>
-      </div>
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-month">Apr 2026</div>
-        <h4>Story Maps, ArcGIS Monitor, Content Administration</h4>
-        <p>Completed the final three Esri courses. Began building Story Maps. ArcGIS Online content administration and monitoring tools.</p>
-      </div>
-      <div class="t-item">
-        <div class="t-dot t-now"></div>
-        <div class="t-month">May 2026 — Now</div>
-        <h4>Enterprise Study + Portfolio</h4>
-        <p>Deep-diving ArcGIS Enterprise architecture. Building spatial projects and this portfolio. Preparing to apply for City of London BSA role.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT'S NEXT -->
+<!-- ROADMAP -->
 <section id="next" class="section" style="background: var(--bg-warm)">
   <div class="wrap">
     <p class="s-label fade">Roadmap</p>
-    <h2 class="s-title fade">What's being built next</h2>
-    <p class="s-sub fade">The active areas of growth — being worked on now or planned for the near term.</p>
-
-    <div class="next-list fade">
-      <div class="next-item">
-        <span class="next-status ns-now">Active</span>
-        <div>
-          <h4>ArcGIS Enterprise — Deep Dive</h4>
-          <p>Working through Enterprise architecture concepts: Portal for ArcGIS, federated ArcGIS Server, geodatabases, patching, and administration. Targeting the system-level GIS knowledge a senior BSA role requires.</p>
-        </div>
+    <h2 class="s-title fade">The next level on each front</h2>
+    <p class="s-sub fade">Beyond the three certifications already in progress above, here's where the hands-on work goes next &mdash; the same levels from the table, moving up.</p>
+    <div class="rm-grid fade">
+      <div class="rm-item">
+        <div class="rm-prog"><span class="lvl lvl-train">Trained</span><span class="rm-arrow">&rarr;</span><span class="lvl lvl-hands">Hands-on</span></div>
+        <h4>ArcGIS Enterprise</h4>
+        <p>Stand up Portal &amp; Server &mdash; from coursework to running the stack.</p>
       </div>
-      <div class="next-item">
-        <span class="next-status ns-now">Active</span>
-        <div>
-          <h4>ArcGIS Story Maps — Publishing Spatial Projects</h4>
-          <p>Building and publishing GIS Story Maps from real data — moving from coursework into demonstrated output. Links will appear in the portfolio as they're completed.</p>
-        </div>
+      <div class="rm-item">
+        <div class="rm-prog"><span class="lvl lvl-learn">Learning</span><span class="rm-arrow">&rarr;</span><span class="lvl lvl-hands">Hands-on</span></div>
+        <h4>Python for ArcGIS (arcpy)</h4>
+        <p>Automate geoprocessing and batch spatial workflows.</p>
       </div>
-      <div class="next-item">
-        <span class="next-status ns-soon">Soon</span>
-        <div>
-          <h4>Python for ArcGIS (arcpy)</h4>
-          <p>Python scripting for ArcGIS — automating geoprocessing workflows, batch operations, and spatial analysis scripts. Bridges programming background directly into GIS practice.</p>
-        </div>
-      </div>
-      <div class="next-item">
-        <span class="next-status ns-soon">Soon</span>
-        <div>
-          <h4>ArcGIS Dashboards &amp; Operations Views</h4>
-          <p>Real-time operational dashboards using ArcGIS Dashboards — directly relevant to the kind of live data visualization a municipal BSA role would involve.</p>
-        </div>
-      </div>
-      <div class="next-item">
-        <span class="next-status ns-soon">Soon</span>
-        <div>
-          <h4>Formal Business Analysis Certification (CBAP prep)</h4>
-          <p>Working toward structured business analysis certification to formalize and validate the experience already accumulated across multiple sectors.</p>
-        </div>
+      <div class="rm-item">
+        <div class="rm-prog"><span class="lvl lvl-learn">Learning</span><span class="rm-arrow">&rarr;</span><span class="lvl lvl-hands">Hands-on</span></div>
+        <h4>Cityworks (AMS, PLL)</h4>
+        <p>Working knowledge of AMS/PLL + ArcGIS Enterprise integration.</p>
       </div>
     </div>
   </div>
