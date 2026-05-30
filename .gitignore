@@ -1,0 +1,5 @@
+# Internal planning / build-log docs — kept LOCAL-ONLY, never published.
+# This repo is PUBLIC and serves talgat.ca via GitHub Pages, so anything
+# committed here is world-readable on github.com regardless of Jekyll's
+# underscore-folder exclusion. Keep these out of the repo entirely.
+_meta/
