@@ -4,16 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>London ON Bikeability Analysis — Talgat Dilmurat</title>
-  <meta name="description" content="A current-state spatial analysis of London Ontario's cycling network using City of London open data — classified with Can-BICS (the Statistics Canada national standard), walking-distance access buffers, and a gap analysis. 55% of the city has no comfortable cycling access nearby." />
+  <meta name="description" content="A spatial analysis of London, Ontario's cycling network — Can-BICS classification, access buffers, and a gap analysis. 55% of the city has no comfortable cycling access." />
+  <link rel="canonical" href="https://talgat.ca/bikeability.html" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://talgat.ca/bikeability.html" />
   <meta property="og:title" content="London ON Bikeability Analysis — Talgat Dilmurat" />
   <meta property="og:description" content="How bikeable is London, and where are the gaps? A Can-BICS classification, walking-distance access buffers, and a gap analysis on City of London open data — 55% of the city has no comfortable cycling access nearby." />
-  <meta property="og:image" content="https://talgat.ca/images/bikeability/gap-polygons.png" />
+  <meta property="og:image" content="https://talgat.ca/images/bikeability/gap-polygons.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="London ON Bikeability Analysis — Talgat Dilmurat" />
   <meta name="twitter:description" content="How bikeable is London, and where are the gaps? A Can-BICS classification, access buffers, and gap analysis on City of London open data." />
-  <meta name="twitter:image" content="https://talgat.ca/images/bikeability/gap-polygons.png" />
+  <meta name="twitter:image" content="https://talgat.ca/images/bikeability/gap-polygons.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,7 +45,7 @@
     a { color: inherit; text-decoration: none; }
 
     /* ─── SCROLL BAR ────────────────────────────────────────────── */
-    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--silver); z-index: 200; transition: width 0.08s linear; pointer-events: none; }
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: var(--accent-brass); z-index: 200; transition: width 0.08s linear; pointer-events: none; }
 
     /* ─── NAV ───────────────────────────────────────────────────── */
     nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
@@ -391,7 +392,7 @@
   </div>
 
   <figure class="map-hero fade">
-    <img src="images/bikeability/gap-polygons.png" alt="Map of cycling-infrastructure access across London, Ontario. The gap is shown in red across the suburban edges and rural fringe; access clusters in the urban core and inner neighbourhoods." />
+    <img src="images/bikeability/gap-polygons.jpg" width="1648" height="1273" loading="lazy" decoding="async" alt="Map of cycling-infrastructure access across London, Ontario. The gap is shown in red across the suburban edges and rural fringe; access clusters in the urban core and inner neighbourhoods." />
     <figcaption><span class="fig-tag">Fig. 01 — The gap</span>London's cycling access, mapped; the red gap is 55% of the city. <span class="fig-faint">(Legend labels get a cleaner re-export from ArcGIS.)</span></figcaption>
   </figure>
 
@@ -403,11 +404,11 @@
 
   <div class="map-outputs" style="margin-top: 44px;">
     <figure class="fade">
-      <img src="images/bikeability/final-layout.png" alt="Full analysis map of London, Ontario — cycling network by Can-BICS comfort class, the access buffers around each route, and the resulting gap zones, shown together." />
+      <img src="images/bikeability/final-layout.jpg" width="1648" height="1273" loading="lazy" decoding="async" alt="Full analysis map of London, Ontario — cycling network by Can-BICS comfort class, the access buffers around each route, and the resulting gap zones, shown together." />
       <figcaption><span class="fig-tag">Fig. 02 — The full picture</span>Comfort classes, the access bands around each route, and the gap, all on one map. <span class="fig-faint">(Legend labels get a cleaner re-export from ArcGIS.)</span></figcaption>
     </figure>
     <figure class="fade">
-      <img src="images/bikeability/tier-classification.png" alt="Map of London, Ontario's cycling network on its own, with each route coloured by its Can-BICS comfort class — high, medium, low, and non-conforming." />
+      <img src="images/bikeability/tier-classification.jpg" width="1648" height="1273" loading="lazy" decoding="async" alt="Map of London, Ontario's cycling network on its own, with each route coloured by its Can-BICS comfort class — high, medium, low, and non-conforming." />
       <figcaption><span class="fig-tag">Fig. 03 — The bare network</span>The cycling network on its own, coloured by Can-BICS comfort class. <span class="fig-faint">(Legend labels get a cleaner re-export from ArcGIS.)</span></figcaption>
     </figure>
   </div>

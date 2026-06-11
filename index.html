@@ -14,10 +14,28 @@
   <meta name="twitter:title" content="Talgat Dilmurat · Portfolio" />
   <meta name="twitter:description" content="GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
   <meta name="twitter:image" content="https://talgat.ca/images/og-card.png" />
+  <link rel="canonical" href="https://talgat.ca/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Talgat Dilmurat",
+    "url": "https://talgat.ca/",
+    "image": "https://talgat.ca/images/talgat-portrait.jpg",
+    "jobTitle": "GIS & Business Systems Analyst",
+    "email": "mailto:talgat.dilmurat.tech@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "London", "addressRegion": "ON", "addressCountry": "CA" },
+    "sameAs": [
+      "https://github.com/talgatdilmurat",
+      "https://www.linkedin.com/in/talgatdilmurat"
+    ],
+    "knowsLanguage": ["en", "zh", "ug", "kk", "ar", "ru"]
+  }
+  </script>
   <style>
     /* ─── RESET ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,7 +79,7 @@
     /* ─── SCROLL PROGRESS ───────────────────────────────────────── */
     #scroll-bar {
       position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-      background: var(--silver); z-index: 200; transition: width 0.08s linear;
+      background: var(--accent-brass); z-index: 200; transition: width 0.08s linear;
       pointer-events: none;
     }
 
@@ -118,7 +136,7 @@
     }
     .nav-links .nav-resume::after { display: none; }
     .nav-links .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
-    .nav-ham { display: none; cursor: pointer; flex-direction: column; gap: 4px; }
+    .nav-ham { display: none; cursor: pointer; flex-direction: column; gap: 4px; background: none; border: none; padding: 6px; }
     .nav-ham span { width: 20px; height: 1.5px; background: var(--text-mid); border-radius: 1px; display: block; }
 
     /* ─── HERO ──────────────────────────────────────────────────── */
@@ -441,7 +459,7 @@
       color: rgba(255,255,255,0.55); letter-spacing: 0.08em; text-transform: uppercase;
     }
     .sm-body { padding: 16px; }
-    .sm-body h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
+    .sm-body h3 { font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; }
     .sm-body p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
     .sm-link { font-size: 0.75rem; color: var(--silver); font-weight: 600; }
     .sm-placeholder {
@@ -513,7 +531,7 @@
       color: var(--text-faint);
       font-family: var(--mono); font-size: 0.7rem;
     }
-    .capstone-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .capstone-card h3 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .capstone-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
     .capstone-card .capstone-tech { font-size: 0.7rem; color: var(--text-faint); font-family: var(--mono); margin-top: 8px; }
     @media (max-width: 700px) { .capstone-grid { grid-template-columns: 1fr; } }
@@ -565,7 +583,7 @@
       color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase;
     }
     .gis-body { padding: 18px; }
-    .gis-body h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; }
+    .gis-body h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; }
     .gis-body p { font-size: 0.79rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
     .gis-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
     .gis-tag {
@@ -637,7 +655,7 @@
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--silver); margin-bottom: 8px; display: block;
     }
-    .gateway-text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .gateway-text h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
     .gateway-text p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
     .gateway-arrow { font-size: 1.3rem; color: var(--silver); margin-left: auto; flex-shrink: 0; }
     @media (max-width: 540px) { .gateway-grid { grid-template-columns: 1fr; } }
@@ -685,7 +703,7 @@
     }
     .log-item:hover { background: var(--bg-soft); padding-left: 8px; padding-right: 8px; margin: 0 -8px; border-radius: var(--radius); }
     .log-item:last-child { border-bottom: none; }
-    .log-content h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .log-content h3 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .log-content p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
     .log-tag {
       display: inline-block; font-size: 0.65rem; font-weight: 700;
@@ -745,6 +763,18 @@
       border-bottom: 1px solid var(--border); display: block;
     }
     #mob-nav a:last-child { border-bottom: none; }
+
+    /* ─── AMBIENT VIDEO PAUSE TOGGLE ────────────────────────────── */
+    .vid-toggle {
+      position: absolute; right: 10px; bottom: 10px; z-index: 5;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(13,36,64,0.55); color: #fff;
+      border: 1px solid rgba(255,255,255,0.45);
+      font-size: 0.58rem; line-height: 1; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .vid-toggle:hover { background: rgba(13,36,64,0.85); }
   </style>
 </head>
 <body>
@@ -763,9 +793,9 @@
       <a href="personal.html">Personal</a>
       <a href="resume.html" class="nav-resume">Resume →</a>
     </div>
-    <div class="nav-ham" onclick="toggleMob()">
+    <button class="nav-ham" aria-label="Menu" aria-expanded="false" aria-controls="mob-nav" onclick="toggleMob()">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 <div id="mob-nav">
@@ -788,9 +818,9 @@
     <div class="hero-links fade">
       <a href="mailto:talgat.dilmurat.tech@gmail.com"><span aria-hidden="true">✉</span> talgat.dilmurat.tech@gmail.com</a>
       <span class="hero-sep">·</span>
-      <a href="https://github.com/talgatdilmurat" target="_blank">GitHub</a>
+      <a href="https://github.com/talgatdilmurat" target="_blank" rel="noopener">GitHub</a>
       <span class="hero-sep">·</span>
-      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -840,7 +870,7 @@
 
         <div class="featured-body">
           <div class="cityflow-demo-thumb" style="width:100%; margin: 16px 0; border-radius: 8px; overflow: hidden;">
-            <video src="images/cityflow-demo.mp4" autoplay muted loop playsinline preload="metadata" width="1100" height="618" aria-label="CityFlow walkthrough — map, service request, AI triage, dashboard" style="width:100%; height:auto; display:block;"></video>
+            <video src="images/cityflow-demo.mp4" class="ambient" autoplay muted loop playsinline preload="metadata" width="1100" height="618" aria-label="CityFlow walkthrough — map, service request, AI triage, dashboard" style="width:100%; height:auto; display:block;"></video>
           </div>
           <div class="featured-features">
             <div class="ff-item"><span class="ff-icon" aria-hidden="true">🗺️</span>Interactive map — live asset pins by category (Leaflet + OpenStreetMap)</div>
@@ -863,7 +893,7 @@
           <div class="featured-footer">
             <a href="https://cityflow-oopa.onrender.com" target="_blank" rel="noopener noreferrer" class="btn-solid">See it live →</a>
             <a href="cityflow.html" class="btn-outline">View architecture →</a>
-            <a href="https://github.com/talgatdilmurat/cityflow" target="_blank" class="btn-outline">↗ GitHub</a>
+            <a href="https://github.com/talgatdilmurat/cityflow" target="_blank" rel="noopener" class="btn-outline">↗ GitHub</a>
           </div>
         </div>
 
@@ -896,7 +926,7 @@
 
         <div class="featured-body">
           <a href="bikeability.html" class="bike-card-map" aria-label="View the full Bikeability analysis" style="display:block; width:100%; margin:16px 0; border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-            <img src="images/bikeability/gap-card.png" alt="Map of London's cycling-access gap — red marks the areas more than a short walk from a comfortable cycling facility" style="width:100%; height:auto; display:block;" />
+            <img src="images/bikeability/gap-card.png" width="1600" height="900" loading="lazy" decoding="async" alt="Map of London's cycling-access gap — red marks the areas more than a short walk from a comfortable cycling facility" style="width:100%; height:auto; display:block;" />
           </a>
           <div class="featured-features">
             <div class="ff-item"><span class="ff-icon" aria-hidden="true">🗺️</span>Every route classified with Can-BICS, the Statistics Canada national standard</div>
@@ -959,7 +989,7 @@
 
       </div>
 
-      <p class="studies-shared-link fade"><a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank">All four studies on GitHub →</a></p>
+      <p class="studies-shared-link fade"><a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" rel="noopener">All four studies on GitHub →</a></p>
       <!-- ── END STUDIES ── -->
 
     </div>
@@ -986,7 +1016,7 @@
           <span class="gis-preview-label">ArcGIS Dashboards</span>
         </div>
         <div class="gis-body">
-          <h4>London 311 Operations Dashboard</h4>
+          <h3>London 311 Operations Dashboard</h3>
           <p>Live operational dashboard visualizing 50 simulated 311 service requests — interactive map, total count indicator, issue-type pie chart, priority bar chart, and a searchable request list. Built on a hosted ArcGIS Online feature layer.</p>
           <div class="gis-tags">
             <span class="gis-tag">ArcGIS Dashboards</span>
@@ -995,8 +1025,8 @@
             <span class="gis-tag">Spatial Data</span>
           </div>
           <div class="gis-links">
-            <a href="https://talgat.maps.arcgis.com/apps/dashboards/152147e339b24fb2ae2f9cb491468849" target="_blank" class="gis-link">📊 Live Dashboard →</a>
-            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="gis-link">↗ GitHub</a>
+            <a href="https://talgat.maps.arcgis.com/apps/dashboards/152147e339b24fb2ae2f9cb491468849" target="_blank" rel="noopener" class="gis-link">📊 Live Dashboard →</a>
+            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" rel="noopener" class="gis-link">↗ GitHub</a>
           </div>
         </div>
       </div>
@@ -1008,7 +1038,7 @@
           <span class="gis-preview-label">ArcGIS Map Viewer</span>
         </div>
         <div class="gis-body">
-          <h4>GIS Service Request Map — London ON</h4>
+          <h3>GIS Service Request Map — London ON</h3>
           <p>50 simulated 311 service requests published as an ArcGIS Online hosted feature layer, styled by issue type with unique symbols. Includes a Leaflet.js browser version loading directly from CSV — no backend required.</p>
           <div class="gis-tags">
             <span class="gis-tag">ArcGIS Online</span>
@@ -1018,8 +1048,8 @@
             <span class="gis-tag">GIS</span>
           </div>
           <div class="gis-links">
-            <a href="https://talgat.maps.arcgis.com/apps/mapviewer/index.html?webmap=f8924e3a2b9140aeb9e65f0b9888b2aa" target="_blank" class="gis-link">🗺 Live Map →</a>
-            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" class="gis-link">↗ GitHub</a>
+            <a href="https://talgat.maps.arcgis.com/apps/mapviewer/index.html?webmap=f8924e3a2b9140aeb9e65f0b9888b2aa" target="_blank" rel="noopener" class="gis-link">🗺 Live Map →</a>
+            <a href="https://github.com/talgatdilmurat/municipal-portfolio" target="_blank" rel="noopener" class="gis-link">↗ GitHub</a>
           </div>
         </div>
       </div>
@@ -1041,23 +1071,23 @@
       <div class="storymap-card fade">
         <div class="sm-thumb sm-thumb-1">🗺️<span class="sm-thumb-label">Lifecycle</span></div>
         <div class="sm-body">
-          <h4>CityFlow — Service Request Lifecycle</h4>
+          <h3>CityFlow — Service Request Lifecycle</h3>
           <p>One pothole through the full lifecycle of a municipal service request — intake, AI triage, dispatch, resolution. Anchored on Oxford & Richmond, London ON.</p>
           <p><em>Illustrative composite — not real City of London data.</em></p>
-          <a href="https://arcg.is/1XfbL85" target="_blank" class="sm-link">Open in ArcGIS →</a>
+          <a href="https://arcg.is/1XfbL85" target="_blank" rel="noopener" class="sm-link">Open in ArcGIS →</a>
         </div>
       </div>
       <div class="storymap-card fade">
         <div class="sm-thumb sm-thumb-2">🌍<span class="sm-thumb-label">Audit</span></div>
         <div class="sm-body">
-          <h4>Reading London's Open Data Through a BSA Lens</h4>
+          <h3>Reading London's Open Data Through a BSA Lens</h3>
           <p>A BSA-lens read of how London publishes its open spatial data — what the datasets do well, where the gaps are. In progress.</p>
         </div>
       </div>
       <div class="storymap-card fade">
         <div class="sm-thumb sm-thumb-3">📍<span class="sm-thumb-label">Infrastructure</span></div>
         <div class="sm-body">
-          <h4>London ON Bikeability Infrastructure</h4>
+          <h3>London ON Bikeability Infrastructure</h3>
           <p>A spatial walkthrough of London's cycling network — Can-BICS comfort classes, access buffers, and the gap. Gated by Phase 2 ArcGIS Pro work.</p>
         </div>
       </div>
@@ -1075,9 +1105,9 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video src="images/capstone-lingosync-demo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="LingoSync interpreter scheduling demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-lingosync-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="LingoSync interpreter scheduling demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
-        <h4>LingoSync — Interpreter Scheduling</h4>
+        <h3>LingoSync — Interpreter Scheduling</h3>
         <p>Assigns interpreters to appointments across languages, with live conflict detection that flags double-bookings before they happen. Calendar view and full appointment lifecycle.</p>
         <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQLite</p>
         <div style="display:flex; gap:16px; margin-top:12px;">
@@ -1088,9 +1118,9 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video src="images/capstone-certpath-demo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="CertPath study tracker demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-certpath-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="CertPath study tracker demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
-        <h4>CertPath — Study Tracker</h4>
+        <h3>CertPath — Study Tracker</h3>
         <p>Tracks certifications, logs study sessions, and visualizes consistency with a 30-day study heatmap and daily streak counter. Modeled on my own Esri Academy and AZ-900 workflow.</p>
         <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQLite</p>
         <div style="display:flex; gap:16px; margin-top:12px;">
@@ -1101,9 +1131,9 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video src="images/capstone-vocana-demo.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Vocana vocabulary and spaced-repetition demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-vocana-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="Vocana vocabulary and spaced-repetition demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
-        <h4>Vocana — Vocabulary &amp; Review</h4>
+        <h3>Vocana — Vocabulary &amp; Review</h3>
         <p>Multi-language vocabulary platform built around the SM-2 spaced-repetition algorithm. Deck-based organization, multiple-choice quizzes, keyboard-driven flashcard reviews.</p>
         <p class="capstone-tech">ASP.NET Core MVC · EF Core · SQLite · Session</p>
         <div style="display:flex; gap:16px; margin-top:12px;">
@@ -1306,7 +1336,7 @@
       <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">Full-Stack</span>
-          <h4>Built CityFlow — Municipal Asset Management System</h4>
+          <h3>Built CityFlow — Municipal Asset Management System</h3>
           <p>Full-stack app: React 18 frontend, Node.js + Express REST API, PostgreSQL database with audit log, interactive Leaflet.js map, AI-assisted triage via the Anthropic API, and a KPI dashboard.</p>
         </div>
       </div>
@@ -1314,7 +1344,7 @@
       <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">GIS</span>
-          <h4>London ON Bikeability Analysis</h4>
+          <h3>London ON Bikeability Analysis</h3>
           <p>Current-state spatial analysis using City of London open data. Can-BICS classification, walking-distance access buffers, gap analysis. Methodology, findings, and limitations written up.</p>
         </div>
       </div>
@@ -1322,7 +1352,7 @@
       <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">ArcGIS</span>
-          <h4>Working through ArcGIS Enterprise architecture</h4>
+          <h3>Working through ArcGIS Enterprise architecture</h3>
           <p>Self-directed study on Portal for ArcGIS, ArcGIS Server, licensing, patching, and geodatabases. Building familiarity beyond ArcGIS Online.</p>
         </div>
       </div>
@@ -1330,7 +1360,7 @@
       <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">Esri</span>
-          <h4>Esri Academy — eleven courses completed</h4>
+          <h3>Esri Academy — eleven courses completed</h3>
           <p>Foundational curriculum: ArcGIS Pro, ArcGIS Online, Business Analyst Pro, GIS Basics, Coordinate Systems, Data Management, AI in ArcGIS, Systems Approach to ArcGIS, ArcGIS Monitor.</p>
         </div>
       </div>
@@ -1338,7 +1368,7 @@
       <div class="log-item fade">
         <div class="log-content">
           <span class="log-tag">Software Engineering</span>
-          <h4>Advanced Diploma — Centennial College</h4>
+          <h3>Advanced Diploma — Centennial College</h3>
           <p>Three-year program covering databases, APIs, cloud, DevOps, networking, security, enterprise systems, and business analysis.</p>
         </div>
       </div>
@@ -1356,7 +1386,7 @@
       <a href="personal.html" class="gateway-card fade">
         <div class="gateway-text">
           <span class="gateway-stage">01</span>
-          <h4>Personal Life</h4>
+          <h3>Personal Life</h3>
           <p>The career before the code — and what it taught me.</p>
         </div>
         <span class="gateway-arrow">→</span>
@@ -1364,7 +1394,7 @@
       <a href="resume.html" class="gateway-card fade">
         <div class="gateway-text">
           <span class="gateway-stage">02</span>
-          <h4>Full Resume</h4>
+          <h3>Full Resume</h3>
           <p>The full record — work history, schooling, certifications.</p>
         </div>
         <span class="gateway-arrow">→</span>
@@ -1381,10 +1411,10 @@
       <a href="mailto:talgat.dilmurat.tech@gmail.com" class="contact-link">
         <span>✉</span> talgat.dilmurat.tech@gmail.com
       </a>
-      <a href="https://github.com/talgatdilmurat" target="_blank" class="contact-link">
+      <a href="https://github.com/talgatdilmurat" target="_blank" rel="noopener" class="contact-link">
         <span>⌥</span> GitHub
       </a>
-      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" class="contact-link">
+      <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" rel="noopener" class="contact-link">
         <span>⌘</span> LinkedIn
       </a>
     </div>
@@ -1395,9 +1425,9 @@
   <div class="footer-row" style="display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 12px;">
     <a href="mailto:talgat.dilmurat.tech@gmail.com" style="font-size: 0.8rem; color: var(--text-muted);">talgat.dilmurat.tech@gmail.com</a>
     <span style="color: var(--text-faint);">·</span>
-    <a href="https://github.com/talgatdilmurat" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);">GitHub</a>
+    <a href="https://github.com/talgatdilmurat" target="_blank" rel="noopener" style="font-size: 0.8rem; color: var(--text-muted);">GitHub</a>
     <span style="color: var(--text-faint);">·</span>
-    <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/talgatdilmurat" target="_blank" rel="noopener" style="font-size: 0.8rem; color: var(--text-muted);">LinkedIn</a>
   </div>
   <p style="font-size: 0.75rem; color: var(--text-faint);">Talgat Dilmurat · London, Ontario · 2026</p>
 </footer>
@@ -1406,7 +1436,9 @@
   // Mobile nav
   function toggleMob() {
     const m = document.getElementById('mob-nav');
-    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+    const open = m.style.display !== 'flex';
+    m.style.display = open ? 'flex' : 'none';
+    document.querySelector('.nav-ham').setAttribute('aria-expanded', String(open));
   }
 
   // Scroll progress bar
@@ -1440,6 +1472,44 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Ambient demo videos: lazy-load below the fold, respect reduced motion, offer pause
+  const prefersStill = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vidObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const v = en.target;
+      if (v.dataset.src && !v.src) v.src = v.dataset.src;
+      if (!prefersStill) v.play().catch(() => {});
+      vidObs.unobserve(v);
+    });
+  }, { rootMargin: '200px' });
+  document.querySelectorAll('video.ambient').forEach(v => {
+    if (prefersStill) {
+      v.removeAttribute('autoplay'); v.autoplay = false;
+      v.preload = 'metadata'; v.pause();
+    }
+    vidObs.observe(v);
+    const wrap = v.parentElement;
+    wrap.style.position = 'relative';
+    const btn = document.createElement('button');
+    btn.className = 'vid-toggle';
+    const setState = playing => {
+      btn.textContent = playing ? '❚❚' : '▶';
+      btn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+    };
+    setState(!prefersStill);
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      if (v.paused) {
+        if (v.dataset.src && !v.src) v.src = v.dataset.src;
+        v.play().catch(() => {});
+      } else { v.pause(); }
+    });
+    v.addEventListener('play', () => setState(true));
+    v.addEventListener('pause', () => setState(false));
+    wrap.appendChild(btn);
+  });
 </script>
 <!-- Cloudflare Web Analytics -->
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "be9df9cdc78448939f35ec2e97eeb73b"}'></script>
