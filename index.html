@@ -214,18 +214,18 @@
     }
     .skills-table tr:hover { background: var(--bg-soft); }
     .skills-table tr:last-child { border-bottom: none; }
-    .skills-table td { padding: 14px 0; vertical-align: top; }
+    .skills-table td { padding: 10px 0; vertical-align: top; }
     .skills-table td:first-child {
       width: 180px; min-width: 140px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--text-faint);
-      padding-right: 24px; padding-top: 16px;
+      padding-right: 24px; padding-top: 13px;
       transition: color 0.15s;
     }
     .skills-table tr:hover td:first-child { color: var(--silver); }
     .skills-table tr.row-building td:first-child,
     .skills-table tr.row-building:hover td:first-child { color: var(--accent-brass); }
-    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 5px 0; }
     .pill {
       font-family: var(--mono); font-size: 0.71rem;
       padding: 4px 9px; border-radius: 4px;
@@ -525,7 +525,7 @@
       box-shadow: 0 4px 12px rgba(13, 36, 64, 0.06);
     }
     .capstone-thumb {
-      aspect-ratio: 4/3; background: var(--bg-soft);
+      aspect-ratio: 16/9; background: var(--bg-soft);
       border-radius: 4px; margin-bottom: 12px;
       display: flex; align-items: center; justify-content: center;
       color: var(--text-faint);
@@ -660,6 +660,23 @@
     @media (max-width: 540px) { .gateway-grid { grid-template-columns: 1fr; } }
 
     /* ─── COURSEWORK ────────────────────────────────────────────── */
+    /* Course fold — full list behind one button */
+    .course-fold { margin-top: 6px; }
+    .course-fold summary {
+      list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 500; color: var(--text-mid);
+      border: 1.5px solid var(--border-dk); border-radius: var(--radius); padding: 7px 16px;
+      transition: all 0.2s; user-select: none; margin-top: 22px;
+    }
+    .course-fold summary::-webkit-details-marker { display: none; }
+    .course-fold summary::after { content: '↓'; color: var(--silver); transition: transform 0.2s; }
+    .course-fold[open] summary::after { transform: rotate(180deg); }
+    .course-fold summary:hover { border-color: var(--silver); color: var(--text); background: rgba(255,255,255,0.65); }
+    .course-fold .cf-open { display: none; }
+    .course-fold[open] .cf-closed { display: none; }
+    .course-fold[open] .cf-open { display: inline; }
+    .course-fold-body { margin-top: 36px; }
+
     .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
     .course-group h4 {
       font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
@@ -1121,7 +1138,7 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video data-src="images/capstone-lingosync-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="LingoSync interpreter scheduling demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-lingosync-demo.mp4" data-demo="https://lingosync.onrender.com" class="ambient" muted loop playsinline preload="none" aria-label="LingoSync interpreter scheduling demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
         <h3>LingoSync — Interpreter Scheduling</h3>
         <p>Assigns interpreters to appointments across languages, with live conflict detection that flags double-bookings before they happen. Calendar view and full appointment lifecycle.</p>
@@ -1134,7 +1151,7 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video data-src="images/capstone-certpath-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="CertPath study tracker demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-certpath-demo.mp4" data-demo="https://certpath.onrender.com" class="ambient" muted loop playsinline preload="none" aria-label="CertPath study tracker demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
         <h3>CertPath — Study Tracker</h3>
         <p>Tracks certifications, logs study sessions, and visualizes consistency with a 30-day study heatmap and daily streak counter. Modeled on my own Esri Academy and AZ-900 workflow.</p>
@@ -1147,7 +1164,7 @@
 
       <div class="capstone-card fade">
         <div class="capstone-thumb">
-          <video data-src="images/capstone-vocana-demo.mp4" class="ambient" muted loop playsinline preload="none" aria-label="Vocana vocabulary and spaced-repetition demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
+          <video data-src="images/capstone-vocana-demo.mp4" data-demo="https://vocana.onrender.com" class="ambient" muted loop playsinline preload="none" aria-label="Vocana vocabulary and spaced-repetition demo" style="width:100%; height:100%; object-fit:cover; border-radius:4px;"></video>
         </div>
         <h3>Vocana — Vocabulary &amp; Review</h3>
         <p>Multi-language vocabulary platform built around the SM-2 spaced-repetition algorithm. Deck-based organization, multiple-choice quizzes, keyboard-driven flashcard reviews.</p>
@@ -1260,6 +1277,13 @@
   <div class="wrap">
     <p class="s-label fade">Education &amp; Training</p>
     <h2 class="s-title fade">Coursework</h2>
+    <p class="s-body fade" style="max-width:660px;">
+      Esri Academy — 11 ArcGIS courses (Pro, Online, Enterprise, Monitor) &nbsp;·&nbsp; Centennial College — three-year Software Engineering Technology advanced diploma, 21 courses across systems, data, business analysis, and programming.
+    </p>
+
+    <details class="course-fold fade">
+      <summary><span class="cf-closed">Show all 32 courses</span><span class="cf-open">Hide the course list</span></summary>
+      <div class="course-fold-body">
 
     <!-- Esri Training -->
     <div style="margin-bottom: 48px;">
@@ -1334,8 +1358,11 @@
         </div>
       </div>
 
-      <p style="font-size:0.75rem; color:var(--text-faint); margin-top:20px;" class="fade">Full transcript available on request.</p>
+      <p style="font-size:0.75rem; color:var(--text-faint); margin-top:20px;">Full transcript available on request.</p>
     </div>
+
+      </div>
+    </details>
   </div>
 </section>
 
@@ -1351,22 +1378,6 @@
 
       <div class="log-item fade">
         <div class="log-content">
-          <span class="log-tag">Full-Stack</span>
-          <h3>Built CityFlow — Municipal Asset Management System</h3>
-          <p>Full-stack app: React 18 frontend, Node.js + Express REST API, PostgreSQL database with audit log, interactive Leaflet.js map, AI-assisted triage via the Anthropic API, and a KPI dashboard.</p>
-        </div>
-      </div>
-
-      <div class="log-item fade">
-        <div class="log-content">
-          <span class="log-tag">GIS</span>
-          <h3>London ON Bikeability Analysis</h3>
-          <p>Current-state spatial analysis using City of London open data. Can-BICS classification, walking-distance access buffers, gap analysis. Methodology, findings, and limitations written up.</p>
-        </div>
-      </div>
-
-      <div class="log-item fade">
-        <div class="log-content">
           <span class="log-tag">ArcGIS</span>
           <h3>Working through ArcGIS Enterprise architecture</h3>
           <p>Self-directed study on Portal for ArcGIS, ArcGIS Server, licensing, patching, and geodatabases. Building familiarity beyond ArcGIS Online.</p>
@@ -1375,21 +1386,14 @@
 
       <div class="log-item fade">
         <div class="log-content">
-          <span class="log-tag">Esri</span>
-          <h3>Esri Academy — eleven courses completed</h3>
-          <p>Foundational curriculum: ArcGIS Pro, ArcGIS Online, Business Analyst Pro, GIS Basics, Coordinate Systems, Data Management, AI in ArcGIS, Systems Approach to ArcGIS, ArcGIS Monitor.</p>
-        </div>
-      </div>
-
-      <div class="log-item fade">
-        <div class="log-content">
-          <span class="log-tag">Software Engineering</span>
-          <h3>Advanced Diploma — Centennial College</h3>
-          <p>Three-year program covering databases, APIs, cloud, DevOps, networking, security, enterprise systems, and business analysis.</p>
+          <span class="log-tag">Certifications</span>
+          <h3>Three certifications in progress</h3>
+          <p>GIS, Mapping &amp; Spatial Analysis (University of Toronto) · Business Analyst Professional (IBM) · PostgreSQL for Everybody (University of Michigan).</p>
         </div>
       </div>
 
     </div>
+    <p class="studies-shared-link fade" style="margin-top: 24px;"><a href="building.html">The full inventory — done, in motion, and next → Building</a></p>
   </div>
 </section>
 
@@ -1525,6 +1529,11 @@
     v.addEventListener('play', () => setState(true));
     v.addEventListener('pause', () => setState(false));
     wrap.appendChild(btn);
+    if (v.dataset.demo) {
+      v.style.cursor = 'pointer';
+      v.title = 'Open the live demo';
+      v.addEventListener('click', () => window.open(v.dataset.demo, '_blank', 'noopener'));
+    }
   });
 </script>
 <!-- Cloudflare Web Analytics -->
