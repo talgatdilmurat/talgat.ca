@@ -9,11 +9,11 @@
   <meta property="og:url" content="https://talgat.ca/" />
   <meta property="og:title" content="Talgat Dilmurat · Portfolio" />
   <meta property="og:description" content="GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
-  <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://talgat.ca/images/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Talgat Dilmurat · Portfolio" />
   <meta name="twitter:description" content="GIS analysis, full-stack systems, and the work between them. Based in London, Ontario." />
-  <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
+  <meta name="twitter:image" content="https://talgat.ca/images/og-card.png" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -128,11 +128,12 @@
       animation: hero-breathe 14s ease-in-out 1;
       animation-fill-mode: forwards;
     }
-    /* Dot grid over gradient hero */
+    /* London linework over gradient hero — real geometry from opendata.london.ca */
     #hero::before {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image: url('images/london-linework.svg');
+      background-size: cover;
+      background-position: 50% 36%;
     }
     #hero::after {
       content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
@@ -159,8 +160,8 @@
       color: rgba(255,255,255,0.82); margin-top: 6px; letter-spacing: 0.01em;
     }
     .hero-divider {
-      width: 36px; height: 2px; background: rgba(255,255,255,0.35);
-      margin: 28px 0; border-radius: 1px;
+      width: 44px; height: 3px; background: var(--accent-brass);
+      margin: 28px 0; border-radius: 2px;
     }
     .hero-focus {
       font-family: var(--mono); font-size: 0.75rem;
@@ -196,7 +197,6 @@
     .skills-table tr:hover { background: var(--bg-soft); }
     .skills-table tr:last-child { border-bottom: none; }
     .skills-table td { padding: 14px 0; vertical-align: top; }
-    .skills-table tr:hover td { padding-left: 4px; }
     .skills-table td:first-child {
       width: 180px; min-width: 140px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
@@ -277,7 +277,6 @@
     }
     .study-card:hover {
       border-color: var(--border-dk);
-      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(13, 36, 64, 0.06);
     }
     .study-card .study-stage {
@@ -315,9 +314,9 @@
     .featured-card {
       border: 1.5px solid var(--border-dk); border-radius: var(--radius);
       overflow: hidden; margin-bottom: 32px;
-      transition: border-color 0.25s, box-shadow 0.25s;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
     }
-    .featured-card:hover { border-color: var(--silver); box-shadow: 0 6px 28px rgba(46,94,153,0.13); }
+    .featured-card:hover { border-color: var(--silver); box-shadow: 0 6px 28px rgba(46,94,153,0.13); transform: translateY(-2px); }
     .featured-banner {
       background: linear-gradient(135deg, #0d2440 0%, #2e5496 60%, #1a3a6e 100%);
       padding: 32px; position: relative; overflow: hidden;
@@ -353,6 +352,20 @@
       padding: 4px 11px; border-radius: 20px;
       background: rgba(184,205,229,0.12); border: 1px solid rgba(184,205,229,0.25);
       color: rgba(255,255,255,0.8);
+    }
+    /* Banner stat moment (bikeability card) */
+    .fb-flex { display: flex; gap: 36px; align-items: flex-start; position: relative; z-index: 1; }
+    .fb-main { flex: 1; min-width: 0; }
+    .fb-stat { flex-shrink: 0; width: 196px; padding-left: 28px; border-left: 1px solid rgba(184,205,229,0.25); }
+    .fb-stat-num {
+      display: block; font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 0.95; color: #fff;
+    }
+    .fb-stat-rule { display: block; width: 44px; height: 3px; background: var(--accent-brass); margin: 12px 0; border-radius: 2px; }
+    .fb-stat-cap { font-size: 0.78rem; color: rgba(184,205,229,0.85); line-height: 1.5; }
+    @media (max-width: 640px) {
+      .fb-flex { flex-direction: column; gap: 20px; }
+      .fb-stat { width: 100%; padding-left: 0; border-left: none; border-top: 1px solid rgba(184,205,229,0.25); padding-top: 18px; }
     }
     /* Card body */
     .featured-body { padding: 24px 32px 28px; background: #fff; }
@@ -412,7 +425,6 @@
     }
     .storymap-card:hover {
       border-color: var(--silver);
-      transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     }
     .sm-thumb {
@@ -492,7 +504,6 @@
     }
     .capstone-card:hover {
       border-color: var(--border-dk);
-      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(13, 36, 64, 0.06);
     }
     .capstone-thumb {
@@ -535,7 +546,6 @@
     }
     .gis-card:hover {
       border-color: var(--silver);
-      transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(0,0,0,0.07);
     }
     .gis-preview {
@@ -619,7 +629,7 @@
       transition: all 0.2s; color: var(--text);
     }
     .gateway-card:hover {
-      border-color: var(--silver); transform: translateY(-2px);
+      border-color: var(--silver);
       box-shadow: 0 4px 20px rgba(46,94,153,0.12);
     }
     .gateway-stage {
@@ -865,13 +875,22 @@
 
         <div class="featured-banner">
           <div class="featured-eyebrow"><div class="featured-dot"></div>Featured Project</div>
-          <h3 class="featured-title">London ON Bikeability Analysis</h3>
-          <p class="featured-tagline">A spatial analysis of London's cycling network, built on City of London open data — Can-BICS classification, walking-distance access buffers, and a gap analysis. The finding: 55% of the city has no comfortable cycling access nearby.</p>
-          <div class="featured-chips">
-            <span class="fchip">ArcGIS Pro</span>
-            <span class="fchip">Can-BICS classification</span>
-            <span class="fchip">500 / 400 / 200 m buffers</span>
-            <span class="fchip">Gap analysis</span>
+          <div class="fb-flex">
+            <div class="fb-main">
+              <h3 class="featured-title">London ON Bikeability Analysis</h3>
+              <p class="featured-tagline">A spatial analysis of London's cycling network, built on City of London open data — Can-BICS classification, walking-distance access buffers, and a gap analysis.</p>
+              <div class="featured-chips">
+                <span class="fchip">ArcGIS Pro</span>
+                <span class="fchip">Can-BICS classification</span>
+                <span class="fchip">500 / 400 / 200 m buffers</span>
+                <span class="fchip">Gap analysis</span>
+              </div>
+            </div>
+            <div class="fb-stat">
+              <span class="fb-stat-num">55%</span>
+              <span class="fb-stat-rule"></span>
+              <p class="fb-stat-cap">of the city has no comfortable cycling access nearby</p>
+            </div>
           </div>
         </div>
 
