@@ -66,6 +66,10 @@
       font-family: inherit;
     }
     .nav-print:hover { color: var(--text); border-color: var(--text-mid); }
+    @media (max-width: 700px) {
+      .nav-back, .nav-title { white-space: nowrap; }
+      .nav-mid a { display: none; }
+    }
 
     /* LAYOUT */
     .page { max-width: 860px; margin: 0 auto; padding: 0 28px 80px; }
@@ -194,7 +198,7 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-back">← Portfolio</a>
-    <div style="display:flex;gap:16px;align-items:center;">
+    <div class="nav-mid" style="display:flex;gap:16px;align-items:center;">
       <a href="personal.html" style="font-size:0.82rem;color:var(--text-muted);">Personal</a>
       <a href="building.html" style="font-size:0.82rem;color:var(--text-muted);">Building</a>
       <span class="nav-title">Resume</span>
@@ -241,6 +245,12 @@
       <li>Operate under formal procedural requirements with high accuracy and confidentiality demands</li>
     </ul>
 
+    <p class="op-job"><strong>Marketing Operations Assistant</strong> · ONESTUDIO · Remote · Dec 2021 – Mar 2023</p>
+    <ul class="op-bullets">
+      <li>Generated performance reports and analyzed campaign data across CRM, CMS, and email marketing platforms</li>
+      <li>Troubleshot workflow and system issues across marketing operations</li>
+    </ul>
+
     <p class="op-job"><strong>Founder &amp; Operations Lead</strong> · Noah's Art (E-commerce) · Remote · Mar 2021 – Mar 2023</p>
     <ul class="op-bullets">
       <li>Designed and managed end-to-end workflows: inventory, fulfillment, supplier coordination, international shipping</li>
@@ -248,16 +258,10 @@
     </ul>
 
     <p class="op-job"><strong>Administrative &amp; Development Operations</strong> · Nonprofit / Freelance · Apr 2020 – Sep 2021</p>
-    <ul class="op-bullets">
+    <ul class="op-bullets" style="margin-bottom: 0;">
       <li>Managed NationBuilder CRM data and produced reports for fundraising, revenue, and leadership decisions</li>
       <li>Documented operational workflows, calling procedures, and SOPs for staff and volunteer consistency</li>
       <li>Trained staff and volunteers on CRM usage, data handling, and reporting</li>
-    </ul>
-
-    <p class="op-job"><strong>Marketing Operations Assistant</strong> · ONESTUDIO · Remote · Dec 2021 – Mar 2023</p>
-    <ul class="op-bullets" style="margin-bottom: 0;">
-      <li>Generated performance reports and analyzed campaign data across CRM, CMS, and email marketing platforms</li>
-      <li>Troubleshot workflow and system issues across marketing operations</li>
     </ul>
   </div>
 
@@ -345,25 +349,6 @@
 
     <div class="r-job">
       <div class="r-job-header">
-        <span class="r-job-title">Administrative &amp; Development Operations</span>
-        <span class="r-job-dates">Apr 2020 – Sep 2021</span>
-      </div>
-      <div class="r-job-org">Nonprofit / Freelance</div>
-      <ul>
-        <li>Managed NationBuilder CRM data, maintained data integrity, and used CRM exports to build Excel-based reports for fundraising, revenue tracking, and leadership decision-making.</li>
-        <li>Converted raw donation data into structured financial reports covering one-time, recurring, and campaign revenue with trend projections.</li>
-        <li>Selected, configured, and organized SaaS tools for project management, workflow tracking, fundraising operations, and team collaboration.</li>
-        <li>Documented workflows, operating procedures, software instructions, and calling processes so staff and volunteers could follow consistent steps.</li>
-        <li>Led donor calling campaigns: assigned caller lists from the database, trained callers, managed the calling platform, and tracked activity and revenue results per caller.</li>
-        <li>Trained staff and volunteers on CRM usage, data handling, donor lists, calling workflow, reporting, and standard operating procedures.</li>
-        <li>Supported HR and internal administration including job postings, candidate shortlisting, interview scheduling, feedback documentation, and policy drafts.</li>
-        <li>Led external partnership outreach by researching 500+ nonprofit organizations and managing collaboration messages and follow-ups.</li>
-        <li>Prepared confidential summaries, policy drafts, operational reports, and communication materials for leadership use.</li>
-      </ul>
-    </div>
-
-    <div class="r-job">
-      <div class="r-job-header">
         <span class="r-job-title">Marketing Operations Assistant</span>
         <span class="r-job-dates">Dec 2021 – Mar 2023</span>
       </div>
@@ -390,6 +375,25 @@
         <li>Used analytics tools to assess marketing performance, SEO, customer engagement, and conversion patterns; made data-driven adjustments to product and spend decisions.</li>
         <li>Troubleshot international shipping, supply-chain delays, and fulfillment problems through direct supplier and factory communication.</li>
         <li>Managed end-to-end customer communication, order follow-up, supplier negotiation, and daily store operations independently.</li>
+      </ul>
+    </div>
+
+    <div class="r-job">
+      <div class="r-job-header">
+        <span class="r-job-title">Administrative &amp; Development Operations</span>
+        <span class="r-job-dates">Apr 2020 – Sep 2021</span>
+      </div>
+      <div class="r-job-org">Nonprofit / Freelance</div>
+      <ul>
+        <li>Managed NationBuilder CRM data, maintained data integrity, and used CRM exports to build Excel-based reports for fundraising, revenue tracking, and leadership decision-making.</li>
+        <li>Converted raw donation data into structured financial reports covering one-time, recurring, and campaign revenue with trend projections.</li>
+        <li>Selected, configured, and organized SaaS tools for project management, workflow tracking, fundraising operations, and team collaboration.</li>
+        <li>Documented workflows, operating procedures, software instructions, and calling processes so staff and volunteers could follow consistent steps.</li>
+        <li>Led donor calling campaigns: assigned caller lists from the database, trained callers, managed the calling platform, and tracked activity and revenue results per caller.</li>
+        <li>Trained staff and volunteers on CRM usage, data handling, donor lists, calling workflow, reporting, and standard operating procedures.</li>
+        <li>Supported HR and internal administration including job postings, candidate shortlisting, interview scheduling, feedback documentation, and policy drafts.</li>
+        <li>Led external partnership outreach by researching 500+ nonprofit organizations and managing collaboration messages and follow-ups.</li>
+        <li>Prepared confidential summaries, policy drafts, operational reports, and communication materials for leadership use.</li>
       </ul>
     </div>
   </div>
@@ -474,9 +478,10 @@
         <h4>Databases &amp; Data</h4>
         <div class="r-skill-pills">
           <span class="r-pill">SQL</span>
+          <span class="r-pill">PostgreSQL</span>
+          <span class="r-pill">SQLite</span>
           <span class="r-pill">Relational Design</span>
           <span class="r-pill">MongoDB</span>
-          <span class="r-pill">Google BigQuery</span>
           <span class="r-pill">Excel Reporting</span>
         </div>
       </div>
@@ -495,10 +500,10 @@
       <div class="r-skill-group">
         <h4>Systems &amp; Tools</h4>
         <div class="r-skill-pills">
-          <span class="r-pill">Salesforce CRM</span>
-          <span class="r-pill">NationBuilder CRM</span>
           <span class="r-pill">Git</span>
+          <span class="r-pill">Docker</span>
           <span class="r-pill">Jira</span>
+          <span class="r-pill">NationBuilder CRM</span>
           <span class="r-pill">Shopify</span>
         </div>
       </div>
@@ -508,6 +513,7 @@
           <span class="r-pill">AWS EC2 / S3</span>
           <span class="r-pill">AWS RDS</span>
           <span class="r-pill">AWS Lambda</span>
+          <span class="r-pill">Render</span>
         </div>
       </div>
       <div class="r-skill-group">
@@ -528,7 +534,7 @@
     <h2 class="r-section-title">Languages</h2>
     <div class="r-lang-grid">
       <div class="r-lang-item"><span class="r-lang-name">English</span><span class="r-lang-level">Fluent</span></div>
-      <div class="r-lang-item"><span class="r-lang-name">Mandarin (Chinese)</span><span class="r-lang-level">Fluent</span></div>
+      <div class="r-lang-item"><span class="r-lang-name">Mandarin (Chinese)</span><span class="r-lang-level">Fluent · IRB Certified</span></div>
       <div class="r-lang-item"><span class="r-lang-name">Uyghur</span><span class="r-lang-level">Fluent · IRB Certified</span></div>
       <div class="r-lang-item"><span class="r-lang-name">Kazakh</span><span class="r-lang-level">Fluent · IRB Certified</span></div>
       <div class="r-lang-item"><span class="r-lang-name">Arabic</span><span class="r-lang-level">Fluent (spoken), Intermediate (written)</span></div>

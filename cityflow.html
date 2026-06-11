@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CityFlow — Talgat Dilmurat</title>
-  <meta name="description" content="CityFlow — a full-stack municipal asset management system. The question it answers, the constraints it was built under, the architecture decisions, and the roadmap ahead." />
+  <meta name="description" content="CityFlow — a full-stack municipal asset management system. The question it answers, the key architecture decisions, and the roadmap ahead." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://talgat.ca/cityflow.html" />
   <meta property="og:title" content="CityFlow — Talgat Dilmurat" />
-  <meta property="og:description" content="A full-stack municipal asset management system — the question it answers, the constraints, the architecture decisions, and the roadmap ahead." />
+  <meta property="og:description" content="A full-stack municipal asset management system — the question it answers, the key architecture decisions, and the roadmap ahead." />
   <meta property="og:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="CityFlow — Talgat Dilmurat" />
-  <meta name="twitter:description" content="A full-stack municipal asset management system — the question it answers, the constraints, the architecture decisions, and the roadmap ahead." />
+  <meta name="twitter:description" content="A full-stack municipal asset management system — the question it answers, the key architecture decisions, and the roadmap ahead." />
   <meta name="twitter:image" content="https://talgat.ca/images/talgat-portrait.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,6 +66,11 @@
       transition: all 0.2s;
     }
     .nav-right .nav-resume:hover { border-color: var(--silver); color: var(--text); background: var(--bg-soft); }
+    @media (max-width: 700px) {
+      .nav-back, .nav-title { white-space: nowrap; }
+      .nav-right { gap: 12px; }
+      .nav-right a:not(.nav-resume) { display: none; }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
