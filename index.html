@@ -620,9 +620,6 @@
       pointer-events: none;
     }
 
-    /* ─── WARM BAND (working notes — matches detail-page palette) ─ */
-    #learning { background: #f7f4ee; }
-
     /* ─── BACK TO TOP ───────────────────────────────────────────── */
     #top-btn {
       position: fixed; bottom: 28px; right: 28px;
@@ -718,13 +715,22 @@
     /* ─── CONTACT / FOOTER ──────────────────────────────────────── */
     #contact { position: relative; padding: 60px 0; border-top: 1px solid var(--border); background: var(--bg-warm); overflow: hidden; }
     #contact::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
       background-image: url('images/london-linework-light.svg');
       background-size: cover;
       background-position: 50% 36%;
-      opacity: 1;
     }
-    #contact .wrap { position: relative; }
+    /* Scrim: calm the text zone, let the map bloom to the right */
+    #contact::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: linear-gradient(90deg, #e7f0fa 0%, rgba(231,240,250,0.92) 30%, rgba(231,240,250,0.4) 58%, rgba(231,240,250,0) 80%);
+    }
+    @media (max-width: 700px) {
+      #contact::after {
+        background: linear-gradient(180deg, rgba(231,240,250,0.94) 0%, rgba(231,240,250,0.78) 60%, rgba(231,240,250,0.35) 100%);
+      }
+    }
+    #contact .wrap { position: relative; z-index: 1; }
     .contact-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
     .contact-link {
       font-size: 0.84rem; color: var(--text-muted);
